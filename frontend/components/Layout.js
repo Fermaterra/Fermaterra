@@ -11,8 +11,8 @@ export default function Layout({ title, children }) {
           {" "}
           {title}
         </title>
-        <meta name="description" content="Guitar store located on Barcelona" />
-        <meta name="keywords" content="Guitars, Guitars store, Barcelona, Music store" />
+        <meta name="description" content="Terraferma " />
+        <meta name="keywords" content="Menorca, Yoga, Kundalini, Frigidarium, Pranayama, Chi kung, experience, relax, activity, activities, Balears" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
