@@ -1,6 +1,5 @@
 .header{
-    padding: 10rem 8rem 3rem;
-    height: 15vh;
+    padding: 10rem 8rem 1rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     color: var(--white);
@@ -15,6 +14,8 @@
 .header a{
     text-decoration: none;
     color: var(--white);
+    letter-spacing: 2px;
+
 
     
 }
@@ -46,8 +47,9 @@
 }
 .logo span{
     font-weight: 300;
-    font-size: 0.8rem;
-    font-stretch: expanded;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    
 }
 
 .nav{
