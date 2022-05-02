@@ -1,3 +1,14 @@
+:root{
+  --beige: #f1e6d5;
+  --white: #fafafa;
+  --gray: #7E7E7E;
+
+  --black: #444444;
+  --blue: #5e6e7b;
+  --green: #747346;
+  --brown: #a6785c;
+}
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -20,7 +31,7 @@
  * Remove the margin in all browsers.
  */
 
-body {
+*, *::after, *::before {
   margin: 0;
   font-family: 'Source Serif Pro', serif;
 }
@@ -39,8 +50,7 @@ main {
  */
 
 h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
+  font-size: 1.2em;
 }
 
 /* Grouping content
