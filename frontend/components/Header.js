@@ -22,7 +22,7 @@ export default function Header() {
       <nav className={styles.nav}>
         <Link href="/booking">Reserves</Link>
         <Link href="/blog">Blog</Link>
-        <Link href="/faq">Faq</Link>
+        <Link href="/faq">Preguntes freqüents</Link>
       </nav>
 
     </header>
