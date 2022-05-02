@@ -7,7 +7,7 @@ export default function Layout({ title, children }) {
     <>
       <Head>
         <title>
-          Terraferma|
+          Terraferma |
           {" "}
           {title}
         </title>
