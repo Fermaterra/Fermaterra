@@ -34,7 +34,7 @@ export default function Home() {
         Planifica una experiència autèntica
         amb els nostres serveis
       </p>
-      <div>
+      <div className={styles.activities_list}>
         {Proxy.map((activity) => <ActivityMiniature activity={activity} key={activity.id} />)}
       </div>
       <div className={styles.image} />

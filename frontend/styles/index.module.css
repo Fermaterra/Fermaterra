@@ -40,12 +40,19 @@
 
 }
 
+.activities_list{
+    margin: 0 auto 5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+}
+
 .contact{
+    width: 75%;
+    margin: 0 auto 5rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     text-align: center;
-    margin-bottom: 5rem;
 }
 .contact__image{
     background-color: var(--blue);
@@ -53,8 +60,9 @@
     width: 80%;
 }
 .contact h4{
+    color: var(--gray);
     font-family: "Recife Display Italic";
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-bottom: 2rem;
 }
 
