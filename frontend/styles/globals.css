@@ -27,6 +27,9 @@
 /* Sections
    ========================================================================== */
 
+body{
+  background-color: var(--white);
+}
 /**
  * Remove the margin in all browsers.
  */
@@ -53,6 +56,8 @@
 
 h1, h2, h3, h4 ,h5, h6{
   font-family: "Bon Voyage Thin";
+  letter-spacing: 6px;
+
 }
 p, a{
   font-family: "Helvetica Neue Thin";
