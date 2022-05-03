@@ -32,7 +32,7 @@ const getActivityById = async ({ params: { id } }, res) => {
   }
 };
 
-const crateActivity = async ({ body }, res) => {
+const createActivity = async ({ body }, res) => {
   try {
     const activity = await Activity.create(body);
     res.status(200).json(activity);
@@ -65,7 +65,7 @@ const deleteActivity = async ({ params: { id } }, res) => {
 module.exports = {
   getAllActivities,
   getActivityById,
-  crateActivity,
+  createActivity,
   updateActivity,
   deleteActivity
 };
