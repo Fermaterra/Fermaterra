@@ -25,6 +25,15 @@ const getClientById = async ({ params: { id } }, res) => {
   }
 };
 
+const createClient = async ({ body }, res) => {
+  try {
+    const client = await Client.create(body);
+    res.status(200).json(client);
+  } catch (error) {
+    serverError(res);
+  }
+};
+
 const updateClient = async ({ params: { id }, body }, res) => {
   try {
     const client = await Client.findByIdAndUpdate(id, body, { new: true });
@@ -53,6 +62,7 @@ const deleteClient = async ({ params: { id } }, res) => {
 module.exports = {
   getClients,
   getClientById,
+  createClient,
   updateClient,
   deleteClient
 };
