@@ -3,4 +3,4 @@ const serverError = (res) => {
   return res.status(500).res.json({ message });
 };
 
-export default serverError;
+module.exports = serverError;
