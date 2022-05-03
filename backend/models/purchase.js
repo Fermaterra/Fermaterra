@@ -10,11 +10,11 @@ const purchaseSchema = Schema({
     ref: "Client",
     required: true
   },
-  activity: {
+  activities: [{
     type: Schema.Types.ObjectId,
     ref: "Activity",
     required: true
-  },
+  }],
   basePrice: {
     type: Number,
     required: true
