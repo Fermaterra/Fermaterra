@@ -41,6 +41,10 @@ const activitySchema = Schema(
       type: String,
       required: true
     },
+    short_description: {
+      type: String,
+      required: true
+    },
     location: {
       type: String,
       required: true
@@ -52,6 +56,10 @@ const activitySchema = Schema(
     instructor: {
       type: String,
       trim: true
+    },
+    notes: {
+      type: String
+
     }
 
   },
