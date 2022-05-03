@@ -11,6 +11,4 @@ const port = process.env.PORT || 4001;
 server.use(morgan("dev"));
 server.use(express.json());
 
-
-
 server.listen(port, () => { debug(`Server is running on port ${port}`); });
