@@ -48,6 +48,10 @@ const activitySchema = Schema(
     contact: {
       type: String,
       required: String
+    },
+    instructor: {
+      type: String,
+      trim: true
     }
 
   },
