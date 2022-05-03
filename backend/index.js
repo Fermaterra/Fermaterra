@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const debug = require("debug")("tasked");
+const debug = require("debug")("terraferma");
 const morgan = require("morgan");
 
 require("./config/mongooseConfig");
