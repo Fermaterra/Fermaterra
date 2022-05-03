@@ -40,6 +40,9 @@ const purchaseSchema = Schema({
   },
   paymentMethod: {
     type: String
+  },
+  notes: {
+    type: String
   }
 
 }, { tiemestamps: true });
