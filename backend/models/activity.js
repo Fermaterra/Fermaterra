@@ -41,6 +41,12 @@ const activitySchema = Schema(
       type: String,
       required: true
     },
+    basePrice: {
+      type: Number
+    },
+    taxes: {
+      type: Number
+    },
     short_description: {
       type: String,
       required: true
@@ -59,7 +65,9 @@ const activitySchema = Schema(
     },
     notes: {
       type: String
-
+    },
+    timesVisited: {
+      type: Number
     }
 
   },

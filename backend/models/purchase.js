@@ -7,22 +7,18 @@ const purchaseSchema = Schema({
   },
   client: {
     type: Schema.Types.ObjectId,
-    ref: "Client",
-    required: true
+    ref: "Client"
   },
   activities: [{
     type: Schema.Types.ObjectId,
-    ref: "Activity",
-    required: true
+    ref: "Activity"
   }],
   basePrice: {
-    type: Number,
-    required: true
+    type: Number
 
   },
-  finalPrice: {
-    type: Number,
-    required: true
+  taxes: {
+    type: Number
   },
   discountApplied: {
     name: {
@@ -35,12 +31,17 @@ const purchaseSchema = Schema({
       default: 0
     }
   },
+  finalPrice: {
+    type: Number
+  },
   status: {
     type: String,
     default: "Pending"
   },
-  tiemestamps: true
+  paymentMethod: {
+    type: String
+  }
 
-});
+}, { tiemestamps: true });
 
 module.exports = model("Purchase", purchaseSchema);

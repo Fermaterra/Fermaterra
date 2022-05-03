@@ -1,6 +1,9 @@
 const { model, Schema } = require("mongoose");
 
 const clientSchema = Schema({
+  treatment: {
+    type: String
+  },
   name: {
     type: String,
     trim: true
@@ -8,6 +11,9 @@ const clientSchema = Schema({
   email: {
     type: String,
     trim: true
+  },
+  birthday: {
+    type: Date
   },
   phone: {
     type: String
@@ -22,6 +28,22 @@ const clientSchema = Schema({
   purchases: [{ type: Schema.Types.ObjectId, ref: "Purchase" }],
   language: {
     String
+  },
+  lastPurchase: {
+    purchase: {
+      type: Schema.Types.ObjectId,
+      ref: "Purchase"
+    },
+    date: { type: Date }
+  },
+  shoppingCart: [{ type: Schema.Types.ObjectId, ref: "Activity" }],
+  adress: {
+    dir: {
+      type: String
+    },
+    zipCode: {
+      type: String
+    }
   }
 
 });
