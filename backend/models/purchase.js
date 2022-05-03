@@ -38,7 +38,8 @@ const purchaseSchema = Schema({
   status: {
     type: String,
     default: "Pending"
-  }
+  },
+  tiemestamps: true
 
 });
 
