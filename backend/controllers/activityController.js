@@ -1,9 +1,6 @@
 const Activity = require("../models/activity");
 
-const serverError = (res) => {
-  const message = "Something went wrong";
-  return res.status(500).res.json({ message });
-};
+const serverError = require("../utils/serverError");
 
 const activityNotFound = (res) => {
   const message = "Activity not found";
@@ -45,6 +42,8 @@ const updateActivity = async ({ params: { id }, body }, res) => {
     const activity = await Activity.findByIdAndUpdate(id, body, { new: true });
     if (!activity) {
       activityNotFound(res);
+    } else {
+      res.status(200).json({ message: `activity ${id} updated` });
     }
   } catch (error) {
     serverError(res);
@@ -56,6 +55,8 @@ const deleteActivity = async ({ params: { id } }, res) => {
     const activity = await Activity.findByIdAndDelete(id);
     if (!activity) {
       activityNotFound(res);
+    } else {
+      res.status(200).json({ message: `activity ${id} deleted` });
     }
   } catch (error) {
     serverError(res);
