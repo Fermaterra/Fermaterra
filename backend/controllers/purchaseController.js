@@ -25,6 +25,15 @@ const getPurchaseById = async ({ params: { id } }, res) => {
   }
 };
 
+const createPurchase = async ({ body }, res) => {
+  try {
+    const purchase = await Purchase.create(body);
+    res.status(200).json(purchase);
+  } catch (error) {
+    serverError(res);
+  }
+};
+
 const updatePurchase = async ({ params: { id }, body }, res) => {
   try {
     const purchase = await Purchase.findByIdAndUpdate(id, body, { new: true });
@@ -53,6 +62,7 @@ const deletePurchase = async ({ params: { id } }, res) => {
 module.exports = {
   getPurchases,
   getPurchaseById,
+  createPurchase,
   updatePurchase,
   deletePurchase
 };
