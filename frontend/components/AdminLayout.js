@@ -15,9 +15,9 @@ export default function AdminLayout() {
 
         </Link>
         <nav className={styles.nav}>
-          <Link className={styles.link} href="/admin/activities">Activities</Link>
-          <Link className={styles.link} href="/admin/books">Books</Link>
-          <Link className={styles.link} href="/admin/clients">Clients</Link>
+          <Link href="/admin/activities">Activities</Link>
+          <Link href="/admin/books">Books</Link>
+          <Link href="/admin/clients">Clients</Link>
         </nav>
       </main>
     </Layout>
