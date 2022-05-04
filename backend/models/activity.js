@@ -70,6 +70,17 @@ const activitySchema = Schema(
     timesVisited: {
       type: Number,
       default: 0
+    },
+    initialStock: {
+      type: Number
+    },
+    books: {
+      type: Number,
+      default: 0
+    },
+    status: {
+      type: String,
+      default: "available"
     }
 
   },
