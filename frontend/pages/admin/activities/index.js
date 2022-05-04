@@ -1,21 +1,23 @@
 import fetchFromApi from "../../../utils/fetchFromApi";
 import AdminLayout from "../../../components/AdminLayout";
 
+import styles from "../../../styles/admin/activities.module.css";
+
 export default function Activities({ activities }) {
   return (
     <AdminLayout>
       <h2>Activities</h2>
-      <table>
-        <th>Número actividad</th>
-        <th>Día</th>
-        <th>Hora</th>
-        <th>Sitio</th>
-        <th>Título actividad</th>
-        <th>Profesor</th>
-        <th>Notas</th>
-        <th>Plazas totales</th>
-        <th>Reservas</th>
-        <th>Estado</th>
+      <div className={styles.rows}>
+        <p>Número actividad</p>
+        <p>Día</p>
+        <p>Hora</p>
+        <p>Sitio</p>
+        <p>Título actividad</p>
+        <p>Profesor</p>
+        <p>Notas</p>
+        <p>Plazas totales</p>
+        <p>Reservas</p>
+        <p>Estado</p>
         {activities.map(({
           _id: id,
           title,
@@ -29,25 +31,25 @@ export default function Activities({ activities }) {
           status
 
         }) => (
-          <tr key={id}>
-            <td>{id}</td>
-            <td>{day}</td>
-            <td>{hour}</td>
-            <td>{location}</td>
-            <td>{title}</td>
-            <td>{instructor}</td>
-            <td>{notes}</td>
-            <td>{initialStock}</td>
-            <td>{books}</td>
-            <td>{status}</td>
-          </tr>
+          < >
+            <a href={`/admin/activities/${id}`} key={id}>{id}</a>
+            <p key={`${id}-day`}>{day}</p>
+            <p key={`${id}-hour`}>{hour}</p>
+            <p key={`${id}-location`}>{location}</p>
+            <p key={`${id}-title`}>{title}</p>
+            <p key={`${id}-instructor`}>{instructor}</p>
+            <p key={`${id}-notes`}>{notes}</p>
+            <p key={`${id}-initialStock`}>{initialStock}</p>
+            <p key={`${id}-books`}>{books}</p>
+            <p key={`${id}-status`}>{status}</p>
+          </>
         ))}
-      </table>
+      </div>
     </AdminLayout>
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const activities = await fetchFromApi(`${process.env.URL}/activities`);
 
   return {
