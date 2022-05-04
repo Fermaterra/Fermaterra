@@ -1,6 +1,6 @@
 const { Router } = require("express");
 
-const activitiesListRouter = Router();
+const activityRouter = Router();
 
 const activityController = require("../controllers/activityController");
 
@@ -12,13 +12,13 @@ const {
   deleteActivity
 } = activityController;
 
-activitiesListRouter.route("/")
+activityRouter.route("/")
   .get(getAllActivities)
   .post(createActivity);
 
-activitiesListRouter.route("/:id")
+activityRouter.route("/:id")
   .get(getActivityById)
   .put(updateActivity)
   .delete(deleteActivity);
 
-module.exports = activitiesListRouter;
+module.exports = activityRouter;
