@@ -1,6 +1,6 @@
 import Layout from "../components/Layout";
 import ActivityMiniature from "../components/ActivityMiniature";
-import Proxy from "../utils/activitiesProxy";
+import Proxy from "../utils/activities.json";
 
 import styles from "../styles/index.module.css";
 
