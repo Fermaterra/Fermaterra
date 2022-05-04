@@ -9,7 +9,7 @@ const activitySchema = Schema(
       trim: true
     },
     day: {
-      type: String,
+      type: Date,
       required: true,
       default: formatDate(Date.now()).toString()
     },
@@ -23,17 +23,11 @@ const activitySchema = Schema(
       type: String,
       required: true
     },
-    picture: {
-      url: {
-        type: String,
-        required: true
-      },
-      alt: {
-        type: String,
-        required: true,
-        trim: true
-      }
+    image: {
+      type: String,
+      required: true
     },
+
     stock: {
       type: Number,
       required: true
