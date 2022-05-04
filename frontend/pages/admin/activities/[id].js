@@ -10,25 +10,12 @@ export default function ActivityDetails({ activity }) {
   );
 }
 
-export async function getStaticPaths() {
-  const entries = await fetchFromApi(`${process.env.API_URL}/activities`);
-  const paths = entries.map(({ _id: id }) => ({
-    params: { id }
-  }));
-
-  return {
-    paths,
-    fallback: false
-
-  };
-}
-
-export async function getStaticProps({ params: { id } }) {
+export async function getServerSideProps({ query: { id } }) {
   const activity = await fetchFromApi(`${process.env.URL}/activities/${id}`);
 
   return {
     props: {
-      activity: activity[0]
+      activity
     }
   };
 }
