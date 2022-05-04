@@ -1,4 +1,5 @@
 const { model, Schema } = require("mongoose");
+const formatDate = require("../utils/formatDate");
 
 const activitySchema = Schema(
   {
@@ -8,15 +9,14 @@ const activitySchema = Schema(
       trim: true
     },
     day: {
-      type: Date,
+      type: String,
       required: true,
-      min: Date.now()
+      default: formatDate(Date.now()).toString()
     },
     hour: {
       type: String,
-      required: true,
-      min: 0,
-      max: 24
+      required: true
+
     },
     duration: {
       type: String,
@@ -41,16 +41,17 @@ const activitySchema = Schema(
       type: String,
       required: true
     },
+    shortDescription: {
+      type: String,
+      required: true
+    },
     basePrice: {
       type: Number
     },
     taxes: {
       type: Number
     },
-    short_description: {
-      type: String,
-      required: true
-    },
+
     location: {
       type: String,
       required: true
@@ -67,7 +68,8 @@ const activitySchema = Schema(
       type: String
     },
     timesVisited: {
-      type: Number
+      type: Number,
+      default: 0
     }
 
   },
