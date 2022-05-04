@@ -1,3 +1,4 @@
+import Link from "next/link";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import AdminLayout from "../../../components/AdminLayout";
 
@@ -29,10 +30,9 @@ export default function Activities({ activities }) {
           initialStock,
           books,
           status
-
         }) => (
           < >
-            <a href={`/admin/activities/${id}`} key={id}>{id}</a>
+            <Link href={`/admin/activities/${id}`} key={id}>{id}</Link>
             <p key={`${id}-day`}>{day}</p>
             <p key={`${id}-hour`}>{hour}</p>
             <p key={`${id}-location`}>{location}</p>
