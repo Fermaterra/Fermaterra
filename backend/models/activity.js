@@ -15,7 +15,8 @@ const activitySchema = Schema(
     },
     hour: {
       type: String,
-      required: true
+      required: true,
+      default: "--h"
 
     },
     duration: {
@@ -53,8 +54,16 @@ const activitySchema = Schema(
     },
 
     location: {
-      type: String,
-      required: true
+      name: {
+        type: String,
+        required: true,
+        default: ""
+      },
+      coordinates: {
+        type: String,
+        required: true
+      }
+
     },
     contact: {
       type: String,
@@ -62,17 +71,20 @@ const activitySchema = Schema(
     },
     instructor: {
       type: String,
-      trim: true
+      trim: true,
+      default: ""
     },
     notes: {
-      type: String
+      type: String,
+      default: "-"
     },
     timesVisited: {
       type: Number,
       default: 0
     },
     initialStock: {
-      type: Number
+      type: Number,
+      default: 0
     },
     books: {
       type: Number,
