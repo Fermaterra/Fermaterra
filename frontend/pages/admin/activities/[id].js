@@ -12,7 +12,7 @@ export default function ActivityDetails({ activity }) {
 
 export async function getStaticPaths() {
   const entries = await fetchFromApi(`${process.env.API_URL}/activities`);
-  const paths = entries.map(({ id }) => ({
+  const paths = entries.map(({ _id: id }) => ({
     params: { id }
   }));
 
