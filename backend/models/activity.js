@@ -67,12 +67,12 @@ const activitySchema = Schema(
     },
     contact: {
       type: String,
-      required: String
+      required: true
     },
     instructor: {
       type: String,
       trim: true,
-      default: ""
+      default: "-"
     },
     notes: {
       type: String,
