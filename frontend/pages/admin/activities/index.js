@@ -4,7 +4,7 @@ import AdminLayout from "../../../components/AdminLayout";
 export default function Activities({ activities }) {
   return (
     <AdminLayout>
-      <h1>Activities</h1>
+      <h2>Activities</h2>
       {activities.map(({
         _id, title, description, instructor
       }) => (

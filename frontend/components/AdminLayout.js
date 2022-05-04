@@ -10,7 +10,7 @@ export default function AdminLayout({ children }) {
         <Link href="/admin">
           <a className={styles.link} href="/">
             {" "}
-            <h1>Admin</h1>
+            <h2>Admin</h2>
           </a>
 
         </Link>
