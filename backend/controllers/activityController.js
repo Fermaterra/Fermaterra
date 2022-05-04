@@ -18,12 +18,9 @@ const getAllActivities = async ({ query }, res) => {
 
 const getActivityById = async ({ params: { id } }, res) => {
   try {
-    const activity = await Activity.findOne({ id });
-    if (!activity) {
-      activityNotFound(res);
-    } else {
-      res.status(200).json(activity);
-    }
+    const activity = await Activity.findById(id);
+
+    res.status(200).json(activity);
   } catch (error) {
     serverError(res);
   }
