@@ -3,7 +3,7 @@ import Layout from "./Layout";
 
 import styles from "../styles/adminLayout.module.css";
 
-export default function AdminLayout() {
+export default function AdminLayout({ children }) {
   return (
     <Layout title="admin">
       <main className={styles.main}>
@@ -19,6 +19,7 @@ export default function AdminLayout() {
           <Link href="/admin/books">Books</Link>
           <Link href="/admin/clients">Clients</Link>
         </nav>
+        {children}
       </main>
     </Layout>
   );
