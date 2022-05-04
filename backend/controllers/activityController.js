@@ -32,7 +32,7 @@ const getActivityById = async ({ params: { id } }, res) => {
 const createActivity = async ({ body }, res) => {
   try {
     const activity = await Activity.create(body);
-    res.status(200).json(activity);
+    res.status(201).json(activity);
   } catch (error) {
     serverError(res);
   }

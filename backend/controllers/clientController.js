@@ -28,7 +28,7 @@ const getClientById = async ({ params: { id } }, res) => {
 const createClient = async ({ body }, res) => {
   try {
     const client = await Client.create(body);
-    res.status(200).json(client);
+    res.status(201).json(client);
   } catch (error) {
     serverError(res);
   }
