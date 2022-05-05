@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import fetchFromApi from "../../../utils/fetchFromApi";
 import AdminLayout from "../../../components/AdminLayout";
-
+import NewActivityForm from "../../../components/adminForms/NewActivityForm";
+import fetchFromApi from "../../../utils/fetchFromApi";
+import formateDate from "../../../utils/formateDate";
 import styles from "../../../styles/admin/activities.module.css";
 
 export default function Activities({ activities }) {
   const [addForm, setAddForm] = useState(false);
+  useEffect(() => {
+
+  }, [addForm]);
 
   const handleAddForm = () => setAddForm(!addForm);
   return (
@@ -14,22 +18,13 @@ export default function Activities({ activities }) {
       <div className={styles.title}>
         <input
           type="button"
-          value="+"
+          value={!addForm ? "+" : "X"}
           onClick={() => { handleAddForm(); }}
         />
         <h2>Activities</h2>
       </div>
       {addForm
-        ? (
-          <div>
-            <p>Add new activity</p>
-            <input
-              type="button"
-              value="Close"
-              onClick={() => { handleAddForm(); }}
-            />
-          </div>
-        )
+        ? <NewActivityForm handleAddForm={handleAddForm} />
         : null}
       <div className={styles.rows}>
         <p>Número actividad</p>
@@ -56,7 +51,7 @@ export default function Activities({ activities }) {
         }) => (
           < >
             <Link href={`/admin/activities/${id}`} key={id}>{id}</Link>
-            <p key={`${id}-day`}>{day}</p>
+            <p key={`${id}-day`}>{formateDate(day)}</p>
             <p key={`${id}-hour`}>{hour}</p>
             <p key={`${id}-location`}>{location}</p>
             <p key={`${id}-title`}>{title}</p>
@@ -72,7 +67,7 @@ export default function Activities({ activities }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const activities = await fetchFromApi(`${process.env.URL}/activities`);
 
   return {
