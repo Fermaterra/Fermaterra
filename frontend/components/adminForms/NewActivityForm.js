@@ -2,45 +2,30 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function NewActivityForm({ handleAddForm }) {
-  const [title, setTitle] = useState("");
-  const [day, setDay] = useState(Date.now());
-  const [hour, setHour] = useState("");
-  const [duration, setDuration] = useState("");
-  const [image, setImage] = useState("");
-  const [stock, setStock] = useState(0);
-  const [description, setDescription] = useState("");
-  const [shortDescription, setShortDescription] = useState("");
-  const [basePrice, setBasePrice] = useState(0);
-  const [taxes, setTaxes] = useState(21);
-  const [location, setLocation] = useState({ name: "", coordinates: "" });
-  const [contact, setContact] = useState("");
-  const [instructor, setInstructor] = useState("");
-  const [notes, setNotes] = useState("");
-  const [timesVisited, setTimesVisited] = useState(0);
-  const [books, setBooks] = useState(0);
-  const [status, setStatus] = useState("available");
-  const [activity, setActivity] = useState({});
+  const [activity, setActivity] = useState({
+    title: "",
+    day: null,
+    hour: "",
+    duration: "",
+    image: "",
+    stock: "",
+    description: "",
+    shortDescription: "",
+    basePrice: "",
+    taxes: "",
+    location: "",
+    contact: "",
+    instructor: "",
+    notes: "",
+    timesVisited: "",
+    books: "",
+    status: ""
+  });
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     await setActivity({
-      title,
-      day,
-      hour,
-      duration,
-      image,
-      stock,
-      description,
-      shortDescription,
-      basePrice,
-      taxes,
-      location: { name: location.name, coordinates: location.coordinates },
-      contact,
-      instructor,
-      notes,
-      timesVisited,
-      books,
-      status
+
     });
     await axios.post(`http://localhost:4001/activities`, activity);
   };
@@ -53,8 +38,8 @@ export default function NewActivityForm({ handleAddForm }) {
         title
         <input
           id="title"
-          value={title}
-          onChange={(evt) => setTitle(evt.target.value)}
+          value={activity.title}
+          onChange={(evt) => { setActivity({ ...activity, title: evt.target.value }); }}
         />
       </label>
       <label htmlFor="day">
@@ -62,128 +47,128 @@ export default function NewActivityForm({ handleAddForm }) {
         <input
           type="date"
           id="day"
-          value={day}
-          onChange={(evt) => setDay(evt.target.value)}
+          value={activity.day}
+          onChange={(evt) => { setActivity({ ...activity, day: evt.target.value }); }}
         />
       </label>
       <label htmlFor="hour">
         hour
         <input
           id="hour"
-          value={hour}
-          onChange={(evt) => setHour(evt.target.value)}
+          value={activity.hour}
+          onChange={(evt) => { setActivity({ ...activity, hour: evt.target.value }); }}
         />
       </label>
       <label htmlFor="duration">
         duration
         <input
           id="duration"
-          value={duration}
-          onChange={(evt) => setDuration(evt.target.value)}
+          value={activity.duration}
+          onChange={(evt) => { setActivity({ ...activity, duration: evt.target.value }); }}
         />
       </label>
       <label htmlFor="image">
         image
         <input
           id="image"
-          value={image}
-          onChange={(evt) => setImage(evt.target.value)}
+          value={activity.image}
+          onChange={(evt) => { setActivity({ ...activity, image: evt.target.value }); }}
         />
       </label>
       <label htmlFor="stock">
         stock
         <input
           id="stock"
-          value={stock}
-          onChange={(evt) => setStock(evt.target.value)}
+          value={activity.stock}
+          onChange={(evt) => { setActivity({ ...activity, stock: evt.target.value }); }}
         />
       </label>
       <label htmlFor="description">
         description
         <input
           id="description"
-          value={description}
-          onChange={(evt) => setDescription(evt.target.value)}
+          value={activity.description}
+          onChange={(evt) => { setActivity({ ...activity, description: evt.target.value }); }}
         />
       </label>
       <label htmlFor="shortDescription">
         shortDescription
         <input
           id="shortDescription"
-          value={shortDescription}
-          onChange={(evt) => setShortDescription(evt.target.value)}
+          value={activity.shortDescription}
+          onChange={(evt) => { setActivity({ ...activity, shortDescription: evt.target.value }); }}
         />
       </label>
       <label htmlFor="basePrice">
         basePrice
         <input
           id="basePrice"
-          value={basePrice}
-          onChange={(evt) => setBasePrice(evt.target.value)}
+          value={activity.basePrice}
+          onChange={(evt) => { setActivity({ ...activity, basePrice: evt.target.value }); }}
         />
       </label>
       <label htmlFor="taxes">
         taxes
         <input
           id="taxes"
-          value={taxes}
-          onChange={(evt) => setTaxes(evt.target.value)}
+          value={activity.taxes}
+          onChange={(evt) => { setActivity({ ...activity, taxes: evt.target.value }); }}
         />
       </label>
       <label htmlFor="location">
         location
         <input
           id="location"
-          value={location.name}
-          onChange={(evt) => setLocation({ name: evt.target.value, coordinates: evt.target.value })}
+          value={activity.location}
+          onChange={(evt) => { setActivity({ ...activity, location: evt.target.value }); }}
         />
       </label>
       <label htmlFor="contact">
         contact
         <input
           id="contact"
-          value={contact}
-          onChange={(evt) => setContact(evt.target.value)}
+          value={activity.contact}
+          onChange={(evt) => { setActivity({ ...activity, contact: evt.target.value }); }}
         />
       </label>
       <label htmlFor="instructor">
         instructor
         <input
           id="instructor"
-          value={instructor}
-          onChange={(evt) => setInstructor(evt.target.value)}
+          value={activity.instructor}
+          onChange={(evt) => { setActivity({ ...activity, instructor: evt.target.value }); }}
         />
       </label>
       <label htmlFor="notes">
         notes
         <input
           id="notes"
-          value={notes}
-          onChange={(evt) => setNotes(evt.target.value)}
+          value={activity.notes}
+          onChange={(evt) => { setActivity({ ...activity, notes: evt.target.value }); }}
         />
       </label>
       <label htmlFor="timesVisited">
         timesVisited
         <input
           id="timesVisited"
-          value={timesVisited}
-          onChange={(evt) => setTimesVisited(evt.target.value)}
+          value={activity.timesVisited}
+          onChange={(evt) => { setActivity({ ...activity, timesVisited: evt.target.value }); }}
         />
       </label>
       <label htmlFor="books">
         books
         <input
           id="books"
-          value={books}
-          onChange={(evt) => setBooks(evt.target.value)}
+          value={activity.books}
+          onChange={(evt) => { setActivity({ ...activity, books: evt.target.value }); }}
         />
       </label>
       <label htmlFor="status">
         status
         <input
           id="status"
-          value={status}
-          onChange={(evt) => setStatus(evt.target.value)}
+          value={activity.status}
+          onChange={(evt) => { setActivity({ ...activity, status: evt.target.value }); }}
         />
       </label>
       <input type="submit" value="Add activity" />
