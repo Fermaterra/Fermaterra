@@ -45,6 +45,6 @@ const purchaseSchema = Schema({
     type: String
   }
 
-}, { tiemestamps: true });
+}, { timestamps: true });
 
 module.exports = model("Purchase", purchaseSchema);
