@@ -8,6 +8,7 @@ import styles from "../../../styles/admin/activities.module.css";
 
 export default function Activities({ activities }) {
   const [addForm, setAddForm] = useState(false);
+  const [activitiesList, setActivitiesList] = useState(activities);
   useEffect(() => {}, [addForm]);
 
   const handleAddForm = () => setAddForm(!addForm);
@@ -23,7 +24,15 @@ export default function Activities({ activities }) {
         />
         <h2>Activities</h2>
       </div>
-      {addForm ? <NewActivityForm handleAddForm={handleAddForm} /> : null}
+      {addForm
+        ? (
+          <NewActivityForm
+            handleAddForm={handleAddForm}
+            activitiesList={activitiesList}
+            setActivitiesList={setActivitiesList}
+          />
+        )
+        : null}
       <ul className={styles.rows}>
         <li key="activityNumber">Número actividad</li>
         <li key="day">Día</li>
@@ -35,7 +44,7 @@ export default function Activities({ activities }) {
         <li key="totalStock">Plazas`` totales</li>
         <li key="books">Reservas</li>
         <li key="status">Estado</li>
-        {activities.map(
+        {activitiesList.map(
           ({
             _id: id,
             title,
