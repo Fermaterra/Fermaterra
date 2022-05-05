@@ -76,10 +76,6 @@ const activitySchema = Schema(
       type: Number,
       default: 0
     },
-    initialStock: {
-      type: Number,
-      default: 0
-    },
     books: {
       type: Number,
       default: 0
