@@ -1,5 +1,4 @@
 const { model, Schema } = require("mongoose");
-const formatDate = require("../utils/formatDate");
 
 const activitySchema = Schema(
   {
@@ -11,7 +10,7 @@ const activitySchema = Schema(
     day: {
       type: Date,
       required: true,
-      default: formatDate(Date.now()).toString()
+      default: Date.now()
     },
     hour: {
       type: String,
@@ -55,7 +54,8 @@ const activitySchema = Schema(
       },
       coordinates: {
         type: String,
-        required: true
+        required: true,
+        default: ""
       }
 
     },
