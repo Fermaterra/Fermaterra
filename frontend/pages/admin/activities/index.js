@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import Link from "next/link";
 import AdminLayout from "../../../components/AdminLayout";
 import NewActivityForm from "../../../components/adminForms/NewActivityForm";
@@ -25,16 +25,16 @@ export default function Activities({ activities }) {
       </div>
       {addForm ? <NewActivityForm handleAddForm={handleAddForm} /> : null}
       <ul className={styles.rows}>
-        <li>Número actividad</li>
-        <li>Día</li>
-        <li>Hora</li>
-        <li>Sitio</li>
-        <li>Título actividad</li>
-        <li>Profesor</li>
-        <li>Notas</li>
-        <li>Plazas`` totales</li>
-        <li>Reservas</li>
-        <li>Estado</li>
+        <li key="activityNumber">Número actividad</li>
+        <li key="day">Día</li>
+        <li key="hour">Hora</li>
+        <li key="site">Sitio</li>
+        <li key="activityTitle">Título actividad</li>
+        <li key="professor">Profesor</li>
+        <li key="description">Notas</li>
+        <li key="totalStock">Plazas`` totales</li>
+        <li key="books">Reservas</li>
+        <li key="status">Estado</li>
         {activities.map(
           ({
             _id: id,
@@ -48,9 +48,9 @@ export default function Activities({ activities }) {
             books,
             status,
           }) => (
-            <>
-              <li>
-                <Link href={`/admin/activities/${id}`} key={id}>
+            <Fragment key={`${id}-fragment`}>
+              <li key={`${id}-link`}>
+                <Link href={`/admin/activities/${id}`} key={`${id}-linkChild`}>
                   {id}
                 </Link>
               </li>
@@ -63,7 +63,7 @@ export default function Activities({ activities }) {
               <li key={`${id}-initialStock`}>{initialStock}</li>
               <li key={`${id}-books`}>{books}</li>
               <li key={`${id}-status`}>{status}</li>
-            </>
+            </Fragment>
           )
         )}
       </ul>
