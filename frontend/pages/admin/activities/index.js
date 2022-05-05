@@ -7,7 +7,11 @@ import styles from "../../../styles/admin/activities.module.css";
 export default function Activities({ activities }) {
   return (
     <AdminLayout>
-      <h2>Activities</h2>
+      <div className={styles.title}>
+        <input type="button" value="+" />
+        <h2>Activities</h2>
+
+      </div>
       <div className={styles.rows}>
         <p>Número actividad</p>
         <p>Día</p>
