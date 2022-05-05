@@ -27,7 +27,7 @@ export default function NewActivityForm({ handleAddForm }) {
     await setActivity({
 
     });
-    await axios.post(`http://localhost:4001/activities`, activity);
+    await axios.post(`${process.env.URL}/activities`, activity);
   };
 
   return (
