@@ -2,6 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import AdminLayout from "../../../components/AdminLayout";
+import NewActivityForm from "../../../components/adminForms/NewActivityForm";
 
 import styles from "../../../styles/admin/activities.module.css";
 
@@ -14,22 +15,13 @@ export default function Activities({ activities }) {
       <div className={styles.title}>
         <input
           type="button"
-          value="+"
+          value={!addForm ? "+" : "X"}
           onClick={() => { handleAddForm(); }}
         />
         <h2>Activities</h2>
       </div>
       {addForm
-        ? (
-          <div>
-            <p>Add new activity</p>
-            <input
-              type="button"
-              value="Close"
-              onClick={() => { handleAddForm(); }}
-            />
-          </div>
-        )
+        ? <NewActivityForm handleAddForm={handleAddForm} />
         : null}
       <div className={styles.rows}>
         <p>Número actividad</p>
