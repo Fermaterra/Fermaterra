@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function NewActivityForm({ setAddForm }) {
+export default function NewActivityForm({ handleAddForm }) {
   const [title, setTitle] = useState("");
   const [day, setDay] = useState(Date.now());
   const [hour, setHour] = useState("");
@@ -21,8 +21,9 @@ export default function NewActivityForm({ setAddForm }) {
   const [status, setStatus] = useState("available");
   const [activity, setActivity] = useState({});
 
-  const handleSubmit = async () => {
-    setActivity({
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+    await setActivity({
       title,
       day,
       hour,
@@ -33,7 +34,7 @@ export default function NewActivityForm({ setAddForm }) {
       shortDescription,
       basePrice,
       taxes,
-      location: { name: "", coordinates: "" },
+      location,
       contact,
       instructor,
       notes,
@@ -45,7 +46,9 @@ export default function NewActivityForm({ setAddForm }) {
   };
 
   return (
-    <form>
+    <form
+      onSubmit={handleSubmit}
+    >
       <label htmlFor="title">
         title
         <input
@@ -131,8 +134,8 @@ export default function NewActivityForm({ setAddForm }) {
         location
         <input
           id="location"
-          value={location}
-          onChange={(evt) => setLocation(evt.target.value)}
+          value={location.name}
+          onChange={(evt) => setLocation({ name: evt.target.value, coordinates: "" })}
         />
       </label>
       <label htmlFor="contact">
@@ -183,8 +186,8 @@ export default function NewActivityForm({ setAddForm }) {
           onChange={(evt) => setStatus(evt.target.value)}
         />
       </label>
-      <input type="submit" value="Add activity" onClick={() => handleSubmit()} />
-      <input type="button" value="Exit" onClick={() => setAddForm(false)} />
+      <input type="submit" value="Add activity" />
+      <input type="button" value="Exit" onClick={() => handleAddForm()} />
     </form>
   );
 }
