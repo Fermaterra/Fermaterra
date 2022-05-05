@@ -34,7 +34,7 @@ export default function NewActivityForm({ handleAddForm }) {
       shortDescription,
       basePrice,
       taxes,
-      location,
+      location: { name: location.name, coordinates: location.coordinates },
       contact,
       instructor,
       notes,
@@ -42,7 +42,7 @@ export default function NewActivityForm({ handleAddForm }) {
       books,
       status
     });
-    await axios.post(`${process.env.URL}/activities`, activity);
+    await axios.post(`http://localhost:4001/activities`, activity);
   };
 
   return (
@@ -135,7 +135,7 @@ export default function NewActivityForm({ handleAddForm }) {
         <input
           id="location"
           value={location.name}
-          onChange={(evt) => setLocation({ name: evt.target.value, coordinates: "" })}
+          onChange={(evt) => setLocation({ name: evt.target.value, coordinates: evt.target.value })}
         />
       </label>
       <label htmlFor="contact">
