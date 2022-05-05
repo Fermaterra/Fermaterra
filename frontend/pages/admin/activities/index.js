@@ -8,9 +8,7 @@ import styles from "../../../styles/admin/activities.module.css";
 
 export default function Activities({ activities }) {
   const [addForm, setAddForm] = useState(false);
-  useEffect(() => {
-
-  }, [addForm]);
+  useEffect(() => {}, [addForm]);
 
   const handleAddForm = () => setAddForm(!addForm);
   return (
@@ -19,50 +17,56 @@ export default function Activities({ activities }) {
         <input
           type="button"
           value={!addForm ? "+" : "X"}
-          onClick={() => { handleAddForm(); }}
+          onClick={() => {
+            handleAddForm();
+          }}
         />
         <h2>Activities</h2>
       </div>
-      {addForm
-        ? <NewActivityForm handleAddForm={handleAddForm} />
-        : null}
-      <div className={styles.rows}>
-        <p>Número actividad</p>
-        <p>Día</p>
-        <p>Hora</p>
-        <p>Sitio</p>
-        <p>Título actividad</p>
-        <p>Profesor</p>
-        <p>Notas</p>
-        <p>Plazas totales</p>
-        <p>Reservas</p>
-        <p>Estado</p>
-        {activities.map(({
-          _id: id,
-          title,
-          day,
-          hour,
-          location,
-          instructor,
-          notes,
-          initialStock,
-          books,
-          status
-        }) => (
-          < >
-            <Link href={`/admin/activities/${id}`} key={id}>{id}</Link>
-            <p key={`${id}-day`}>{formateDate(day)}</p>
-            <p key={`${id}-hour`}>{hour}</p>
-            <p key={`${id}-location`}>{location}</p>
-            <p key={`${id}-title`}>{title}</p>
-            <p key={`${id}-instructor`}>{instructor}</p>
-            <p key={`${id}-notes`}>{notes}</p>
-            <p key={`${id}-initialStock`}>{initialStock}</p>
-            <p key={`${id}-books`}>{books}</p>
-            <p key={`${id}-status`}>{status}</p>
-          </>
-        ))}
-      </div>
+      {addForm ? <NewActivityForm handleAddForm={handleAddForm} /> : null}
+      <ul className={styles.rows}>
+        <li>Número actividad</li>
+        <li>Día</li>
+        <li>Hora</li>
+        <li>Sitio</li>
+        <li>Título actividad</li>
+        <li>Profesor</li>
+        <li>Notas</li>
+        <li>Plazas`` totales</li>
+        <li>Reservas</li>
+        <li>Estado</li>
+        {activities.map(
+          ({
+            _id: id,
+            title,
+            day,
+            hour,
+            location,
+            instructor,
+            notes,
+            initialStock,
+            books,
+            status,
+          }) => (
+            <>
+              <li>
+                <Link href={`/admin/activities/${id}`} key={id}>
+                  {id}
+                </Link>
+              </li>
+              <li key={`${id}-day`}>{formateDate(day)}</li>
+              <li key={`${id}-hour`}>{hour}</li>
+              <li key={`${id}-location`}>{location}</li>
+              <li key={`${id}-title`}>{title}</li>
+              <li key={`${id}-instructor`}>{instructor}</li>
+              <li key={`${id}-notes`}>{notes}</li>
+              <li key={`${id}-initialStock`}>{initialStock}</li>
+              <li key={`${id}-books`}>{books}</li>
+              <li key={`${id}-status`}>{status}</li>
+            </>
+          )
+        )}
+      </ul>
     </AdminLayout>
   );
 }
@@ -72,7 +76,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      activities
-    }
+      activities,
+    },
   };
 }

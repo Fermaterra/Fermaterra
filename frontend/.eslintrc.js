@@ -1,24 +1,19 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
   },
-  extends: [
-    "plugin:react/recommended",
-    "airbnb"
-  ],
+  extends: ["plugin:react/recommended", "airbnb"],
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: "latest",
-    sourceType: "module"
+    sourceType: "module",
   },
-  plugins: [
-    "react"
-  ],
+  plugins: ["react"],
   rules: {
-    "comma-dangle": [2, "never"],
+    "comma-dangle": "off",
     "linebreak-style": 0,
     "global-require": 0,
     "eslint linebreak-style": [0, "error", "windows"],
@@ -26,6 +21,6 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
-    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }]
-  }
+    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
+  },
 };
