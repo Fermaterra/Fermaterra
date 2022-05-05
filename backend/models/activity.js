@@ -47,18 +47,12 @@ const activitySchema = Schema(
     },
 
     location: {
-      name: {
-        type: String,
-        required: true,
-        default: ""
-      },
-      coordinates: {
-        type: String,
-        required: true,
-        default: ""
-      }
 
+      type: String,
+      required: true,
+      default: ""
     },
+
     contact: {
       type: String,
       required: true
