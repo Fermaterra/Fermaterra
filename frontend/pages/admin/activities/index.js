@@ -50,7 +50,7 @@ export default function Activities({ activities }) {
             <Link href={`/admin/activities/${id}`} key={id}>{id}</Link>
             <p key={`${id}-day`}>{day}</p>
             <p key={`${id}-hour`}>{hour}</p>
-            <p key={`${id}-location`}>{location}</p>
+            <p key={`${id}-location`}>{location.name}</p>
             <p key={`${id}-title`}>{title}</p>
             <p key={`${id}-instructor`}>{instructor}</p>
             <p key={`${id}-notes`}>{notes}</p>
