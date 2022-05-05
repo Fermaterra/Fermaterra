@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function NewActivityForm({ handleAddForm }) {
+export default function NewActivityForm({
+  handleAddForm, activitiesList, setActivitiesList, id
+}) {
   const [activity, setActivity] = useState({
     title: "",
-    day: null,
+    day: "",
     hour: "",
     duration: "",
     image: "",
@@ -21,13 +23,21 @@ export default function NewActivityForm({ handleAddForm }) {
     books: "",
     status: ""
   });
-
+  const [error, setError] = useState("");
+  if (id) {
+    const findActivity = async () => axios.get(`${process.env.URL}/activities/${id}`);
+    const activityToUpdate = findActivity();
+    setActivity(activityToUpdate);
+  }
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    await setActivity({
-
-    });
-    await axios.post(`${process.env.URL}/activities`, activity);
+    try {
+      const { status, data } = await axios.post(`${process.env.URL}/activities`, activity);
+      if (status === 201) setActivitiesList([...activitiesList, data]);
+      handleAddForm();
+    } catch ({ response: { data: { message } } }) {
+      setError(message);
+    }
   };
 
   return (
@@ -173,6 +183,7 @@ export default function NewActivityForm({ handleAddForm }) {
       </label>
       <input type="submit" value="Add activity" />
       <input type="button" value="Exit" onClick={() => handleAddForm()} />
+      {error ? <p>{error}</p> : null}
     </form>
   );
 }
