@@ -1,0 +1,31 @@
+.container{
+justify-content: center;
+margin: 3rem auto;
+color: var(--black);
+}
+
+.heading{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 3rem;
+}
+
+.heading input{
+    width: fit-content;
+    margin: auto;
+    color: var(--black);
+    background-color: var(--white);
+
+}
+
+.activity{
+    padding: 0;
+}
+
+.activity li{
+    width: fit-content;
+    list-style: none;
+    margin: 0.5rem auto;
+    color: var(--black);
+
+}
