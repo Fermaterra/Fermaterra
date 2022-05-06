@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import axios from "axios";
 import styles from "../../styles/admin/activityForm.module.css";
 
@@ -25,17 +26,30 @@ export default function NewActivityForm({
     status: ""
   });
   const [error, setError] = useState("");
-  if (id) {
-    const findActivity = async () => axios.get(`${process.env.URL}/activities/${id}`);
-    const activityToUpdate = findActivity();
-    setActivity(activityToUpdate);
-  }
+  const router = useRouter();
+
+  useEffect(() => {
+    if (id) {
+      const fetchActivity = async () => {
+        const { data } = await axios.get(`${process.env.URL}/activities/${id}`);
+        await setActivity(data);
+      };
+      fetchActivity();
+    }
+  }, []);
+
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
-      const { status, data } = await axios.post(`${process.env.URL}/activities`, activity);
-      if (status === 201) setActivitiesList([...activitiesList, data]);
-      handleAddForm();
+      if (id) {
+        await axios.put(`${process.env.URL}/activities/${id}`, activity);
+        router.push(`/admin/activities/${id}`);
+      } else {
+        const { status, data } = await axios.post(`${process.env.URL}/activities`, activity);
+        if (status === 201) setActivitiesList([...activitiesList, data]);
+      }
+
+      await handleAddForm();
     } catch ({ response: { data: { message } } }) {
       setError(message);
     }
@@ -183,7 +197,7 @@ export default function NewActivityForm({
           onChange={(evt) => { setActivity({ ...activity, status: evt.target.value }); }}
         />
       </label>
-      <input type="submit" value="Add activity" />
+      <input type="submit" value={id ? "Edit activity" : "Add activity"} />
       <input type="button" value="Exit" onClick={() => handleAddForm()} />
       {error ? <p>{error}</p> : null}
     </form>
