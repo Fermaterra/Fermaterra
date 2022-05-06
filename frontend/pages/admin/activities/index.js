@@ -1,7 +1,7 @@
 import { useState, useEffect, Fragment } from "react";
 import Link from "next/link";
 import AdminLayout from "../../../components/AdminLayout";
-import NewActivityForm from "../../../components/adminForms/NewActivityForm";
+import ActivityForm from "../../../components/adminForms/ActivityForm";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import formateDate from "../../../utils/formateDate";
 import styles from "../../../styles/admin/activities.module.css";
@@ -26,7 +26,7 @@ export default function Activities({ activities }) {
       </div>
       {addForm
         ? (
-          <NewActivityForm
+          <ActivityForm
             handleAddForm={handleAddForm}
             activitiesList={activitiesList}
             setActivitiesList={setActivitiesList}
