@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
 import ActivityForm from "../../../components/adminForms/ActivityForm";
 import AdminLayout from "../../../components/AdminLayout";
 import fetchFromApi from "../../../utils/fetchFromApi";
@@ -13,8 +15,14 @@ export default function ActivityDetails({ activity }) {
     basePrice, taxes, location, contact, instructor, notes, timesVisited, books, status
   } = activity;
 
+  const router = useRouter();
   const handleEdition = () => {
     setEditionMode(!editionMode);
+  };
+
+  const handleDeleting = async () => {
+    await axios.delete(`${process.env.URL}/activities/${id}`);
+    router.push(`/admin/activities`);
   };
 
   return (
@@ -31,6 +39,8 @@ export default function ActivityDetails({ activity }) {
           <input
             type="button"
             value="Delete activity"
+            onClick={() => { handleDeleting(); }}
+
           />
         </div>
         {editionMode
