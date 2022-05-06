@@ -41,7 +41,7 @@ export default function Activities({ activities }) {
         <li key="activityTitle">Título actividad</li>
         <li key="professor">Profesor</li>
         <li key="description">Notas</li>
-        <li key="totalStock">Plazas`` totales</li>
+        <li key="totalStock">Plazas totales</li>
         <li key="books">Reservas</li>
         <li key="status">Estado</li>
         {activitiesList.map(
@@ -53,7 +53,7 @@ export default function Activities({ activities }) {
             location,
             instructor,
             notes,
-            initialStock,
+            stock,
             books,
             status,
           }) => (
@@ -69,7 +69,7 @@ export default function Activities({ activities }) {
               <li key={`${id}-title`}>{title}</li>
               <li key={`${id}-instructor`}>{instructor}</li>
               <li key={`${id}-notes`}>{notes}</li>
-              <li key={`${id}-initialStock`}>{initialStock}</li>
+              <li key={`${id}-initialStock`}>{stock + books}</li>
               <li key={`${id}-books`}>{books}</li>
               <li key={`${id}-status`}>{status}</li>
             </Fragment>
