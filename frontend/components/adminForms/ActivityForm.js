@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import styles from "../../styles/admin/activityForm.module.css";
 
 export default function NewActivityForm({
   handleAddForm, activitiesList, setActivitiesList, id
@@ -42,6 +43,7 @@ export default function NewActivityForm({
 
   return (
     <form
+      className={styles.form}
       onSubmit={handleSubmit}
     >
       <label htmlFor="title">
