@@ -42,22 +42,22 @@ export default function ActivityDetails({ activity }) {
           )
           : (
             <ul className={styles.activity}>
-              <li>{formateDate(day)}</li>
-              <li>{hour}</li>
-              <li>{duration}</li>
-              <li>{image}</li>
-              <li>{stock}</li>
-              <li>{description}</li>
-              <li>{shortDescription}</li>
-              <li>{basePrice}</li>
-              <li>{taxes}</li>
-              <li>{location}</li>
-              <li>{contact}</li>
-              <li>{instructor}</li>
-              <li>{notes}</li>
-              <li>{timesVisited}</li>
-              <li>{books}</li>
-              <li>{status}</li>
+              <li>{`Día: ${formateDate(day)}`}</li>
+              <li>{`Hora: ${hour}`}</li>
+              <li>{`Duración: ${duration}`}</li>
+              <li>{`Imagen: ${image}`}</li>
+              <li>{`Plazas: ${stock}`}</li>
+              <li>{`Descripción: ${description}`}</li>
+              <li>{`Descripción breve: ${shortDescription}`}</li>
+              <li>{`Precio: ${basePrice}`}</li>
+              <li>{`Impuestos: ${taxes}`}</li>
+              <li>{`Localización: ${location}`}</li>
+              <li>{`Contacto: ${contact}`}</li>
+              <li>{`Instructor: ${instructor}`}</li>
+              <li>{`Notas: ${notes}`}</li>
+              <li>{`Veces visitada: ${timesVisited}`}</li>
+              <li>{`Reservas: ${books}`}</li>
+              <li>{`Estado: ${status}`}</li>
             </ul>
           )}
       </section>
