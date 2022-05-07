@@ -1,0 +1,42 @@
+.title{
+    width: 90%;
+    margin: 3rem auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    color: var(--black);
+}
+.title input[type="button"]{
+    padding: 0 0.5rem;
+    width: fit-content;
+    color: var(--black);
+    background-color: var(--white);    
+    border-radius: 0.25rem;
+}
+
+.rows{
+    margin: 3rem auto;
+    padding: 0.2rem;
+    width: 90%;
+    display:grid;
+    gap: 0.2rem;
+    background-color: var(--black);
+    border-radius: 0.25rem;
+}
+
+.activities{
+    grid-template-columns: 1fr 1fr 1fr 1fr 3fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.books{
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.rows *{
+    background-color: var(--white);
+    padding: 0.5rem;
+    list-style: none;
+}
+
+.rows a {
+    color: var(--black);
+}
