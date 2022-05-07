@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import storage from "../../firebase";
 import styles from "../../styles/admin/activityForm.module.css";
 
 export default function NewActivityForm({
@@ -54,6 +56,14 @@ export default function NewActivityForm({
       setError(message);
     }
   };
+  const uploadImage = (image) => {
+    const imageRef = ref(storage, `images/${image.title}-${image.day}-${image.hour}`);
+    uploadBytes(imageRef, image,).then(() => {
+      getDownloadURL(imageRef).then((url) => {
+        setActivity({ ...activity, image: url });
+      });
+    });
+  };
 
   return (
     <form
@@ -97,8 +107,8 @@ export default function NewActivityForm({
         image
         <input
           id="image"
-          value={activity.image}
-          onChange={(evt) => { setActivity({ ...activity, image: evt.target.value }); }}
+          type="file"
+          onChange={(evt) => { uploadImage(evt.target.files[0]); }}
         />
       </label>
       <label htmlFor="stock">
