@@ -33,7 +33,7 @@ export default function Activities({ activities }) {
           />
         )
         : null}
-      <ul className={styles.rows}>
+      <ul className={`${styles.rows} ${styles.activities}`}>
         <li key="activityNumber">Número actividad</li>
         <li key="day">Día</li>
         <li key="hour">Hora</li>
