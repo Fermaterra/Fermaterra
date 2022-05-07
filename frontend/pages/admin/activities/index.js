@@ -4,7 +4,7 @@ import AdminLayout from "../../../components/AdminLayout";
 import NewActivityForm from "../../../components/adminForms/NewActivityForm";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import formateDate from "../../../utils/formateDate";
-import styles from "../../../styles/admin/activities.module.css";
+import styles from "../../../styles/admin/views.module.css";
 
 export default function Activities({ activities }) {
   const [addForm, setAddForm] = useState(false);
@@ -24,7 +24,7 @@ export default function Activities({ activities }) {
         <h2>Activities</h2>
       </div>
       {addForm ? <NewActivityForm handleAddForm={handleAddForm} /> : null}
-      <ul className={styles.rows}>
+      <ul className={`${styles.rows} ${styles.activities}`}>
         <li key="activityNumber">Número actividad</li>
         <li key="day">Día</li>
         <li key="hour">Hora</li>
