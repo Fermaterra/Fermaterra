@@ -1,6 +1,7 @@
 import { useState, useEffect, Fragment } from "react";
 import Link from "next/link";
 import AdminLayout from "../../../components/AdminLayout";
+import BookForm from "../../../components/adminForms/BookForm";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import formateDate from "../../../utils/formateDate";
 import styles from "../../../styles/admin/views.module.css";
@@ -22,7 +23,7 @@ export default function Books({ purchases }) {
         />
         <h2>Reservas</h2>
       </div>
-      {addForm ? "Crear reserva" : null}
+      {addForm ? <BookForm /> : null}
       <ul className={`${styles.rows} ${styles.books}`}>
         <li key="bookNumber">Número reserva</li>
         <li key="purchaseDate">Fecha de pedido</li>
