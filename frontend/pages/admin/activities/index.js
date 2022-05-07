@@ -1,13 +1,14 @@
 import { useState, useEffect, Fragment } from "react";
 import Link from "next/link";
 import AdminLayout from "../../../components/AdminLayout";
-import NewActivityForm from "../../../components/adminForms/NewActivityForm";
+import ActivityForm from "../../../components/adminForms/ActivityForm";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import formateDate from "../../../utils/formateDate";
 import styles from "../../../styles/admin/activities.module.css";
 
 export default function Activities({ activities }) {
   const [addForm, setAddForm] = useState(false);
+  const [activitiesList, setActivitiesList] = useState(activities);
   useEffect(() => {}, [addForm]);
 
   const handleAddForm = () => setAddForm(!addForm);
@@ -23,7 +24,15 @@ export default function Activities({ activities }) {
         />
         <h2>Activities</h2>
       </div>
-      {addForm ? <NewActivityForm handleAddForm={handleAddForm} /> : null}
+      {addForm
+        ? (
+          <ActivityForm
+            handleAddForm={handleAddForm}
+            activitiesList={activitiesList}
+            setActivitiesList={setActivitiesList}
+          />
+        )
+        : null}
       <ul className={styles.rows}>
         <li key="activityNumber">Número actividad</li>
         <li key="day">Día</li>
@@ -32,10 +41,10 @@ export default function Activities({ activities }) {
         <li key="activityTitle">Título actividad</li>
         <li key="professor">Profesor</li>
         <li key="description">Notas</li>
-        <li key="totalStock">Plazas`` totales</li>
+        <li key="totalStock">Plazas totales</li>
         <li key="books">Reservas</li>
         <li key="status">Estado</li>
-        {activities.map(
+        {activitiesList.map(
           ({
             _id: id,
             title,
@@ -44,7 +53,7 @@ export default function Activities({ activities }) {
             location,
             instructor,
             notes,
-            initialStock,
+            stock,
             books,
             status,
           }) => (
@@ -60,7 +69,7 @@ export default function Activities({ activities }) {
               <li key={`${id}-title`}>{title}</li>
               <li key={`${id}-instructor`}>{instructor}</li>
               <li key={`${id}-notes`}>{notes}</li>
-              <li key={`${id}-initialStock`}>{initialStock}</li>
+              <li key={`${id}-initialStock`}>{stock + books}</li>
               <li key={`${id}-books`}>{books}</li>
               <li key={`${id}-status`}>{status}</li>
             </Fragment>
