@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import axios from "axios";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import storage from "../../firebase";
+import styles from "../../styles/admin/activityForm.module.css";
 
-export default function NewActivityForm({ handleAddForm }) {
+export default function NewActivityForm({
+  handleAddForm, activitiesList, setActivitiesList, id
+}) {
   const [activity, setActivity] = useState({
     title: "",
-    day: null,
+    day: "",
     hour: "",
     duration: "",
     image: "",
@@ -21,17 +27,47 @@ export default function NewActivityForm({ handleAddForm }) {
     books: "",
     status: ""
   });
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    if (id) {
+      const fetchActivity = async () => {
+        const { data } = await axios.get(`${process.env.URL}/activities/${id}`);
+        await setActivity(data);
+      };
+      fetchActivity();
+    }
+  }, []);
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    await setActivity({
+    try {
+      if (id) {
+        await axios.put(`${process.env.URL}/activities/${id}`, activity);
+        router.push(`/admin/activities/${id}`);
+      } else {
+        const { status, data } = await axios.post(`${process.env.URL}/activities`, activity);
+        if (status === 201) setActivitiesList([...activitiesList, data]);
+      }
 
+      await handleAddForm();
+    } catch ({ response: { data: { message } } }) {
+      setError(message);
+    }
+  };
+  const uploadImage = (image) => {
+    const imageRef = ref(storage, `images/${image.title}-${image.day}-${image.hour}`);
+    uploadBytes(imageRef, image,).then(() => {
+      getDownloadURL(imageRef).then((url) => {
+        setActivity({ ...activity, image: url });
+      });
     });
-    await axios.post(`http://localhost:4001/activities`, activity);
   };
 
   return (
     <form
+      className={styles.form}
       onSubmit={handleSubmit}
     >
       <label htmlFor="title">
@@ -71,8 +107,8 @@ export default function NewActivityForm({ handleAddForm }) {
         image
         <input
           id="image"
-          value={activity.image}
-          onChange={(evt) => { setActivity({ ...activity, image: evt.target.value }); }}
+          type="file"
+          onChange={(evt) => { uploadImage(evt.target.files[0]); }}
         />
       </label>
       <label htmlFor="stock">
@@ -171,8 +207,9 @@ export default function NewActivityForm({ handleAddForm }) {
           onChange={(evt) => { setActivity({ ...activity, status: evt.target.value }); }}
         />
       </label>
-      <input type="submit" value="Add activity" />
+      <input type="submit" value={id ? "Edit activity" : "Add activity"} />
       <input type="button" value="Exit" onClick={() => handleAddForm()} />
+      {error ? <p>{error}</p> : null}
     </form>
   );
 }

@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true
+  reactStrictMode: true,
+  env: {
+    URL: "http://localhost:4001",
+  }
 };
 
 module.exports = nextConfig;
