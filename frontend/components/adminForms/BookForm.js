@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function NewActivityForm({ handleAddForm }) {
+export default function BookForm({ handleAddForm }) {
   const [book, setBook] = useState({
 
   });
