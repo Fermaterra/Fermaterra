@@ -11,13 +11,7 @@ export default function Books({ purchases }) {
   const [books, setBooks] = useState(purchases);
   const [booksToDisplay, setBooksToDisplay] = useState(purchases);
   useEffect(() => { setBooksToDisplay(books); }, [books]);
-
   const handleAddForm = () => setAddForm(!addForm);
-  const getClientName = async (clientId) => {
-    const client = await fetchFromApi(`${process.env.URL}/clients/${clientId}`);
-    const { name } = await client;
-    return name;
-  };
 
   const filterBooks = (query) => {
     const filteredBooks = books.filter(
@@ -63,7 +57,7 @@ export default function Books({ purchases }) {
         {booksToDisplay?.map(
           ({
             _id: id,
-            client,
+            client: { _id: clientId, name: clientName },
             createdAt,
             basePrice,
             finalPrice,
@@ -77,10 +71,10 @@ export default function Books({ purchases }) {
               </li>
               <li key={`${id}-day`}>{formateDate(createdAt)}</li>
               <li key={`${id}-client_link`}>
-                {client
+                {clientId
                   ? (
-                    <Link href={`/admin/clients/${client}`} key={`${client}-client`}>
-                      {`${getClientName(client)}`}
+                    <Link href={`/admin/clients/${clientId}`} key={`${clientId}-client`}>
+                      {clientName}
                     </Link>
                   )
                   : "Sin cliente"}
