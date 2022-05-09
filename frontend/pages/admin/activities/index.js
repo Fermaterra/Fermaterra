@@ -10,7 +10,8 @@ export default function Activities({ activities }) {
   const [addForm, setAddForm] = useState(false);
   const [activitiesList, setActivitiesList] = useState(activities);
   const [activitiesToDisplay, setActivitiesToDisplay] = useState(activities);
-  useEffect(() => {}, [addForm]);
+
+  useEffect(() => { setActivitiesToDisplay(activitiesList); }, [activitiesList]);
 
   const handleAddForm = () => setAddForm(!addForm);
   const filterActivities = (query) => {
