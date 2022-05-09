@@ -9,9 +9,22 @@ import styles from "../../../styles/admin/views.module.css";
 export default function Books({ purchases }) {
   const [addForm, setAddForm] = useState(false);
   const [books, setBooks] = useState(purchases);
-  useEffect(() => {}, [addForm]);
+  const [booksToDisplay, setBooksToDisplay] = useState(purchases);
+  useEffect(() => { setBooksToDisplay(books); }, [books]);
 
   const handleAddForm = () => setAddForm(!addForm);
+  const getClientName = async (clientId) => {
+    const client = await fetchFromApi(`${process.env.URL}/clients/${clientId}`);
+    const { name } = await client;
+    return name;
+  };
+
+  const filterBooks = (query) => {
+    const filteredBooks = books.filter(
+      (book) => (Object.values(book).toString().toUpperCase().includes(query.toUpperCase()))
+    );
+    setBooksToDisplay(filteredBooks);
+  };
   return (
     <AdminLayout>
       <div className={styles.title}>
@@ -24,6 +37,14 @@ export default function Books({ purchases }) {
         />
         <h2>Reservas</h2>
       </div>
+      <label htmlFor="search">
+        Buscar:
+        {" "}
+        <input
+          id="search"
+          onChange={(evt) => filterBooks(evt.target.value)}
+        />
+      </label>
       {addForm ? (
         <BookForm
           books={books}
@@ -39,7 +60,7 @@ export default function Books({ purchases }) {
         <li key="finalPrice">Precio con descuento</li>
         <li key="status">Status</li>
 
-        {books?.map(
+        {booksToDisplay?.map(
           ({
             _id: id,
             client,
@@ -59,7 +80,7 @@ export default function Books({ purchases }) {
                 {client
                   ? (
                     <Link href={`/admin/clients/${client}`} key={`${client}-client`}>
-                      {client}
+                      {`${getClientName(client)}`}
                     </Link>
                   )
                   : "Sin cliente"}
