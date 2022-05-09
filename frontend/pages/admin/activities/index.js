@@ -9,9 +9,17 @@ import styles from "../../../styles/admin/views.module.css";
 export default function Activities({ activities }) {
   const [addForm, setAddForm] = useState(false);
   const [activitiesList, setActivitiesList] = useState(activities);
+  const [activitiesToDisplay, setActivitiesToDisplay] = useState(activities);
   useEffect(() => {}, [addForm]);
 
   const handleAddForm = () => setAddForm(!addForm);
+  const filterActivities = (query) => {
+    const filteredActivities = activitiesList.filter(
+      (activity) => activity.title.toUpperCase().includes(query.toUpperCase())
+    );
+    setActivitiesToDisplay(filteredActivities);
+  };
+
   return (
     <AdminLayout>
       <div className={styles.title}>
@@ -24,6 +32,14 @@ export default function Activities({ activities }) {
         />
         <h2>Activities</h2>
       </div>
+      <label htmlFor="search">
+        Buscar:
+        <input
+          id="search"
+          placeholder="Buscar actividad"
+          onChange={(evt) => filterActivities(evt.target.value)}
+        />
+      </label>
       {addForm
         ? (
           <ActivityForm
@@ -33,7 +49,7 @@ export default function Activities({ activities }) {
           />
         )
         : null}
-      <ul className={styles.rows}>
+      <ul className={`${styles.rows} ${styles.activities}`}>
         <li key="activityNumber">Número actividad</li>
         <li key="day">Día</li>
         <li key="hour">Hora</li>
@@ -44,7 +60,7 @@ export default function Activities({ activities }) {
         <li key="totalStock">Plazas totales</li>
         <li key="books">Reservas</li>
         <li key="status">Estado</li>
-        {activitiesList.map(
+        {activitiesToDisplay.map(
           ({
             _id: id,
             title,
