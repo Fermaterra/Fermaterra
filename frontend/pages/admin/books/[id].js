@@ -2,7 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";
-import AdminLayout from "../../../components/AdminLayout";
+import AdminNav from "../../../components/AdminNav";
 import BookForm from "../../../components/adminForms/BookForm";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import formateDate from "../../../utils/formateDate";
@@ -36,7 +36,7 @@ export default function bookDetails({ book }) {
   };
 
   return (
-    <AdminLayout>
+    <AdminNav>
       <section className={styles.container}>
         <div className={styles.heading}>
           <input
@@ -112,7 +112,7 @@ export default function bookDetails({ book }) {
             </ul>
           )}
       </section>
-    </AdminLayout>
+    </AdminNav>
   );
 }
 

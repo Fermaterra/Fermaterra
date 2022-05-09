@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import ActivityForm from "../../../components/adminForms/ActivityForm";
-import AdminLayout from "../../../components/AdminLayout";
+import AdminNav from "../../../components/AdminNav";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import formateDate from "../../../utils/formateDate";
 
@@ -26,7 +26,7 @@ export default function ActivityDetails({ activity }) {
   };
 
   return (
-    <AdminLayout>
+    <AdminNav>
 
       <section className={styles.container}>
         <div className={styles.heading}>
@@ -71,7 +71,7 @@ export default function ActivityDetails({ activity }) {
             </ul>
           )}
       </section>
-    </AdminLayout>
+    </AdminNav>
 
   );
 }

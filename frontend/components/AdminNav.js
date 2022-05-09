@@ -3,7 +3,7 @@ import Layout from "./Layout";
 
 import styles from "../styles/admin/adminLayout.module.css";
 
-export default function AdminLayout({ children }) {
+export default function AdminNav({ children }) {
   return (
     <Layout title="admin">
       <main className={styles.main}>

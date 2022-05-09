@@ -1,6 +1,6 @@
 import { useState, useEffect, Fragment } from "react";
 import Link from "next/link";
-import AdminLayout from "../../../components/AdminLayout";
+import AdminNav from "../../../components/AdminNav";
 import BookForm from "../../../components/adminForms/BookForm";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import formateDate from "../../../utils/formateDate";
@@ -20,7 +20,7 @@ export default function Books({ purchases }) {
     setBooksToDisplay(filteredBooks);
   };
   return (
-    <AdminLayout>
+    <AdminNav>
       <div className={styles.title}>
         <input
           type="button"
@@ -86,7 +86,7 @@ export default function Books({ purchases }) {
           )
         )}
       </ul>
-    </AdminLayout>
+    </AdminNav>
   );
 }
 
