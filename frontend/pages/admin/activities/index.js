@@ -15,7 +15,7 @@ export default function Activities({ activities }) {
   const handleAddForm = () => setAddForm(!addForm);
   const filterActivities = (query) => {
     const filteredActivities = activitiesList.filter(
-      (activity) => activity.title.toUpperCase().includes(query.toUpperCase())
+      (activity) => Object.values(activity).toString().toUpperCase().includes(query.toUpperCase())
     );
     setActivitiesToDisplay(filteredActivities);
   };
