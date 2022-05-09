@@ -6,7 +6,7 @@ import AdminLayout from "../../../components/AdminLayout";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import formateDate from "../../../utils/formateDate";
 
-import styles from "../../../styles/admin/activityDetails.module.css";
+import styles from "../../../styles/admin/detailsView.module.css";
 
 export default function ActivityDetails({ activity }) {
   const [editionMode, setEditionMode] = useState(false);
