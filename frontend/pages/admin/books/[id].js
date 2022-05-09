@@ -1,9 +1,12 @@
 import { useState } from "react";
 import Link from "next/link";
+import axios from "axios";
+import { useRouter } from "next/router";
 import AdminLayout from "../../../components/AdminLayout";
 import BookForm from "../../../components/adminForms/BookForm";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import formateDate from "../../../utils/formateDate";
+
 import styles from "../../../styles/admin/detailsView.module.css";
 
 export default function bookDetails({ book }) {
@@ -22,9 +25,16 @@ export default function bookDetails({ book }) {
     notes,
     updatedAt
   } = book;
+
+  const router = useRouter();
+  const handleDeleting = async () => {
+    await axios.delete(`${process.env.URL}/purchases/${id}`);
+    router.push(`/admin/books`);
+  };
   const handleEdition = () => {
     setEditionMode(!editionMode);
   };
+
   return (
     <AdminLayout>
       <section className={styles.container}>
@@ -32,12 +42,13 @@ export default function bookDetails({ book }) {
           <input
             type="button"
             value={editionMode ? "X" : "Edit"}
-            onClick={() => { handleEdition(); }}
+            onClick={handleEdition}
           />
           <h3>{id}</h3>
           <input
             type="button"
             value="Delete activity"
+            onClick={handleDeleting}
           />
         </div>
         {editionMode
