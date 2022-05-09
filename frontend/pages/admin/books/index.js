@@ -8,6 +8,7 @@ import styles from "../../../styles/admin/views.module.css";
 
 export default function Books({ purchases }) {
   const [addForm, setAddForm] = useState(false);
+  const [books, setBooks] = useState(purchases);
   useEffect(() => {}, [addForm]);
 
   const handleAddForm = () => setAddForm(!addForm);
@@ -23,7 +24,13 @@ export default function Books({ purchases }) {
         />
         <h2>Reservas</h2>
       </div>
-      {addForm ? <BookForm /> : null}
+      {addForm ? (
+        <BookForm
+          books={books}
+          setBooks={setBooks}
+          handleAddForm={handleAddForm}
+        />
+      ) : null}
       <ul className={`${styles.rows} ${styles.books}`}>
         <li key="bookNumber">Número reserva</li>
         <li key="purchaseDate">Fecha de pedido</li>
@@ -32,7 +39,7 @@ export default function Books({ purchases }) {
         <li key="finalPrice">Precio con descuento</li>
         <li key="status">Status</li>
 
-        {purchases?.map(
+        {books?.map(
           ({
             _id: id,
             client,
