@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function BookForm({ handleAddForm }) {
+export default function BookForm({ books, setBooks, handleAddForm }) {
   const [book, setBook] = useState({
     client: null,
     activities: [],
@@ -14,19 +14,25 @@ export default function BookForm({ handleAddForm }) {
     notes: ""
   });
   const [discount, setDiscount] = useState({ name: "", percentage: 0 });
-
+  const [error, setError] = useState("");
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     await setBook({
       ...book, discountApplied: discount
     });
-    await axios.post(`http://localhost:4001/purchases`, book);
+    try {
+      const { status, data } = await axios.post(`http://localhost:4001/purchases`, book);
+      if (status === 201) setBooks([...books, data]);
+    } catch ({ response: { data: { message } } }) {
+      setError(message);
+    }
   };
 
   return (
     <form
       onSubmit={handleSubmit}
     >
+      {error ? <p>{error}</p> : null}
       <label htmlFor="client">
         Cliente
         <input
