@@ -10,7 +10,7 @@ color: var(--black);
     margin-bottom: 3rem;
 }
 
-.heading input{
+.heading input, .back_button{
     width: fit-content;
     margin: auto;
     color: var(--black);
