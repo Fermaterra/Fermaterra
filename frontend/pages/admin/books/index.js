@@ -1,17 +1,26 @@
 import { useState, useEffect, Fragment } from "react";
 import Link from "next/link";
-import AdminLayout from "../../../components/AdminLayout";
+import AdminNav from "../../../components/AdminNav";
+import BookForm from "../../../components/adminForms/BookForm";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import formateDate from "../../../utils/formateDate";
 import styles from "../../../styles/admin/views.module.css";
 
 export default function Books({ purchases }) {
   const [addForm, setAddForm] = useState(false);
-  useEffect(() => {}, [addForm]);
-
+  const [books, setBooks] = useState(purchases);
+  const [booksToDisplay, setBooksToDisplay] = useState(purchases);
+  useEffect(() => { setBooksToDisplay(books); }, [books]);
   const handleAddForm = () => setAddForm(!addForm);
+
+  const filterBooks = (query) => {
+    const filteredBooks = books.filter(
+      (book) => (Object.values(book).toString().toUpperCase().includes(query.toUpperCase()))
+    );
+    setBooksToDisplay(filteredBooks);
+  };
   return (
-    <AdminLayout>
+    <AdminNav>
       <div className={styles.title}>
         <input
           type="button"
@@ -22,7 +31,21 @@ export default function Books({ purchases }) {
         />
         <h2>Reservas</h2>
       </div>
-      {addForm ? "Crear reserva" : null}
+      <label htmlFor="search">
+        Buscar:
+        {" "}
+        <input
+          id="search"
+          onChange={(evt) => filterBooks(evt.target.value)}
+        />
+      </label>
+      {addForm ? (
+        <BookForm
+          books={books}
+          setBooks={setBooks}
+          handleAddForm={handleAddForm}
+        />
+      ) : null}
       <ul className={`${styles.rows} ${styles.books}`}>
         <li key="bookNumber">Número reserva</li>
         <li key="purchaseDate">Fecha de pedido</li>
@@ -31,10 +54,10 @@ export default function Books({ purchases }) {
         <li key="finalPrice">Precio con descuento</li>
         <li key="status">Status</li>
 
-        {purchases?.map(
+        {booksToDisplay?.map(
           ({
             _id: id,
-            client,
+            client: { _id: clientId, name: clientName },
             createdAt,
             basePrice,
             finalPrice,
@@ -48,10 +71,10 @@ export default function Books({ purchases }) {
               </li>
               <li key={`${id}-day`}>{formateDate(createdAt)}</li>
               <li key={`${id}-client_link`}>
-                {client
+                {clientId
                   ? (
-                    <Link href={`/admin/clients/${client}`} key={`${client}-client`}>
-                      {client}
+                    <Link href={`/admin/clients/${clientId}`} key={`${clientId}-client`}>
+                      {clientName}
                     </Link>
                   )
                   : "Sin cliente"}
@@ -63,7 +86,7 @@ export default function Books({ purchases }) {
           )
         )}
       </ul>
-    </AdminLayout>
+    </AdminNav>
   );
 }
 

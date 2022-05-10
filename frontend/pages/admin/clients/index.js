@@ -1,12 +1,12 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import fetchFromApi from "../../../utils/fetchFromApi";
-import AdminLayout from "../../../components/AdminLayout";
+import AdminNav from "../../../components/AdminNav";
 import styles from "../../../styles/admin/views.module.css";
 
 export default function Books({ clients }) {
   return (
-    <AdminLayout>
+    <AdminNav>
       <h2>Clients</h2>
       <ul className={`${styles.rows} ${styles.clients}`}>
         <li>Id</li>
@@ -18,7 +18,7 @@ export default function Books({ clients }) {
           </Fragment>
         ))}
       </ul>
-    </AdminLayout>
+    </AdminNav>
   );
 }
 

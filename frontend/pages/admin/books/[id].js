@@ -2,7 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";
-import AdminLayout from "../../../components/AdminLayout";
+import AdminNav from "../../../components/AdminNav";
 import BookForm from "../../../components/adminForms/BookForm";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import formateDate from "../../../utils/formateDate";
@@ -15,7 +15,7 @@ export default function bookDetails({ book }) {
   const {
     createdAt,
     _id: id,
-    client,
+    client: { _id: clientId, name: clientName },
     activities,
     basePrice,
     discountApplied,
@@ -36,7 +36,7 @@ export default function bookDetails({ book }) {
   };
 
   return (
-    <AdminLayout>
+    <AdminNav>
       <section className={styles.container}>
         <div className={styles.heading}>
           <input
@@ -59,11 +59,11 @@ export default function bookDetails({ book }) {
                 {`Fecha de creación: `}
                 {formateDate(createdAt)}
               </li>
-              {client
+              {clientId
                 ? (
                   <li>
                     {`Cliente: `}
-                    <Link href={`/admin/clients/${client}`}>{client}</Link>
+                    <Link href={`/admin/clients/${clientId}`}>{clientName}</Link>
                   </li>
                 )
                 : <li>Sin cliente</li>}
@@ -72,7 +72,7 @@ export default function bookDetails({ book }) {
                 ? (
                   <ul>
                     {`Actividades: `}
-                    {activities.map((activity) => <li><Link href={`admin/activities/${activity}`}>{activity}</Link></li>)}
+                    {activities.map((activity) => <li key={activity}><Link href={`/admin/activities/${activity}`}>{activity}</Link></li>)}
                   </ul>
                 )
                 : <li>Sin actividades</li>}
@@ -112,7 +112,7 @@ export default function bookDetails({ book }) {
             </ul>
           )}
       </section>
-    </AdminLayout>
+    </AdminNav>
   );
 }
 

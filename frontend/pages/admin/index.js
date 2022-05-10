@@ -1,7 +1,7 @@
-import AdminLayout from "../../components/AdminLayout";
+import AdminNav from "../../components/AdminNav";
 
 export default function Admin() {
   return (
-    <AdminLayout />
+    <AdminNav />
   );
 }

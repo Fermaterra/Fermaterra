@@ -1,6 +1,6 @@
 import { useState, useEffect, Fragment } from "react";
 import Link from "next/link";
-import AdminLayout from "../../../components/AdminLayout";
+import AdminNav from "../../../components/AdminNav";
 import ActivityForm from "../../../components/adminForms/ActivityForm";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import formateDate from "../../../utils/formateDate";
@@ -22,7 +22,7 @@ export default function Activities({ activities }) {
   };
 
   return (
-    <AdminLayout>
+    <AdminNav>
       <div className={styles.title}>
         <input
           type="button"
@@ -93,7 +93,7 @@ export default function Activities({ activities }) {
           )
         )}
       </ul>
-    </AdminLayout>
+    </AdminNav>
   );
 }
 

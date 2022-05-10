@@ -5,7 +5,11 @@ const purchaseNotFound = (res) => res.status(404).json({ message: "Purchase not 
 
 const getPurchases = async ({ query }, res) => {
   try {
-    const purchases = await Purchase.find({ query });
+    const purchases = await Purchase.find({ query })
+      .populate({
+        path: "client",
+        select: "name"
+      });
     res.status(200).json({ purchases });
   } catch (error) {
     serverError(res);
@@ -14,7 +18,11 @@ const getPurchases = async ({ query }, res) => {
 
 const getPurchaseById = async ({ params: { id } }, res) => {
   try {
-    const purchase = await Purchase.findById(id);
+    const purchase = await Purchase.findById(id)
+      .populate({
+        path: "client",
+        select: "name"
+      });
     if (!purchase) {
       purchaseNotFound(res);
     } else {
