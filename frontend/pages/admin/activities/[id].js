@@ -70,6 +70,12 @@ export default function ActivityDetails({ activity }) {
               <li>{`Estado: ${status}`}</li>
             </ul>
           )}
+        <input
+          className={styles.back_button}
+          type="button"
+          onClick={() => router.back()}
+          value="Volver"
+        />
       </section>
     </AdminNav>
 
