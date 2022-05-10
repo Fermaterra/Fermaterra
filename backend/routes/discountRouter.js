@@ -12,11 +12,11 @@ const {
   deleteDiscount
 } = discountController;
 
-discountController.route("/")
+discountRouter.route("/")
   .get(getAllDiscounts)
   .post(createDiscount);
 
-discountController.route("/:id")
+discountRouter.route("/:id")
   .get(getDiscountById)
   .put(updateDiscount)
   .delete(deleteDiscount);
