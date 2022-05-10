@@ -72,7 +72,7 @@ export default function bookDetails({ book }) {
                 ? (
                   <ul>
                     {`Actividades: `}
-                    {activities.map((activity) => <li key={activity}><Link href={`/admin/activities/${activity}`}>{activity}</Link></li>)}
+                    {activities.map(({ _id: activityId, title: activityTitle }) => <li key={activityId}><Link href={`/admin/activities/${activityId}`}>{activityTitle}</Link></li>)}
                   </ul>
                 )
                 : <li>Sin actividades</li>}

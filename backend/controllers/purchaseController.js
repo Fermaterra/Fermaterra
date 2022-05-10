@@ -22,6 +22,10 @@ const getPurchaseById = async ({ params: { id } }, res) => {
       .populate({
         path: "client",
         select: "name"
+      })
+      .populate({
+        path: "activities",
+        select: "title"
       });
     if (!purchase) {
       purchaseNotFound(res);
