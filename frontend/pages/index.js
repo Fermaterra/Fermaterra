@@ -1,15 +1,39 @@
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import Layout from "../components/Layout";
 import ActivityMiniature from "../components/ActivityMiniature";
 import Proxy from "../utils/activities.json";
+import es from "../languages/es";
+import cat from "../languages/cat";
+import en from "../languages/en";
 
 import styles from "../styles/index.module.css";
 
 export default function Home() {
+  const [language, setLanguage] = useState(cat);
+  const { locale } = useRouter();
+  useEffect(() => {
+    switch (locale) {
+      case "es":
+        setLanguage(es);
+        break;
+      case "en":
+        setLanguage(en);
+
+        break;
+      case "ca-ES":
+        setLanguage(cat);
+
+        break;
+
+      default:
+        break;
+    }
+  }, [locale]);
   return (
     <Layout title="Home">
       <div className={styles.image}>
-        <p>La terra, la respiració,</p>
-        <p>els sentits</p>
+        <p>{language.banner}</p>
       </div>
       <section className={styles.section}>
         <h2>TERRAFERMA</h2>

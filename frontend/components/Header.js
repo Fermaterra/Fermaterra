@@ -1,7 +1,54 @@
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import es from "../languages/es/header";
+import cat from "../languages/cat/header";
+import en from "../languages/en/header";
+
 import styles from "../styles/header.module.css";
 
 export default function Header() {
+  const { asPath, locale, locales } = useRouter();
+
+  const [language, setLanguage] = useState(cat);
+  useEffect(() => {
+    switch (locale) {
+      case "es":
+        setLanguage(es);
+        break;
+      case "en":
+        setLanguage(en);
+
+        break;
+      case "ca-ES":
+        setLanguage(cat);
+
+        break;
+
+      default:
+        break;
+    }
+  }, [locale]);
+
+  const lang = (loc) => {
+    let languageName;
+    switch (loc) {
+      case "es":
+        languageName = "Castellano";
+        break;
+      case "ca-ES":
+        languageName = "Català";
+        break;
+      case "en":
+        languageName = "English";
+        break;
+
+      default:
+        break;
+    }
+    return languageName;
+  };
+
   return (
     <header className={styles.header}>
       <div>
@@ -20,9 +67,13 @@ export default function Header() {
 
       </div>
       <nav className={styles.nav}>
-        <Link href="/booking">Reserves</Link>
-        <Link href="/blog">Blog</Link>
-        <Link href="/faq">Preguntes freqüents</Link>
+        <Link href="/booking">{language.booking}</Link>
+        <Link href="/blog">{language.blog}</Link>
+        <Link href="/faq">{language.faqs}</Link>
+        <div className={styles.languages}>
+          {locales.map((loc) => <Link href={asPath} locale={loc} key={loc}>{lang(loc)}</Link>)}
+
+        </div>
       </nav>
 
     </header>
