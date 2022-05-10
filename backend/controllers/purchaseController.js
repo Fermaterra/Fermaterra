@@ -9,6 +9,10 @@ const getPurchases = async ({ query }, res) => {
       .populate({
         path: "client",
         select: "name"
+      })
+      .populate({
+        path: "discountApplied",
+        select: "-expiresOn"
       });
     res.status(200).json({ purchases });
   } catch (error) {
@@ -26,6 +30,10 @@ const getPurchaseById = async ({ params: { id } }, res) => {
       .populate({
         path: "activities",
         select: "title"
+      })
+      .populate({
+        path: "discountApplied"
+
       });
     if (!purchase) {
       purchaseNotFound(res);
