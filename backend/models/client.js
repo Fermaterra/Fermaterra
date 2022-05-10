@@ -36,7 +36,7 @@ const clientSchema = Schema({
     },
     date: { type: Date }
   },
-  shoppingCart: [{ type: Schema.Types.ObjectId, ref: "Activity" }],
+  shoppingCart: { type: Schema.Types.ObjectId, ref: "Cart" },
   address: {
     dir: {
       type: String

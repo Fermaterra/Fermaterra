@@ -21,15 +21,8 @@ const purchaseSchema = Schema({
     type: Number
   },
   discountApplied: {
-    name: {
-      type: String,
-      default: ""
-
-    },
-    percentage: {
-      type: Number,
-      default: 0
-    }
+    type: Schema.Types.ObjectId,
+    ref: "Discount"
   },
   finalPrice: {
     type: Number

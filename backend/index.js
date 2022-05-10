@@ -26,4 +26,12 @@ const purchaseRouter = require("./routes/purchaseRouter");
 
 server.use("/purchases", purchaseRouter);
 
+const discountRouter = require("./routes/discountRouter");
+
+server.use("/discounts", discountRouter);
+
+const cartRouter = require("./routes/cartRouter");
+
+server.use("/carts", cartRouter);
+
 server.listen(port, () => { debug(`Server is running on port ${port}`); });
