@@ -83,11 +83,11 @@ export default function bookDetails({ book }) {
               </li>
               <li>
                 {`Descuento aplicado: `}
-                {discountApplied.name ? discountApplied.name : "Ningún descuento"}
+                {discountApplied ? discountApplied.name : "Ningún descuento"}
               </li>
               <li>
                 {`Porcentaje descontado: `}
-                {discountApplied.percentage ? discountApplied.percentage : "0%"}
+                {discountApplied ? discountApplied.percentage : "0%"}
               </li>
               <li>
                 {`Precio final: `}
@@ -111,6 +111,13 @@ export default function bookDetails({ book }) {
               </li>
             </ul>
           )}
+        <input
+          className={styles.back_button}
+          type="button"
+          onClick={() => router.back()}
+          value="Volver"
+        />
+
       </section>
     </AdminNav>
   );
