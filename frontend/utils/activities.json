@@ -1,7 +1,7 @@
 [{
-  "_id": {
-    "$oid": "627261da883ae35cd1a48d64"
-  },
+  "id": 
+    "627261da883ae35cd1a48d64"
+  ,
   "title": "Prueba1",
   "day": "04 de mayo de 2022",
   "hour": "--h",
@@ -38,9 +38,9 @@
   },
   "__v": 0
 },{
-  "_id": {
-    "$oid": "627261f0883ae35cd1a48d66"
-  },
+  "id": 
+     "627261f0883ae35cd1a48d66"
+  ,
   "title": "Prueba2",
   "day": "04 de mayo de 2022",
   "hour": "--h",
@@ -77,9 +77,9 @@
   },
   "__v": 0
 },{
-  "_id": {
-    "$oid": "627261fa883ae35cd1a48d68"
-  },
+  "id": 
+     "627261fa883ae35cd1a48d68"
+  ,
   "title": "Prueba3",
   "day": "04 de mayo de 2022",
   "hour": "--h",
@@ -116,9 +116,9 @@
   },
   "__v": 0
 },{
-  "_id": {
-    "$oid": "62726211883ae35cd1a48d6a"
-  },
+  "id": 
+     "62726211883ae35cd1a48d6a"
+  ,
   "title": "Prueba4",
   "day": "04 de mayo de 2022",
   "hour": "--h",
