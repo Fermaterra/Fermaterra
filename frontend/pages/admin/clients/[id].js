@@ -1,7 +1,10 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import AdminNav from "../../../components/AdminNav";
 import fetchFromApi from "../../../utils/fetchFromApi";
 
 export default function ClientDetails({ client }) {
+  const { back } = useRouter();
   const {
     treatment,
     name,
@@ -18,7 +21,7 @@ export default function ClientDetails({ client }) {
     notes
   } = client;
   return (
-    <>
+    <AdminNav>
       <h2>{name}</h2>
       <section>
         <h3>Datos personales</h3>
@@ -76,7 +79,12 @@ export default function ClientDetails({ client }) {
         <h3>Notas</h3>
         {notes.map((note) => <p>{note}</p>)}
       </section>
-    </>
+      <input
+        type="button"
+        value="Volver"
+        onClick={back}
+      />
+    </AdminNav>
   );
 }
 
