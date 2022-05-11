@@ -1,11 +1,11 @@
-const formateDate = (date) => {
+const formateDate = (date, locale) => {
   const formatedDate = new Date(date);
   const options = {
-    year: "numeric",
     month: "long",
-    day: "2-digit"
+    weekday: "long",
+    day: "numeric"
   };
-  return formatedDate.toLocaleDateString("es-ES", options);
+  return formatedDate.toLocaleDateString(locale, options);
 };
 
 module.exports = formateDate;

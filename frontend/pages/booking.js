@@ -1,9 +1,39 @@
+import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
+import fetchFromApi from "../utils/fetchFromApi";
+import compareDates from "../utils/compareDates";
+import ActivityMiniature from "../components/ActivityMiniature";
 
-export default function Booking() {
+export default function Booking({ activities }) {
+  const [activitiesToDisplay, setActivitiesToDisplay] = useState([]);
+  useEffect(() => {
+    setActivitiesToDisplay(activities.filter(({ day }) => compareDates(day)));
+  }, []);
   return (
-    <Layout title="Booking">
-      <h1>Terraferma Booking</h1>
+    <Layout>
+      <h2>Activitats</h2>
+      {activitiesToDisplay?.map(({
+        _id: id, title, image, shortDescription, basePrice, day, hour
+      }) => (
+        <ActivityMiniature
+          title={title}
+          image={image}
+          shortDescription={shortDescription}
+          basePrice={basePrice}
+          day={day}
+          hour={hour}
+          key={id}
+        />
+      ))}
     </Layout>
   );
+}
+
+export async function getServerSideProps() {
+  const activities = await fetchFromApi(`${process.env.URL}/activities`);
+  return {
+    props: {
+      activities,
+    },
+  };
 }

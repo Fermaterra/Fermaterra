@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
-import ActivityMiniature from "../components/ActivityMiniature";
-import Proxy from "../utils/activities.json";
 import es from "../languages/es";
 import cat from "../languages/cat";
 import en from "../languages/en";
@@ -58,9 +56,7 @@ export default function Home() {
         Planifica una experiència autèntica
         amb els nostres serveis
       </p>
-      <div className={styles.activities_list}>
-        {Proxy.map((activity) => <ActivityMiniature activity={activity} key={activity.id} />)}
-      </div>
+
       <div className={styles.image} />
       <section className={styles.contact}>
         <div className={styles.contact__image} />
