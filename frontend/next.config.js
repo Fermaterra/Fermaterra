@@ -4,6 +4,9 @@ const nextConfig = {
   env: {
     URL: "http://localhost:4001",
   },
+  images: {
+    domains: ["firebasestorage.googleapis.com"]
+  },
   i18n: {
     locales: ["es", "ca-ES", "en"],
     defaultLocale: "ca-ES"
