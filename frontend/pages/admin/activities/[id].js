@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import axios from "axios";
 import ActivityForm from "../../../components/adminForms/ActivityForm";
 import AdminNav from "../../../components/AdminNav";
@@ -55,7 +56,10 @@ export default function ActivityDetails({ activity }) {
               <li>{`Día: ${formateDate(day)}`}</li>
               <li>{`Hora: ${hour}`}</li>
               <li>{`Duración: ${duration}`}</li>
-              <li>{`Imagen: ${image}`}</li>
+              <li>
+                {`Imagen: `}
+                <Image src={`${image}`} width={200} height={200} alt={`${title}`} />
+              </li>
               <li>{`Plazas: ${stock}`}</li>
               <li>{`Descripción: ${description}`}</li>
               <li>{`Descripción breve: ${shortDescription}`}</li>
