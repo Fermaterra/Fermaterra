@@ -8,6 +8,7 @@ import styles from "../../styles/admin/activityForm.module.css";
 export default function NewActivityForm({
   handleAddForm, activitiesList, setActivitiesList, id
 }) {
+  const [image, setImage] = useState(null);
   const [activity, setActivity] = useState({
     title: "",
     day: "",
@@ -40,8 +41,18 @@ export default function NewActivityForm({
     }
   }, []);
 
+  const uploadImage = () => {
+    const imageRef = ref(storage, `images/${activity.title}-${activity.day}-${activity.hour}`);
+    uploadBytes(imageRef, image,).then(() => {
+      getDownloadURL(imageRef).then((url) => {
+        setActivity({ ...activity, image: url });
+      });
+    });
+  };
+
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    uploadImage();
     try {
       if (id) {
         await axios.put(`${process.env.URL}/activities/${id}`, activity);
@@ -55,14 +66,6 @@ export default function NewActivityForm({
     } catch ({ response: { data: { message } } }) {
       setError(message);
     }
-  };
-  const uploadImage = (image) => {
-    const imageRef = ref(storage, `images/${image.title}-${image.day}-${image.hour}`);
-    uploadBytes(imageRef, image,).then(() => {
-      getDownloadURL(imageRef).then((url) => {
-        setActivity({ ...activity, image: url });
-      });
-    });
   };
 
   return (
@@ -108,7 +111,7 @@ export default function NewActivityForm({
         <input
           id="image"
           type="file"
-          onChange={(evt) => { uploadImage(evt.target.files[0]); }}
+          onChange={(evt) => { setImage(evt.target.files[0]); }}
         />
       </label>
       <label htmlFor="stock">
