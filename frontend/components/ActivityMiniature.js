@@ -5,7 +5,7 @@ import formateDate from "../utils/formateDate";
 import styles from "../styles/activityMiniature.module.css";
 
 export default function ActivityMiniature({
-  title, image, shortDescription, basePrice, day, hour
+  id, title, image, shortDescription, basePrice, day, hour
 }) {
   const { locale } = useRouter();
   return (
@@ -14,13 +14,8 @@ export default function ActivityMiniature({
       <h3>{title}</h3>
       <p>{basePrice}</p>
       <p>{shortDescription}</p>
-      <Link href="/">
-        <p>
-          Reserva
-          {" "}
-          <span>{`${formateDate(day, locale).toUpperCase()} - ${hour}h`}</span>
-        </p>
-      </Link>
+      <Link href={`booking/${id}`}> Reserva</Link>
+      <p>{`${formateDate(day, locale)} - ${hour}h`}</p>
     </article>
   );
 }
