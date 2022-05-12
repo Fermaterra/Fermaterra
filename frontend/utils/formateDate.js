@@ -5,7 +5,7 @@ const formateDate = (date, locale) => {
     weekday: "long",
     day: "numeric"
   };
-  return formatedDate.toLocaleDateString(locale, options);
+  return formatedDate.toLocaleDateString(locale, options).toUpperCase();
 };
 
 module.exports = formateDate;
