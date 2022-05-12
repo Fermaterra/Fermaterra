@@ -1,25 +1,89 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import MUIDataTable from "mui-datatables";
+import { useRouter } from "next/router";
 import AdminNav from "../../../components/AdminNav";
 import ActivityForm from "../../../components/adminForms/ActivityForm";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import formateDate from "../../../utils/formateDate";
 import styles from "../../../styles/admin/views.module.css";
 
+function createLink(value) {
+  return (
+    <Link href={`/admin/activities/${value}`} key={`${value}-linkChild`}>
+      {value}
+    </Link>
+  );
+}
+
 export default function Activities({ activities }) {
+  const { locale } = useRouter();
   const [addForm, setAddForm] = useState(false);
   const [activitiesList, setActivitiesList] = useState(activities);
   const [activitiesToDisplay, setActivitiesToDisplay] = useState(activities);
+  const columns = [
+    {
+      label: "id",
+      name: "_id",
+      options: {
+        filter: false,
+        sort: true,
+        customBodyRender: (value) => createLink(value),
+      },
+    },
+    {
+      label: "Dia",
+      name: "day",
+      options: {
+        customBodyRender: (value) => formateDate(value, locale),
+      },
+    },
+    {
+      label: "Hora",
+      name: "hour",
+      options: {
+        filter: true,
+        sort: false,
+      },
+    },
+    {
+      label: "Sitio",
+      name: "location",
+    },
+    {
+      label: "Titulo",
+      name: "title",
+    },
+    {
+      label: "Profesor",
+      name: "instructor",
+    },
+    {
+      label: "Notas",
+      name: "notes",
+    },
+    {
+      label: "Plazas totales",
+      name: "stock",
+    },
+    {
+      label: "Reservas",
+      name: "books",
+    },
+    {
+      label: "Estado",
+      name: "status",
+    },
+  ];
+  const options = {
+    filterType: "dropdown",
+  };
 
-  useEffect(() => { setActivitiesToDisplay(activitiesList); }, [activitiesList]);
+  useEffect(() => {
+    setActivitiesToDisplay(activitiesList);
+  }, [activitiesList]);
 
   const handleAddForm = () => setAddForm(!addForm);
-  const filterActivities = (query) => {
-    const filteredActivities = activitiesList.filter(
-      (activity) => Object.values(activity).toString().toUpperCase().includes(query.toUpperCase())
-    );
-    setActivitiesToDisplay(filteredActivities);
-  };
 
   return (
     <AdminNav>
@@ -33,66 +97,20 @@ export default function Activities({ activities }) {
         />
         <h2>Activities</h2>
       </div>
-      <label htmlFor="search">
-        Buscar:
-        <input
-          id="search"
-          placeholder="Buscar actividad"
-          onChange={(evt) => filterActivities(evt.target.value)}
+      {addForm ? (
+        <ActivityForm
+          handleAddForm={handleAddForm}
+          activitiesList={activitiesList}
+          setActivitiesList={setActivitiesList}
         />
-      </label>
-      {addForm
-        ? (
-          <ActivityForm
-            handleAddForm={handleAddForm}
-            activitiesList={activitiesList}
-            setActivitiesList={setActivitiesList}
-          />
-        )
-        : null}
-      <ul className={`${styles.rows} ${styles.activities}`}>
-        <li key="activityNumber">Número actividad</li>
-        <li key="day">Día</li>
-        <li key="hour">Hora</li>
-        <li key="site">Sitio</li>
-        <li key="activityTitle">Título actividad</li>
-        <li key="professor">Profesor</li>
-        <li key="description">Notas</li>
-        <li key="totalStock">Plazas totales</li>
-        <li key="books">Reservas</li>
-        <li key="status">Estado</li>
-        {activitiesToDisplay.map(
-          ({
-            _id: id,
-            title,
-            day,
-            hour,
-            location,
-            instructor,
-            notes,
-            stock,
-            books,
-            status,
-          }) => (
-            <Fragment key={`${id}-fragment`}>
-              <li key={`${id}-link`}>
-                <Link href={`/admin/activities/${id}`} key={`${id}-linkChild`}>
-                  {id}
-                </Link>
-              </li>
-              <li key={`${id}-day`}>{formateDate(day)}</li>
-              <li key={`${id}-hour`}>{hour}</li>
-              <li key={`${id}-location`}>{location}</li>
-              <li key={`${id}-title`}>{title}</li>
-              <li key={`${id}-instructor`}>{instructor}</li>
-              <li key={`${id}-notes`}>{notes}</li>
-              <li key={`${id}-initialStock`}>{stock + books}</li>
-              <li key={`${id}-books`}>{books}</li>
-              <li key={`${id}-status`}>{status}</li>
-            </Fragment>
-          )
-        )}
-      </ul>
+      ) : null}
+      <MUIDataTable
+        title=""
+        data={activitiesToDisplay}
+        columns={columns}
+        options={options}
+        keyField="_id"
+      />
     </AdminNav>
   );
 }
