@@ -69,8 +69,8 @@ export default function Books({ purchases }) {
   }, [books]);
 
   const filterBooks = (query) => {
-    const filteredBooks = books.filter((book) =>
-      Object.values(book).toString().toUpperCase().includes(query.toUpperCase())
+    const filteredBooks = books.filter(
+      (book) => Object.values(book).toString().toUpperCase().includes(query.toUpperCase())
     );
     setBooksToDisplay(filteredBooks);
   };
@@ -87,7 +87,8 @@ export default function Books({ purchases }) {
         <h2>Reservas</h2>
       </div>
       <label htmlFor="search">
-        Buscar:{" "}
+        Buscar:
+        {" "}
         <input id="search" onChange={(evt) => filterBooks(evt.target.value)} />
       </label>
       {addForm ? (
