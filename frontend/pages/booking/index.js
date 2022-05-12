@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import Layout from "../components/Layout";
-import fetchFromApi from "../utils/fetchFromApi";
-import compareDates from "../utils/compareDates";
-import ActivityMiniature from "../components/ActivityMiniature";
+import Layout from "../../components/Layout";
+import fetchFromApi from "../../utils/fetchFromApi";
+import compareDates from "../../utils/compareDates";
+import ActivityMiniature from "../../components/ActivityMiniature";
 
 export default function Booking({ activities }) {
   const [activitiesToDisplay, setActivitiesToDisplay] = useState([]);
@@ -16,6 +16,7 @@ export default function Booking({ activities }) {
         _id: id, title, image, shortDescription, basePrice, day, hour
       }) => (
         <ActivityMiniature
+          id={id}
           title={title}
           image={image}
           shortDescription={shortDescription}
