@@ -10,7 +10,7 @@ import styles from "../styles/header.module.css";
 export default function Header() {
   const { asPath, locale, locales } = useRouter();
 
-  const [language, setLanguage] = useState(cat);
+  const [language, setLanguage] = useState(en);
   useEffect(() => {
     switch (locale) {
       case "es":
@@ -20,7 +20,7 @@ export default function Header() {
         setLanguage(en);
 
         break;
-      case "ca-ES":
+      case "ca":
         setLanguage(cat);
 
         break;
@@ -36,7 +36,7 @@ export default function Header() {
       case "es":
         languageName = "Castellano";
         break;
-      case "ca-ES":
+      case "ca":
         languageName = "Català";
         break;
       case "en":
