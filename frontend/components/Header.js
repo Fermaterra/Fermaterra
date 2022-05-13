@@ -70,9 +70,11 @@ export default function Header() {
         <Link href="/booking">{language.booking}</Link>
         <Link href="/blog">{language.blog}</Link>
         <Link href="/faq">{language.faqs}</Link>
-        <div className={styles.languages}>
-          {locales.map((loc) => <Link href={asPath} locale={loc} key={loc}>{lang(loc)}</Link>)}
-
+        <div className={styles.dropdown}>
+          <input type="button" className={styles.dropdown_button} value={lang(locale)} />
+          <div className={styles.dropdown_content}>
+            {locales.map((loc) => <Link href={asPath} locale={loc} key={loc}>{lang(loc)}</Link>)}
+          </div>
         </div>
       </nav>
 
