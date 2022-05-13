@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+// import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import storage from "../../firebase";
 import styles from "../../styles/admin/activityForm.module.css";
 
 export default function NewActivityForm({
-  handleAddForm, activitiesList, setActivitiesList, id
+  handleAddForm,
+  activitiesList,
+  setActivitiesList,
+  id,
 }) {
   const [image, setImage] = useState(null);
   const [activity, setActivity] = useState({
@@ -26,7 +30,7 @@ export default function NewActivityForm({
     notes: "",
     timesVisited: "",
     books: "",
-    status: ""
+    status: "",
   });
   const [error, setError] = useState("");
   const router = useRouter();
@@ -40,45 +44,105 @@ export default function NewActivityForm({
       fetchActivity();
     }
   }, []);
-
-  const uploadImage = () => {
-    const imageRef = ref(storage, `images/${activity.title}-${activity.day}-${activity.hour}`);
-    uploadBytes(imageRef, image,).then(() => {
-      getDownloadURL(imageRef).then((url) => {
-        setActivity({ ...activity, image: url });
-      });
-    });
-  };
-
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
-    uploadImage();
+  const sendSubmit = async () => {
     try {
       if (id) {
         await axios.put(`${process.env.URL}/activities/${id}`, activity);
         router.push(`/admin/activities/${id}`);
       } else {
-        const { status, data } = await axios.post(`${process.env.URL}/activities`, activity);
+        setIsLoading(false);
+        setError("Succes!!");
+        const { status, data } = await axios.post(
+          `${process.env.URL}/activities`,
+          activity
+        );
         if (status === 201) setActivitiesList([...activitiesList, data]);
       }
 
       await handleAddForm();
-    } catch ({ response: { data: { message } } }) {
+    } catch ({
+      response: {
+        data: { message },
+      },
+    }) {
       setError(message);
     }
   };
+  useEffect(() => {
+    if (activity.image) {
+      sendSubmit();
+    }
+  }, [activity.image]);
+
+  const uploadImage = async () => {
+    // Upload file and metadata to the object 'images/mountains.jpg'
+    const storageRef = ref(
+      storage,
+      `images/${activity.title}-${activity.day}-${activity.hour}`
+    );
+    const uploadTask = uploadBytesResumable(storageRef, image);
+
+    // Listen for state changes, errors, and completion of the upload.
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        // Get task progress, including the number
+        // of bytes uploaded and the total number of bytes to be uploaded
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log(`Upload is ${progress}% done`);
+        switch (snapshot.state) {
+          case "paused":
+            console.log("Upload is paused");
+            break;
+          case "running":
+            console.log("Upload is running");
+            break;
+          default:
+            break;
+        }
+      },
+      (err) => {
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
+        switch (err.code) {
+          case "storage/unauthorized":
+            // User doesn't have permission to access the object
+            break;
+          case "storage/canceled":
+            // User canceled the upload
+            break;
+          case "storage/unknown":
+            // Unknown error occurred, inspect error.serverResponse
+            break;
+          default:
+            break;
+        }
+      },
+      () => {
+        // Upload completed successfully, now we can get the download URL
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setActivity({ ...activity, image: downloadURL });
+        });
+      }
+    );
+  };
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+    setError("Loading...");
+    uploadImage();
+  };
 
   return (
-    <form
-      className={styles.form}
-      onSubmit={handleSubmit}
-    >
+    <form className={styles.form} onSubmit={handleSubmit}>
       <label htmlFor="title">
         title
         <input
           id="title"
           value={activity.title}
-          onChange={(evt) => { setActivity({ ...activity, title: evt.target.value }); }}
+          onChange={(evt) => {
+            setActivity({ ...activity, title: evt.target.value });
+          }}
         />
       </label>
       <label htmlFor="day">
@@ -87,7 +151,9 @@ export default function NewActivityForm({
           type="date"
           id="day"
           value={activity.day}
-          onChange={(evt) => { setActivity({ ...activity, day: evt.target.value }); }}
+          onChange={(evt) => {
+            setActivity({ ...activity, day: evt.target.value });
+          }}
         />
       </label>
       <label htmlFor="hour">
@@ -95,7 +161,9 @@ export default function NewActivityForm({
         <input
           id="hour"
           value={activity.hour}
-          onChange={(evt) => { setActivity({ ...activity, hour: evt.target.value }); }}
+          onChange={(evt) => {
+            setActivity({ ...activity, hour: evt.target.value });
+          }}
         />
       </label>
       <label htmlFor="duration">
@@ -103,7 +171,9 @@ export default function NewActivityForm({
         <input
           id="duration"
           value={activity.duration}
-          onChange={(evt) => { setActivity({ ...activity, duration: evt.target.value }); }}
+          onChange={(evt) => {
+            setActivity({ ...activity, duration: evt.target.value });
+          }}
         />
       </label>
       <label htmlFor="image">
@@ -111,7 +181,9 @@ export default function NewActivityForm({
         <input
           id="image"
           type="file"
-          onChange={(evt) => { setImage(evt.target.files[0]); }}
+          onChange={(evt) => {
+            setImage(evt.target.files[0]);
+          }}
         />
       </label>
       <label htmlFor="stock">
@@ -119,7 +191,9 @@ export default function NewActivityForm({
         <input
           id="stock"
           value={activity.stock}
-          onChange={(evt) => { setActivity({ ...activity, stock: evt.target.value }); }}
+          onChange={(evt) => {
+            setActivity({ ...activity, stock: evt.target.value });
+          }}
         />
       </label>
       <label htmlFor="description">
@@ -127,7 +201,9 @@ export default function NewActivityForm({
         <input
           id="description"
           value={activity.description}
-          onChange={(evt) => { setActivity({ ...activity, description: evt.target.value }); }}
+          onChange={(evt) => {
+            setActivity({ ...activity, description: evt.target.value });
+          }}
         />
       </label>
       <label htmlFor="shortDescription">
@@ -135,7 +211,9 @@ export default function NewActivityForm({
         <input
           id="shortDescription"
           value={activity.shortDescription}
-          onChange={(evt) => { setActivity({ ...activity, shortDescription: evt.target.value }); }}
+          onChange={(evt) => {
+            setActivity({ ...activity, shortDescription: evt.target.value });
+          }}
         />
       </label>
       <label htmlFor="basePrice">
@@ -143,7 +221,9 @@ export default function NewActivityForm({
         <input
           id="basePrice"
           value={activity.basePrice}
-          onChange={(evt) => { setActivity({ ...activity, basePrice: evt.target.value }); }}
+          onChange={(evt) => {
+            setActivity({ ...activity, basePrice: evt.target.value });
+          }}
         />
       </label>
       <label htmlFor="taxes">
@@ -151,7 +231,9 @@ export default function NewActivityForm({
         <input
           id="taxes"
           value={activity.taxes}
-          onChange={(evt) => { setActivity({ ...activity, taxes: evt.target.value }); }}
+          onChange={(evt) => {
+            setActivity({ ...activity, taxes: evt.target.value });
+          }}
         />
       </label>
       <label htmlFor="location">
@@ -159,7 +241,9 @@ export default function NewActivityForm({
         <input
           id="location"
           value={activity.location}
-          onChange={(evt) => { setActivity({ ...activity, location: evt.target.value }); }}
+          onChange={(evt) => {
+            setActivity({ ...activity, location: evt.target.value });
+          }}
         />
       </label>
       <label htmlFor="contact">
@@ -167,7 +251,9 @@ export default function NewActivityForm({
         <input
           id="contact"
           value={activity.contact}
-          onChange={(evt) => { setActivity({ ...activity, contact: evt.target.value }); }}
+          onChange={(evt) => {
+            setActivity({ ...activity, contact: evt.target.value });
+          }}
         />
       </label>
       <label htmlFor="instructor">
@@ -175,7 +261,9 @@ export default function NewActivityForm({
         <input
           id="instructor"
           value={activity.instructor}
-          onChange={(evt) => { setActivity({ ...activity, instructor: evt.target.value }); }}
+          onChange={(evt) => {
+            setActivity({ ...activity, instructor: evt.target.value });
+          }}
         />
       </label>
       <label htmlFor="notes">
@@ -183,7 +271,9 @@ export default function NewActivityForm({
         <input
           id="notes"
           value={activity.notes}
-          onChange={(evt) => { setActivity({ ...activity, notes: evt.target.value }); }}
+          onChange={(evt) => {
+            setActivity({ ...activity, notes: evt.target.value });
+          }}
         />
       </label>
       <label htmlFor="timesVisited">
@@ -191,7 +281,9 @@ export default function NewActivityForm({
         <input
           id="timesVisited"
           value={activity.timesVisited}
-          onChange={(evt) => { setActivity({ ...activity, timesVisited: evt.target.value }); }}
+          onChange={(evt) => {
+            setActivity({ ...activity, timesVisited: evt.target.value });
+          }}
         />
       </label>
       <label htmlFor="books">
@@ -199,7 +291,9 @@ export default function NewActivityForm({
         <input
           id="books"
           value={activity.books}
-          onChange={(evt) => { setActivity({ ...activity, books: evt.target.value }); }}
+          onChange={(evt) => {
+            setActivity({ ...activity, books: evt.target.value });
+          }}
         />
       </label>
       <label htmlFor="status">
@@ -207,7 +301,9 @@ export default function NewActivityForm({
         <input
           id="status"
           value={activity.status}
-          onChange={(evt) => { setActivity({ ...activity, status: evt.target.value }); }}
+          onChange={(evt) => {
+            setActivity({ ...activity, status: evt.target.value });
+          }}
         />
       </label>
       <input type="submit" value={id ? "Edit activity" : "Add activity"} />
