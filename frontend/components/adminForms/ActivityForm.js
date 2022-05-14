@@ -36,6 +36,7 @@ export default function NewActivityForm({
       const fetchActivity = async () => {
         const { data } = await axios.get(`${process.env.URL}/activities/${id}`);
         await setActivity(data);
+        await setImage(activity.image);
       };
       fetchActivity();
     }
@@ -72,7 +73,8 @@ export default function NewActivityForm({
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    uploadImage();
+    if (image) uploadImage();
+    if (!image) sendDataToDDBB();
   };
 
   return (
