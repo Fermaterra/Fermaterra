@@ -11,7 +11,7 @@ export default function CartView({ cart, setCart }) {
     ) => previousTotal + nextItem.subTotal, 0));
   }, [cart]);
   return (
-    <Layout>
+    <Layout cart={cart}>
       <h2>Cart</h2>
       {cart?.map((itemOnCart) => (
         <CartItem
