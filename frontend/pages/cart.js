@@ -1,19 +1,23 @@
+import CartItem from "../components/CartItem";
 import Layout from "../components/Layout";
 
 export default function CartView({ cart, setCart }) {
-  console.log(cart);
+  const total = cart.reduce((
+    previousTotal,
+    nextItem
+  ) => previousTotal + nextItem.subTotal, 0);
   return (
     <Layout>
       <h2>Cart</h2>
       {cart.map((itemOnCart) => (
-        <>
-          <p>{`activity: ${itemOnCart.activity}`}</p>
-          <p>{`amount: ${itemOnCart.amount}`}</p>
-          <p>{`price: ${itemOnCart.price}`}</p>
-          <p>{`subtotal: ${itemOnCart.subTotal} `}</p>
-
-        </>
+        <CartItem
+          itemOnCart={itemOnCart}
+          key={itemOnCart.id}
+          cart={cart}
+          setCart={setCart}
+        />
       ))}
+      <p>{`Total: ${total}`}</p>
 
     </Layout>
   );
