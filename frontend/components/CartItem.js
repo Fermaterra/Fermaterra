@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function CartItem({ itemOnCart, cart, setCart }) {
   const handleItem = (action) => {
     let newItem;
@@ -43,6 +45,7 @@ export default function CartItem({ itemOnCart, cart, setCart }) {
   };
   return (
     <>
+      <Image src={itemOnCart.image} width={80} height={80} alt={itemOnCart.activity} />
       <p>{`activity: ${itemOnCart.activity}`}</p>
       <p>{`amount: ${itemOnCart.amount}`}</p>
       <p>{`price: ${itemOnCart.price}`}</p>

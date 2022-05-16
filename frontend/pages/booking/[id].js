@@ -21,7 +21,7 @@ export default function BookingDetails({ activity, cart, setCart }) {
     const alreadyInCart = cart.find((itemOnCart) => Object.values(itemOnCart).includes(id));
     if (!alreadyInCart) {
       setCart([...cart, {
-        activity: title, amount, price: basePrice, subTotal: basePrice * amount, id
+        activity: title, amount, price: basePrice, subTotal: basePrice * amount, image, id
       }]);
     }
     if (alreadyInCart) {
