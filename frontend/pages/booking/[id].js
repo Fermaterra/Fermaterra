@@ -19,11 +19,15 @@ export default function BookingDetails({ activity, cart, setCart }) {
   };
   const addToCart = () => {
     const alreadyInCart = cart.find((itemOnCart) => Object.values(itemOnCart).includes(id));
-    if (!alreadyInCart) setCart([...cart, { activity: id, amount }]);
+    if (!alreadyInCart) {
+      setCart([...cart, {
+        activity: title, amount, price: basePrice, subTotal: basePrice * amount, id
+      }]);
+    }
     if (alreadyInCart) {
       const updateItemOnCart = cart.map((itemOnCart) => {
         if (Object.values(itemOnCart).includes(id)) {
-          return ({ activity: id, amount: itemOnCart.amount + amount });
+          return ({ ...itemOnCart, amount: itemOnCart.amount + amount });
         }
         return itemOnCart;
       });
