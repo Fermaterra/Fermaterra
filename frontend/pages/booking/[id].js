@@ -6,16 +6,29 @@ import fetchFromApi from "../../utils/fetchFromApi";
 import formateDate from "../../utils/formateDate";
 import styles from "../../styles/booking.module.css";
 
-export default function BookingDetails({ activity }) {
+export default function BookingDetails({ activity, cart, setCart }) {
   const [dataDisplayed, setDataDisplayed] = useState("includes");
   const [amount, setAmount] = useState(1);
   const { locale } = useRouter();
   const {
-    image, title, day, hour, basePrice, location, description, stock
+    image, _id: id, title, day, hour, basePrice, location, description, stock
   } = activity;
   const handleAmount = (action) => {
     if (action === "increase" && amount < stock) setAmount(amount + 1);
     if (action === "decrease" && amount > 1) setAmount(amount - 1);
+  };
+  const addToCart = () => {
+    const alreadyInCart = cart.find((itemOnCart) => Object.values(itemOnCart).includes(id));
+    if (!alreadyInCart) setCart([...cart, { activity: id, amount }]);
+    if (alreadyInCart) {
+      const updateItemOnCart = cart.map((itemOnCart) => {
+        if (Object.values(itemOnCart).includes(id)) {
+          return ({ activity: id, amount: itemOnCart.amount + amount });
+        }
+        return itemOnCart;
+      });
+      setCart(updateItemOnCart);
+    }
   };
   return (
     <Layout>
@@ -59,6 +72,11 @@ export default function BookingDetails({ activity }) {
               onClick={() => handleAmount("decrease")}
             />
           </div>
+          <input
+            type="button"
+            value="Reservar"
+            onClick={() => addToCart()}
+          />
         </div>
       </main>
 
