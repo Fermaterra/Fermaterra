@@ -13,7 +13,7 @@
     font-weight: 700;
 }
 
-.header a{
+.header a, .dropdown_button{
     text-decoration: none;
     color: var(--white);
     letter-spacing: 2px;
@@ -59,7 +59,33 @@
     justify-content: space-around;
 }
 
-.languages{
+.dropdown{
+    display: inline-block;
+    position: relative;
+    font-family: "Helvetica Neue Thin";
+
+}
+
+.dropdown_button{
+    background-color: transparent;
+    border: none;
+    color: var(--white);
+    text-transform: uppercase;
+}
+
+.dropdown_content{
+    display: none;
+    position: absolute;
+    background-color: transparent;
+}
+
+.dropdown_content a{
+    color: var(--white);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.dropdown:hover .dropdown_content{
     display: flex;
     flex-direction: column;
 }
