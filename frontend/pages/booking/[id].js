@@ -9,6 +9,8 @@ import styles from "../../styles/booking.module.css";
 export default function BookingDetails({ activity, cart, setCart }) {
   const [dataDisplayed, setDataDisplayed] = useState("includes");
   const [amount, setAmount] = useState(1);
+  const [addedToCart, setAddedToCart] = useState(false);
+
   const { locale } = useRouter();
   const {
     image, _id: id, title, day, hour, basePrice, location, description, stock
@@ -33,6 +35,10 @@ export default function BookingDetails({ activity, cart, setCart }) {
       });
       setCart(updateItemOnCart);
     }
+    setAddedToCart(true);
+    setTimeout(() => {
+      setAddedToCart(false);
+    }, 750);
   };
   return (
     <Layout cart={cart}>
@@ -76,11 +82,15 @@ export default function BookingDetails({ activity, cart, setCart }) {
               onClick={() => handleAmount("decrease")}
             />
           </div>
-          <input
-            type="button"
-            value="Reservar"
-            onClick={() => addToCart()}
-          />
+          {addedToCart
+            ? <p>Added to Cart</p>
+            : (
+              <input
+                type="button"
+                value="Reservar"
+                onClick={() => addToCart()}
+              />
+            )}
         </div>
       </main>
 
