@@ -48,8 +48,7 @@ export default function CartItem({ itemOnCart, cart, setCart }) {
       <p>{`price: ${itemOnCart.price}`}</p>
       <p>{`subtotal: ${itemOnCart.subTotal} `}</p>
       <div>
-        <input type="button" value="+" onClick={() => { handleItem("increase"); }} />
-        <input type="button" value="-" onClick={() => { handleItem("decrease"); }} />
+
         <input type="button" value="X" onClick={() => { handleItem("delete"); }} />
       </div>
     </>
