@@ -8,7 +8,7 @@ import en from "../languages/en";
 import styles from "../styles/index.module.css";
 
 export default function Home() {
-  const [language, setLanguage] = useState(cat);
+  const [language, setLanguage] = useState(en);
   const { locale } = useRouter();
   useEffect(() => {
     switch (locale) {
@@ -19,7 +19,7 @@ export default function Home() {
         setLanguage(en);
 
         break;
-      case "ca-ES":
+      case "ca":
         setLanguage(cat);
 
         break;

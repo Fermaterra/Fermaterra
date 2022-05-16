@@ -8,8 +8,8 @@ const nextConfig = {
     domains: ["firebasestorage.googleapis.com"]
   },
   i18n: {
-    locales: ["es", "ca-ES", "en"],
-    defaultLocale: "ca-ES"
+    locales: ["es", "ca", "en"],
+    defaultLocale: "en"
   }
 };
 
