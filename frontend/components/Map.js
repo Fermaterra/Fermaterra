@@ -19,7 +19,7 @@ function Map() {
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={15}
+      zoom={16}
     >
       <Marker
         position={center}
