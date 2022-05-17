@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import MUIDataTable from "mui-datatables";
 import { useRouter } from "next/router";
@@ -19,7 +19,6 @@ function createLink(value) {
 export default function Books({ purchases }) {
   const { locale } = useRouter();
   const [addForm, setAddForm] = useState(false);
-  const [books, setBooks] = useState(purchases);
   const [booksToDisplay, setBooksToDisplay] = useState(purchases);
   const handleAddForm = () => setAddForm(!addForm);
   const getClientData = (value) => {
@@ -70,9 +69,6 @@ export default function Books({ purchases }) {
   const options = {
     filterType: "dropdown",
   };
-  useEffect(() => {
-    setBooksToDisplay(books);
-  }, [books]);
 
   return (
     <AdminNav>
@@ -89,8 +85,8 @@ export default function Books({ purchases }) {
 
       {addForm ? (
         <BookForm
-          books={books}
-          setBooks={setBooks}
+          books={booksToDisplay}
+          setBooks={setBooksToDisplay}
           handleAddForm={handleAddForm}
         />
       ) : null}
