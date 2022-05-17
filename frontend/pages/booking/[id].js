@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
@@ -10,7 +10,7 @@ export default function BookingDetails({ activity, cart, setCart }) {
   const [dataDisplayed, setDataDisplayed] = useState("includes");
   const [amount, setAmount] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
-
+  useEffect(() => { if (cart.length > 0) localStorage.setItem("cart", JSON.stringify(cart)); }, [cart]);
   const { locale } = useRouter();
   const {
     image, _id: id, title, day, hour, basePrice, location, description, stock
@@ -19,7 +19,7 @@ export default function BookingDetails({ activity, cart, setCart }) {
     if (action === "increase" && amount < stock) setAmount(amount + 1);
     if (action === "decrease" && amount > 1) setAmount(amount - 1);
   };
-  const addToCart = () => {
+  const addToCart = async () => {
     const alreadyInCart = cart.find((itemOnCart) => Object.values(itemOnCart).includes(id));
     if (!alreadyInCart) {
       setCart([...cart, {
