@@ -5,6 +5,7 @@ import Layout from "../../components/Layout";
 import fetchFromApi from "../../utils/fetchFromApi";
 import formateDate from "../../utils/formateDate";
 import styles from "../../styles/booking.module.css";
+import Map from "../../components/Map";
 
 export default function BookingDetails({ activity, cart, setCart }) {
   const {
@@ -77,7 +78,7 @@ export default function BookingDetails({ activity, cart, setCart }) {
             />
           </div>
           <div>
-            {dataDisplayed === "includes" ? <p>IActivitats incloses</p> : <p>{location}</p>}
+            {dataDisplayed === "includes" ? <p>IActivitats incloses</p> : <Map />}
           </div>
           <p>Quantitat</p>
           <div>

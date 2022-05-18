@@ -1,4 +1,6 @@
 import Head from "next/head";
+import Footer from "./adminForms/Footer";
+
 import Header from "./Header";
 
 export default function Layout({ title, children, cart }) {
@@ -18,6 +20,7 @@ export default function Layout({ title, children, cart }) {
       <>
         <Header cart={cart} />
         {children}
+        <Footer />
       </>
     </>
   );
