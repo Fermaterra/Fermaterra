@@ -3,7 +3,7 @@ import Link from "next/link";
 import MUIDataTable from "mui-datatables";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import AdminNav from "../../../components/AdminNav";
-import styles from "../../../styles/admin/views.module.css";
+import styles from "../../../styles/admin/views.module.scss";
 
 function createLink(value) {
   return (

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Layout from "./Layout";
 
-import styles from "../styles/admin/adminLayout.module.css";
+import styles from "../styles/admin/adminLayout.module.scss";
 
 export default function AdminNav({ children }) {
   return (

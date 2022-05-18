@@ -6,7 +6,7 @@ import AdminNav from "../../../components/AdminNav";
 import ActivityForm from "../../../components/adminForms/ActivityForm";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import formateDate from "../../../utils/formateDate";
-import styles from "../../../styles/admin/views.module.css";
+import styles from "../../../styles/admin/views.module.scss";
 
 function createLink(value) {
   return (

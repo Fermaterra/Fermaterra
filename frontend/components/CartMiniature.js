@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../styles/cart.module.css";
+import styles from "../styles/cart.module.scss";
 
 export default function Cart({ cart }) {
   return (

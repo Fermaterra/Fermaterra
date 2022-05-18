@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import storage from "../../firebase";
-import styles from "../../styles/admin/activityForm.module.css";
+import styles from "../../styles/admin/activityForm.module.scss";
 
 export default function NewActivityForm({
   handleAddForm, activitiesList, setActivitiesList, id
