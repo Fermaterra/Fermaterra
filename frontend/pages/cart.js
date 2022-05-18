@@ -12,7 +12,7 @@ export default function CartView({ cart, setCart }) {
     ) => previousTotal + nextItem.subTotal, 0));
   }, [cart]);
   return (
-    <Layout cart={cart}>
+    <Layout cart={cart} title="Cart">
       <main className={styles.cart}>
         <section className={styles.cart_content}>
           <h2>Revisar la compra</h2>
