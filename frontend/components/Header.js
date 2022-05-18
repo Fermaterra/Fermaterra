@@ -56,7 +56,7 @@ export default function Header() {
           <div className={styles.logo}>
             <div className={styles.logo__container}>
               <h1>
-                TERRAFERMA
+                FERMATERRA
                 {" "}
               </h1>
               <span>Barcelona  -  Menorca</span>
