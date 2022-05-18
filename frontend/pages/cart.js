@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import CartItem from "../components/CartItem";
 import Layout from "../components/Layout";
-import styles from "../styles/cart.module.css";
+import styles from "../styles/cart.module.scss";
 
 export default function CartView({ cart, setCart }) {
   const [total, setTtotal] = useState(0);
