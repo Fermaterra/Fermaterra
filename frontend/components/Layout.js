@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Footer from "./adminForms/Footer";
 
 import Header from "./Header";
 
@@ -19,6 +20,7 @@ export default function Layout({ title, children }) {
       <>
         <Header />
         {children}
+        <Footer />
       </>
     </>
   );
