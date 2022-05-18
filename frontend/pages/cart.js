@@ -9,7 +9,7 @@ export default function CartView({ cart, setCart }) {
     setTtotal(cart?.reduce((
       previousTotal,
       nextItem
-    ) => previousTotal + nextItem.subTotal, 0));
+    ) => previousTotal + nextItem.subTotal, 0).toFixed(2));
   }, [cart]);
   return (
     <Layout cart={cart} title="Cart">
@@ -26,13 +26,13 @@ export default function CartView({ cart, setCart }) {
           ))}
         </section>
         <section className={styles.cart_payment}>
-          <p>{`Subtotal: ${total}`}</p>
+          <p>{`Subtotal: ${total} €`}</p>
           <h3>CODI DESCOMPTE</h3>
           <form>
             <input type="text" placeholder="Escriure el teu codi" />
             <input type="submit" value="APLICAR" />
           </form>
-          <input type="button" value="pagament" />
+          <input type="button" value="pagament" className={styles.payment_button} />
         </section>
 
       </main>
