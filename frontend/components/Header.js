@@ -4,10 +4,11 @@ import { useRouter } from "next/router";
 import es from "../languages/es/header";
 import cat from "../languages/cat/header";
 import en from "../languages/en/header";
+import Cart from "./CartMiniature";
 
 import styles from "../styles/header.module.css";
 
-export default function Header() {
+export default function Header({ cart }) {
   const { asPath, locale, locales } = useRouter();
 
   const [language, setLanguage] = useState(en);
@@ -76,6 +77,7 @@ export default function Header() {
             {locales.map((loc) => <Link href={asPath} locale={loc} key={loc}>{lang(loc)}</Link>)}
           </div>
         </div>
+        <Cart cart={cart} />
       </nav>
 
     </header>

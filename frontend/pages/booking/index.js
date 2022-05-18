@@ -4,13 +4,13 @@ import fetchFromApi from "../../utils/fetchFromApi";
 import compareDates from "../../utils/compareDates";
 import ActivityMiniature from "../../components/ActivityMiniature";
 
-export default function Booking({ activities }) {
+export default function Booking({ activities, cart }) {
   const [activitiesToDisplay, setActivitiesToDisplay] = useState([]);
   useEffect(() => {
     setActivitiesToDisplay(activities.filter(({ day }) => compareDates(day)));
   }, []);
   return (
-    <Layout>
+    <Layout cart={cart}>
       <h2>Activitats</h2>
       {activitiesToDisplay?.map(({
         _id: id, title, image, shortDescription, basePrice, day, hour
