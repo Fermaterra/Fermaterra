@@ -2,18 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import formateDate from "../utils/formateDate";
-import styles from "../styles/activityMiniature.module.scss";
+import styles from "../styles/activities.module.scss";
 
 export default function ActivityMiniature({
   id, title, image, shortDescription, basePrice, day, hour
 }) {
   const { locale } = useRouter();
   return (
-    <article classtitle={styles.miniature}>
+    <article className={styles.miniature}>
       <Image src={image} height={450} width={400} alt={title} />
-      <h3>{title}</h3>
-      <p>{basePrice}</p>
-      <p>{shortDescription}</p>
+      <div>
+        <h3>{title}</h3>
+        <p>{`${basePrice.toFixed(2)}€`}</p>
+      </div>
+      <p className={styles.activity_description}>{shortDescription}</p>
       <Link href={`booking/${id}`}> Reserva</Link>
       <p>{`${formateDate(day, locale)} - ${hour}h`}</p>
     </article>
