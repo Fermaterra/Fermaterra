@@ -21,7 +21,7 @@ export default function CartView({ cart, setCart }) {
           <table className={styles.cart_table}>
             <thead>
               <tr>
-                <th>Enllaç</th>
+                <th>  </th>
                 <th>Activitat</th>
                 <th>Preu</th>
                 <th>Quantitat</th>
@@ -36,8 +36,8 @@ export default function CartView({ cart, setCart }) {
                       <span>
                         <Image
                           src={itemOnCart.image}
-                          height={50}
-                          width={50}
+                          height={100}
+                          width={80}
                           alt={itemOnCart.title}
                         />
                       </span>
