@@ -51,9 +51,11 @@
                 &:focus{
                     outline: none;
                 }
-                &:hover{cursor: pointer;}
+                &[type=submit]{
+               &:hover{cursor: pointer;}
+     
+           }
             }
-      
             
             border-bottom: 1px solid var(--black);
             padding-bottom: 10px;
