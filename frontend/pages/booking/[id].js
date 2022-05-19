@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import fetchFromApi from "../../utils/fetchFromApi";
 import formateDate from "../../utils/formateDate";
-import styles from "../../styles/booking.module.css";
+import styles from "../../styles/booking.module.scss";
 import Map from "../../components/Map";
 
 export default function BookingDetails({ activity, cart, setCart }) {

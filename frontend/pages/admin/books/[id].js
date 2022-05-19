@@ -7,7 +7,7 @@ import BookForm from "../../../components/adminForms/BookForm";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import formateDate from "../../../utils/formateDate";
 
-import styles from "../../../styles/admin/detailsView.module.css";
+import styles from "../../../styles/admin/detailsView.module.scss";
 
 export default function bookDetails({ book }) {
   const [editionMode, setEditionMode] = useState(false);

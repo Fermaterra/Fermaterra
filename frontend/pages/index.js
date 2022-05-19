@@ -5,7 +5,7 @@ import es from "../languages/es";
 import cat from "../languages/cat";
 import en from "../languages/en";
 
-import styles from "../styles/index.module.css";
+import styles from "../styles/index.module.scss";
 
 export default function Home({ cart }) {
   const [language, setLanguage] = useState(en);

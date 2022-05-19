@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import formateDate from "../utils/formateDate";
-import styles from "../styles/activityMiniature.module.css";
+import styles from "../styles/activityMiniature.module.scss";
 
 export default function ActivityMiniature({
   id, title, image, shortDescription, basePrice, day, hour

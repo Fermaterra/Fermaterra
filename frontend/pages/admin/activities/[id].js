@@ -7,7 +7,7 @@ import AdminNav from "../../../components/AdminNav";
 import fetchFromApi from "../../../utils/fetchFromApi";
 import formateDate from "../../../utils/formateDate";
 
-import styles from "../../../styles/admin/detailsView.module.css";
+import styles from "../../../styles/admin/detailsView.module.scss";
 
 export default function ActivityDetails({ activity }) {
   const [editionMode, setEditionMode] = useState(false);
