@@ -1,24 +1,28 @@
 .cart_miniature{
     position: relative;
-}
-
-.image:hover {
-    cursor: pointer;
-}
-.resume{
-    position: absolute;
-    display: none;
-    padding: 3rem;
-}
-.resume_item{
-    display: block;
-}
-.resume a{
-    color: var(--black);
-}
-.cart_miniature:hover .resume{
-    display: flex;
-    flex-direction: column;
+    img{
+        &:hover{
+            cursor: pointer;
+        }
+    }
+    .resume{
+        position: absolute;
+        display: none;
+        padding: 3rem;
+        a{
+            color: var(--black);
+    
+        }
+        .resume_item{
+            display: block;
+        }
+    }
+    &:hover{
+        .resume{
+            display: flex;
+            flex-direction: column;
+        }
+    }
 }
 
 .cart{
