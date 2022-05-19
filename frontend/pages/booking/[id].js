@@ -53,7 +53,7 @@ export default function BookingDetails({ activity, cart, setCart }) {
     setAmount(1);
   };
   return (
-    <Layout cart={cart}>
+    <Layout cart={cart} title={title}>
       <main className={styles.booking}>
 
         <Image src={image} width={600} height={500} alt={title} />
