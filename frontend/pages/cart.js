@@ -35,11 +35,12 @@ export default function CartView({ cart, setCart }) {
         if (item.id === id) return itemToUpdate;
         return item;
       }));
+      localStorage.setItem("cart", JSON.stringify(cart));
     } else {
       const newCart = cart.filter((item) => item.id !== id);
       setCart(newCart);
+      localStorage.setItem("cart", JSON.stringify(newCart));
     }
-    localStorage.setItem("cart", JSON.stringify(cart));
   };
   return (
     <Layout cart={cart} title="Cart">
