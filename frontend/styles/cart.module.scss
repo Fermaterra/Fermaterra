@@ -107,5 +107,13 @@
             font-weight: 400;
             font-size: 18px;
         }
+        input{
+            background-color: var(--white);
+            border: none;
+            color: var(--black);
+            &:hover{
+                cursor: pointer;
+            }
+        }
     }
 }
