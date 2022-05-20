@@ -92,8 +92,11 @@
     .cart_table{
         width: 100%;
         border-collapse: collapse;
-        img:hover{
-            cursor: pointer;
+        img{
+            min-width: 50px;
+            &:hover{
+                cursor: pointer;
+            }
         }
         tr{
             
