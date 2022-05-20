@@ -37,9 +37,9 @@ export default function CartView({ cart, setCart }) {
       }));
       localStorage.setItem("cart", JSON.stringify(cart));
     } else {
-      const newCart = cart.filter((item) => item.id !== id);
-      setCart(newCart);
-      localStorage.setItem("cart", JSON.stringify(newCart));
+      const editedCart = cart.filter((item) => item.id !== id);
+      setCart(editedCart);
+      localStorage.setItem("cart", JSON.stringify(editedCart));
     }
   };
   return (
