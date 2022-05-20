@@ -3,6 +3,7 @@ import Layout from "../../components/Layout";
 import fetchFromApi from "../../utils/fetchFromApi";
 import compareDates from "../../utils/compareDates";
 import ActivityMiniature from "../../components/ActivityMiniature";
+import styles from "../../styles/activities.module.scss";
 
 export default function Booking({ activities, cart }) {
   const [activitiesToDisplay, setActivitiesToDisplay] = useState([]);
@@ -10,22 +11,25 @@ export default function Booking({ activities, cart }) {
     setActivitiesToDisplay(activities.filter(({ day }) => compareDates(day)));
   }, []);
   return (
-    <Layout cart={cart}>
-      <h2>Activitats</h2>
-      {activitiesToDisplay?.map(({
-        _id: id, title, image, shortDescription, basePrice, day, hour
-      }) => (
-        <ActivityMiniature
-          id={id}
-          title={title}
-          image={image}
-          shortDescription={shortDescription}
-          basePrice={basePrice}
-          day={day}
-          hour={hour}
-          key={id}
-        />
-      ))}
+    <Layout cart={cart} title="Activitats">
+      <main>
+        <div className={styles.activities_list}>
+          {activitiesToDisplay?.map(({
+            _id: id, title, image, shortDescription, basePrice, day, hour
+          }) => (
+            <ActivityMiniature
+              id={id}
+              title={title}
+              image={image}
+              shortDescription={shortDescription}
+              basePrice={basePrice}
+              day={day}
+              hour={hour}
+              key={id}
+            />
+          ))}
+        </div>
+      </main>
     </Layout>
   );
 }

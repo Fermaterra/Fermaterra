@@ -1,0 +1,36 @@
+.miniature{display: flex;
+flex-direction: column;
+align-items: center;
+margin-bottom: 3rem;
+    div{
+        width:80%;
+        display: flex;
+        justify-content: space-between;
+        margin: 1rem auto;
+        h3{
+            font-family:  "Helvetica Neue Thin";
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+    }
+    p, a{
+        font-size: 18px;
+        color: var(--gray);
+    }
+    a{
+        text-decoration: none;
+    }
+    .activity_description{
+        color: var(--black);
+        margin-bottom: 3rem;
+    }
+}
+
+.activities_list{
+    padding-top: 10rem;
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5rem;
+}

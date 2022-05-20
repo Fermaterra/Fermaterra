@@ -9,7 +9,7 @@ import Map from "../../components/Map";
 
 export default function BookingDetails({ activity, cart, setCart }) {
   const {
-    image, _id: id, title, day, hour, basePrice, location, description, stock
+    image, _id: id, title, day, hour, basePrice, description, stock
   } = activity;
   const [dataDisplayed, setDataDisplayed] = useState("includes");
   const [amount, setAmount] = useState(1);
@@ -53,56 +53,60 @@ export default function BookingDetails({ activity, cart, setCart }) {
     setAmount(1);
   };
   return (
-    <Layout cart={cart}>
+    <Layout cart={cart} title={title}>
       <main className={styles.booking}>
 
-        <Image src={image} width={600} height={800} alt={title} />
+        <Image src={image} width={600} height={500} alt={title} />
         <div>
-          <section>
-            <h3>{title}</h3>
-            <p>{basePrice}</p>
-            <p>{`${formateDate(day, locale)} - ${hour}h`}</p>
-            <p>{description}</p>
-            {}
+          <section className={styles.info}>
+            <div>
+              <h3>{title}</h3>
+              <p>{`${formateDate(day, locale)} - ${hour}h`}</p>
+            </div>
+            <p>{`${basePrice.toFixed(2)} €`}</p>
           </section>
-          <div>
-            <input
-              type="button"
-              value="inclou"
-              onClick={() => setDataDisplayed("includes")}
-            />
-            <input
-              type="button"
-              value="ubicació"
-              onClick={() => setDataDisplayed("location")}
-            />
-          </div>
-          <div>
-            {dataDisplayed === "includes" ? <p>IActivitats incloses</p> : <Map />}
-          </div>
-          <p>Quantitat</p>
-          <div>
-            <input
-              type="button"
-              value="+"
-              onClick={() => handleAmount("increase")}
-            />
-            <p>{amount}</p>
-            <input
-              type="button"
-              value="-"
-              onClick={() => handleAmount("decrease")}
-            />
-          </div>
-          {addedToCart
-            ? <p>Added to Cart</p>
-            : (
+          <p className={styles.description}>{description}</p>
+          <section className={styles.specifications}>
+            <div>
               <input
                 type="button"
-                value="Reservar"
-                onClick={() => addToCart()}
+                value="inclou"
+                onClick={() => setDataDisplayed("includes")}
               />
-            )}
+              <input
+                type="button"
+                value="ubicació"
+                onClick={() => setDataDisplayed("location")}
+              />
+            </div>
+            {dataDisplayed === "includes" ? <p>IActivitats incloses</p> : <Map />}
+          </section>
+          <section className={styles.add_to_cart}>
+            <div>
+              <p>Quantitat</p>
+              <input
+                type="button"
+                value="-"
+                onClick={() => handleAmount("decrease")}
+              />
+              <p>{amount}</p>
+              <input
+                type="button"
+                value="+"
+                onClick={() => handleAmount("increase")}
+              />
+            </div>
+            {addedToCart
+              ? <p>Added to Cart</p>
+              : (
+                <input
+                  className={styles.add_button}
+                  type="button"
+                  value="Reservar"
+                  onClick={() => addToCart()}
+                />
+              )}
+          </section>
         </div>
       </main>
 
