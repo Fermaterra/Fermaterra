@@ -83,7 +83,8 @@
 .cart_content{
     font-family: "Helvetica Neue Thin";
     height: 60vh;
-    overflow-y: scroll;
+    overflow-y: auto;
+    
     h2{
         color: var(--black);
         letter-spacing: 0.5px;
