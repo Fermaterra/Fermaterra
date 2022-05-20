@@ -40,7 +40,11 @@ export default function BookingDetails({ activity, cart, setCart }) {
     if (alreadyInCart) {
       const updateItemOnCart = cart.map((itemOnCart) => {
         if (Object.values(itemOnCart).includes(id)) {
-          return ({ ...itemOnCart, amount: itemOnCart.amount + amount });
+          return ({
+            ...itemOnCart,
+            amount: itemOnCart.amount + amount,
+            subTotal: itemOnCart.subTotal + (basePrice * amount)
+          });
         }
         return itemOnCart;
       });

@@ -13,6 +13,35 @@ export default function CartView({ cart, setCart }) {
       nextItem
     ) => previousTotal + nextItem.subTotal, 0).toFixed(2));
   }, [cart]);
+
+  const increaseItem = (id) => {
+    const itemToUpdate = cart.find((item) => item.id === id);
+    itemToUpdate.amount += 1;
+    itemToUpdate.subTotal += itemToUpdate.price;
+    setCart(cart.map((item) => {
+      if (item.id === id) return itemToUpdate;
+      return item;
+    }));
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
+
+  const decreaseItem = (id) => {
+    const itemToUpdate = cart.find((item) => item.id === id);
+    if (itemToUpdate.amount > 1) {
+      itemToUpdate.amount -= 1;
+      itemToUpdate.subTotal -= itemToUpdate.price;
+      setCart(cart.map((item) => {
+        if (item.id === id) return itemToUpdate;
+        return item;
+      }));
+      localStorage.setItem("cart", JSON.stringify(cart));
+    } else {
+      const editedCart = cart.filter((item) => item.id !== id);
+      setCart(editedCart);
+      localStorage.setItem("cart", JSON.stringify(editedCart));
+    }
+  };
   return (
     <Layout cart={cart} title="Cart">
       <main className={styles.cart}>
@@ -45,7 +74,11 @@ export default function CartView({ cart, setCart }) {
                   </td>
                   <td key={`${itemOnCart.id}-activity`}>{itemOnCart.activity}</td>
                   <td key={`${itemOnCart.id}-price`}>{itemOnCart.price}</td>
-                  <td key={`${itemOnCart.id}-amount`}>{itemOnCart.amount}</td>
+                  <td key={`${itemOnCart.id}-amount`}>
+                    <input type="button" value="-" onClick={() => decreaseItem(itemOnCart.id)} />
+                    {itemOnCart.amount}
+                    <input type="button" value="+" onClick={() => increaseItem(itemOnCart.id)} />
+                  </td>
                 </tr>
               ))}
             </tbody>
