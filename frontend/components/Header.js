@@ -50,6 +50,18 @@ export default function Header({ cart }) {
     return languageName;
   };
 
+  if (typeof window !== "undefined") {
+    const scrollTrigger = window.screen.height / 10;
+    const header = document.querySelector("header");
+    window.onscroll = function scrolling() {
+      if (window.scrollY >= scrollTrigger || window.pageYOffset >= scrollTrigger) {
+        header.classList.add(styles.header_scroll);
+      } else {
+        header.classList.remove(styles.header_scroll);
+      }
+    };
+  }
+
   return (
     <header className={styles.header}>
       <div>
