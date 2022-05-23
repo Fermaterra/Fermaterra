@@ -8,6 +8,9 @@ import styles from "../styles/cart.module.scss";
 export default function CartView({ cart, setCart }) {
   const [total, setTtotal] = useState(0);
   const [cartView, setCartView] = useState("resume");
+  const [client, setClient] = useState({});
+  const [confirmAge, setConfirmAge] = useState(false);
+  const [confirmPoliticies, setConfirmPoliticies] = useState(false);
   useEffect(() => {
     setTtotal(cart?.reduce((
       previousTotal,
@@ -44,9 +47,15 @@ export default function CartView({ cart, setCart }) {
     }
   };
 
+  const handlePayment = () => {
+    if (Object.keys(client).length < 6) return alert("All fields must be filled");
+    if (client.mail !== client.confirmedMail) return alert("Email must coincide with confirmation");
+    if (confirmAge && confirmPoliticies) return alert(JSON.stringify(client));
+    return alert("Confirm politicies");
+  };
   const handleView = () => {
     if (cartView === "resume") setCartView("client");
-    if (cartView === "client") setCartView("resume");
+    if (cartView === "client") handlePayment();
   };
   return (
     <Layout cart={cart} title="Cart">
@@ -96,36 +105,40 @@ export default function CartView({ cart, setCart }) {
           )
           : (
             <section className={styles.client}>
-              <h2>Dades del contacte</h2>
+              <h2>Dades de contacte</h2>
               <form>
                 <label htmlFor="name">
                   NOM
-                  <input id="name" />
+                  <input id="name" onChange={(evt) => setClient({ ...client, name: evt.target.value })} />
                 </label>
                 <label htmlFor="surname">
                   COGNOMS
-                  <input id="surname" />
+                  <input id="surname" onChange={(evt) => setClient({ ...client, surname: evt.target.value })} />
                 </label>
                 <label htmlFor="email">
                   MAIL
-                  <input id="email" type="email" />
+                  <input id="email" type="email" onChange={(evt) => setClient({ ...client, mail: evt.target.value })} />
                 </label>
                 <label htmlFor="confirm_email">
                   CONFIR. MAIL
-                  <input id="confirm_email" type="email" />
+                  <input id="confirm_email" type="email" onChange={(evt) => setClient({ ...client, confirmedMail: evt.target.value })} />
                 </label>
                 <label htmlFor="phone">
                   TELF
-                  <input id="phone" type="tel" />
+                  <input id="phone" type="tel" onChange={(evt) => setClient({ ...client, phone: evt.target.value })} />
                 </label>
                 <label htmlFor="country">
                   PAÍS
-                  <input id="country" />
+                  <input id="country" onChange={(evt) => setClient({ ...client, country: evt.target.value })} />
                 </label>
               </form>
               <div className={styles.confirmations}>
                 <label htmlFor="confirm_age">
-                  <input id="confirm_age" type="checkbox" />
+                  <input
+                    id="confirm_age"
+                    type="checkbox"
+                    onChange={() => setConfirmAge(!confirmAge)}
+                  />
                   Confirmo que tots els participants
                   són majors de 18 anys o majors de 14 acompanyats d&apos;un tutor legal.
                 </label>
@@ -133,12 +146,15 @@ export default function CartView({ cart, setCart }) {
                   <input
                     id="confirm_politicies"
                     type="checkbox"
-                    value="Confirmo que he llegit les"
+                    onChange={() => setConfirmPoliticies(!confirmPoliticies)}
                   />
                   Confirmo que he llegit i accepto les
-                  <Link href="/"> condicions de participació a l&apos;activitat </Link>
+                  {" "}
+                  <a href="/" target="blank">condicions de participació a l&apos;activitat</a>
+                  {" "}
                   i la
-                  <Link href="/"> política de protecció de dades</Link>
+                  {" "}
+                  <a href="/booking" target="blank">política de protecció de dades</a>
                   .
                 </label>
               </div>

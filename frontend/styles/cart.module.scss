@@ -51,7 +51,7 @@
 
     .cart_payment{
         padding-top: 40vh;
-       
+        font-family: "Helvetica Neue Thin";
         p{
             width: 100%;
             padding-bottom: 10px;
@@ -146,6 +146,7 @@
     .confirmations{
         display: flex;
         flex-direction: column;
+        margin-left: 5rem;
         input{
             margin-right: 3rem;
         }
