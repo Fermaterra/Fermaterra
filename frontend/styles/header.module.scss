@@ -7,54 +7,58 @@
     position: fixed;
     width: 100%;
     z-index: 1;
+    h1{
+        font-weight: 700;
+    }
+    a, .dropdown_button{
+        text-decoration: none;
+        color: var(--white);
+        letter-spacing: 2px;
+    }
+    a{
+        &:hover{
+            cursor: pointer;
+        }
+    }
 }
 
-.header h1{
-    font-weight: 700;
-}
-
-.header a, .dropdown_button{
-    text-decoration: none;
-    color: var(--white);
-    letter-spacing: 2px;
-}
-
-.header a:hover{
-    cursor: pointer;
-}
 
 .header_scroll{
     background-color: var(--blue);
-   .dropdown_content{
-    background-color: var(--blue);
-   }
+    nav{
+        .dropdown_content{
+            background-color: var(--blue);
+        }
+    }
 }
 
 .logo{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    &:hover{
+        width: fit-content;
+        height: fit-content;
+        cursor: pointer;
+    }
+    span{
+        font-weight: 300;
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        
+    }
 }
 .logo__container {
     display: flex;
     flex-direction: column;
     text-align: center;
-}
 
-.logo__container h1{
-    font-size: 1.8rem;
-    font-weight: 300;
-    letter-spacing: 6px;
-}
-.logo:hover{
-    width: fit-content;
-    height: fit-content;
-    cursor: pointer;
-}
-.logo span{
-    font-weight: 300;
-    font-size: 0.75rem;
-    letter-spacing: 2px;
+    h1{
+        font-size: 1.8rem;
+        font-weight: 300;
+        letter-spacing: 6px;
+    }
     
 }
 
@@ -69,28 +73,30 @@
     position: relative;
     font-family: "Helvetica Neue Thin";
 
-}
+    &:hover{
+        .dropdown_content{
+            display: flex;
+            flex-direction: column;
+        }
+    }
 
-.dropdown_button{
-    background-color: transparent;
-    border: none;
-    color: var(--white);
-    text-transform: uppercase;
-}
+    .dropdown_button{
+        padding: 0;
+        background-color: transparent;
+        border: none;
+        color: var(--white);
+        text-transform: uppercase;
+    }
+    
+    .dropdown_content{
+        display: none;
+        position: absolute;
+            background-color:rgba(141, 141, 141, 0.5);
 
-.dropdown_content{
-    display: none;
-    position: absolute;
-    background-color: transparent;
-}
-
-.dropdown_content a{
-    color: var(--white);
-    text-decoration: none;
-    text-transform: uppercase;
-}
-
-.dropdown:hover .dropdown_content{
-    display: flex;
-    flex-direction: column;
+        a{
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+    }
 }
