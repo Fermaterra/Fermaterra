@@ -1,0 +1,11 @@
+.message{
+    background-color: var(--blue);
+    color: var(--white);
+    text-transform: uppercase;
+    position: fixed;
+    width: 100%;
+    margin: 10vh auto;
+    z-index: 1;
+    text-align: center;
+    padding: 2vh;
+}
