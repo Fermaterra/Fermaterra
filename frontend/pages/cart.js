@@ -7,6 +7,10 @@ import styles from "../styles/cart.module.scss";
 
 export default function CartView({ cart, setCart }) {
   const [total, setTtotal] = useState(0);
+  const [cartView, setCartView] = useState("resume");
+  const [client, setClient] = useState({});
+  const [confirmAge, setConfirmAge] = useState(false);
+  const [confirmPoliticies, setConfirmPoliticies] = useState(false);
   useEffect(() => {
     setTtotal(cart?.reduce((
       previousTotal,
@@ -42,49 +46,121 @@ export default function CartView({ cart, setCart }) {
       localStorage.setItem("cart", JSON.stringify(editedCart));
     }
   };
+
+  const handlePayment = () => {
+    if (Object.keys(client).length < 6) return alert("All fields must be filled");
+    if (client.mail !== client.confirmedMail) return alert("Email must coincide with confirmation");
+    if (confirmAge && confirmPoliticies) return alert(JSON.stringify(client));
+    return alert("Confirm politicies");
+  };
+  const handleView = () => {
+    if (cartView === "resume") setCartView("client");
+    if (cartView === "client") handlePayment();
+  };
   return (
     <Layout cart={cart} title="Cart">
       <main className={styles.cart}>
-        <section className={styles.cart_content}>
-          <h2>Revisar la compra</h2>
-          <table className={styles.cart_table}>
-            <thead>
-              <tr>
-                <th>  </th>
-                <th>Activitat</th>
-                <th>Preu</th>
-                <th>Quantitat</th>
-              </tr>
-            </thead>
-            <tbody>
+        {cartView === "resume"
+          ? (
+            <section className={styles.cart_content}>
+              <h2>Revisar la compra</h2>
+              <table className={styles.cart_table}>
+                <thead>
+                  <tr>
+                    <th>  </th>
+                    <th>Activitat</th>
+                    <th>Preu</th>
+                    <th>Quantitat</th>
+                  </tr>
+                </thead>
+                <tbody>
 
-              {cart.map((itemOnCart) => (
-                <tr key={`${itemOnCart.id}-tround`}>
-                  <td key={`${itemOnCart.id}-image`}>
-                    <Link href={`booking/${itemOnCart.id}`} key={`${itemOnCart.id}-image-link`}>
-                      <span>
-                        <Image
-                          src={itemOnCart.image}
-                          height={100}
-                          width={80}
-                          alt={itemOnCart.title}
-                        />
-                      </span>
-                    </Link>
-                  </td>
-                  <td key={`${itemOnCart.id}-activity`}>{itemOnCart.activity}</td>
-                  <td key={`${itemOnCart.id}-price`}>{itemOnCart.price}</td>
-                  <td key={`${itemOnCart.id}-amount`}>
-                    <input type="button" value="-" onClick={() => decreaseItem(itemOnCart.id)} />
-                    {itemOnCart.amount}
-                    <input type="button" value="+" onClick={() => increaseItem(itemOnCart.id)} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+                  {cart.map((itemOnCart) => (
+                    <tr key={`${itemOnCart.id}-tround`}>
+                      <td key={`${itemOnCart.id}-image`}>
+                        <Link href={`booking/${itemOnCart.id}`} key={`${itemOnCart.id}-image-link`}>
+                          <span>
+                            <Image
+                              src={itemOnCart.image}
+                              height={100}
+                              width={80}
+                              alt={itemOnCart.title}
+                            />
+                          </span>
+                        </Link>
+                      </td>
+                      <td key={`${itemOnCart.id}-activity`}>{itemOnCart.activity}</td>
+                      <td key={`${itemOnCart.id}-price`}>{itemOnCart.price}</td>
+                      <td key={`${itemOnCart.id}-amount`}>
+                        <input type="button" value="-" onClick={() => decreaseItem(itemOnCart.id)} />
+                        {itemOnCart.amount}
+                        <input type="button" value="+" onClick={() => increaseItem(itemOnCart.id)} />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
 
-          </table>
-        </section>
+              </table>
+            </section>
+          )
+          : (
+            <section className={styles.client}>
+              <h2>Dades de contacte</h2>
+              <form>
+                <label htmlFor="name">
+                  NOM
+                  <input id="name" onChange={(evt) => setClient({ ...client, name: evt.target.value })} />
+                </label>
+                <label htmlFor="surname">
+                  COGNOMS
+                  <input id="surname" onChange={(evt) => setClient({ ...client, surname: evt.target.value })} />
+                </label>
+                <label htmlFor="email">
+                  MAIL
+                  <input id="email" type="email" onChange={(evt) => setClient({ ...client, mail: evt.target.value })} />
+                </label>
+                <label htmlFor="confirm_email">
+                  CONFIR. MAIL
+                  <input id="confirm_email" type="email" onChange={(evt) => setClient({ ...client, confirmedMail: evt.target.value })} />
+                </label>
+                <label htmlFor="phone">
+                  TELF
+                  <input id="phone" type="tel" onChange={(evt) => setClient({ ...client, phone: evt.target.value })} />
+                </label>
+                <label htmlFor="country">
+                  PAÍS
+                  <input id="country" onChange={(evt) => setClient({ ...client, country: evt.target.value })} />
+                </label>
+              </form>
+              <div className={styles.confirmations}>
+                <label htmlFor="confirm_age">
+                  <input
+                    id="confirm_age"
+                    type="checkbox"
+                    onChange={() => setConfirmAge(!confirmAge)}
+                  />
+                  Confirmo que tots els participants
+                  són majors de 18 anys o majors de 14 acompanyats d&apos;un tutor legal.
+                </label>
+                <label htmlFor="confirm_politicies">
+                  <input
+                    id="confirm_politicies"
+                    type="checkbox"
+                    onChange={() => setConfirmPoliticies(!confirmPoliticies)}
+                  />
+                  Confirmo que he llegit i accepto les
+                  {" "}
+                  <a href="/" target="blank">condicions de participació a l&apos;activitat</a>
+                  {" "}
+                  i la
+                  {" "}
+                  <a href="/booking" target="blank">política de protecció de dades</a>
+                  .
+                </label>
+              </div>
+
+            </section>
+          )}
         <section className={styles.cart_payment}>
           <p>{`Subtotal: ${total} €`}</p>
           <h3>CODI DESCOMPTE</h3>
@@ -92,7 +168,7 @@ export default function CartView({ cart, setCart }) {
             <input type="text" placeholder="Escriure el teu codi" />
             <input type="submit" value="APLICAR" />
           </form>
-          <input type="button" value="pagament" className={styles.payment_button} />
+          <input type="button" value="pagament" className={styles.payment_button} onClick={handleView} />
         </section>
 
       </main>
