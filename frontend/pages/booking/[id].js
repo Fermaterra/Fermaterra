@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
+import Modal from "../../components/Modal";
+import Map from "../../components/Map";
 import fetchFromApi from "../../utils/fetchFromApi";
 import formateDate from "../../utils/formateDate";
+import messageToCostumer from "../../utils/messageToCostumer";
 import styles from "../../styles/booking.module.scss";
-import Map from "../../components/Map";
 
 export default function BookingDetails({ activity, cart, setCart }) {
   const {
@@ -13,7 +15,7 @@ export default function BookingDetails({ activity, cart, setCart }) {
   } = activity;
   const [dataDisplayed, setDataDisplayed] = useState("includes");
   const [amount, setAmount] = useState(1);
-  const [addedToCart, setAddedToCart] = useState(false);
+  const [addedToCart, setAddedToCart] = useState("");
   useEffect(() => { if (cart.length > 0) localStorage.setItem("cart", JSON.stringify(cart)); }, [cart]);
   useEffect(() => {
     const amountChecker = cart.find((itemOnCart) => itemOnCart.id === id);
@@ -30,7 +32,8 @@ export default function BookingDetails({ activity, cart, setCart }) {
     if (action === "increase" && (amount + currentAmount) < stock) setAmount(amount + 1);
     if (action === "decrease" && amount > 1) setAmount(amount - 1);
   };
-  const addToCart = async () => {
+  const addToCart = () => {
+    if (amount === 0) return (messageToCostumer("No queden més places", setAddedToCart));
     const alreadyInCart = cart.find((itemOnCart) => Object.values(itemOnCart).includes(id));
     if (!alreadyInCart) {
       setCart([...cart, {
@@ -50,14 +53,12 @@ export default function BookingDetails({ activity, cart, setCart }) {
       });
       setCart(updateItemOnCart);
     }
-    setAddedToCart(true);
-    setTimeout(() => {
-      setAddedToCart(false);
-    }, 750);
     setAmount(1);
+    return messageToCostumer("Afegit al carretó", setAddedToCart);
   };
   return (
     <Layout cart={cart} title={title}>
+      {addedToCart ? <Modal message={addedToCart} /> : null}
       <main className={styles.booking}>
 
         <Image src={image} width={600} height={500} alt={title} />
@@ -100,16 +101,13 @@ export default function BookingDetails({ activity, cart, setCart }) {
                 onClick={() => handleAmount("increase")}
               />
             </div>
-            {addedToCart
-              ? <p>Added to Cart</p>
-              : (
-                <input
-                  className={styles.add_button}
-                  type="button"
-                  value="Reservar"
-                  onClick={() => addToCart()}
-                />
-              )}
+            <input
+              className={styles.add_button}
+              type="button"
+              value="Reservar"
+              onClick={() => addToCart()}
+            />
+
           </section>
         </div>
       </main>

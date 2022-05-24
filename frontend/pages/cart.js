@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 
 import Layout from "../components/Layout";
+import Modal from "../components/Modal";
+import messageToCostumer from "../utils/messageToCostumer";
 import styles from "../styles/cart.module.scss";
 
 export default function CartView({ cart, setCart }) {
@@ -11,6 +13,7 @@ export default function CartView({ cart, setCart }) {
   const [client, setClient] = useState({});
   const [confirmAge, setConfirmAge] = useState(false);
   const [confirmPoliticies, setConfirmPoliticies] = useState(false);
+  const [message, setMessage] = useState("");
   useEffect(() => {
     setTtotal(cart?.reduce((
       previousTotal,
@@ -48,10 +51,10 @@ export default function CartView({ cart, setCart }) {
   };
 
   const handlePayment = () => {
-    if (Object.keys(client).length < 6) return alert("All fields must be filled");
-    if (client.mail !== client.confirmedMail) return alert("Email must coincide with confirmation");
-    if (confirmAge && confirmPoliticies) return alert(JSON.stringify(client));
-    return alert("Confirm politicies");
+    if (Object.keys(client).length < 6) return messageToCostumer("Tots els camps són obligatoris", setMessage);
+    if (client.mail !== client.confirmedMail) return messageToCostumer("Els correus no coincideixen", setMessage);
+    if (confirmAge && confirmPoliticies) return messageToCostumer("Passant a pagament", setMessage);
+    return messageToCostumer("S'han de confirmar les condicions i polítiques", setMessage);
   };
   const handleView = () => {
     if (cartView === "resume") setCartView("client");
@@ -59,6 +62,7 @@ export default function CartView({ cart, setCart }) {
   };
   return (
     <Layout cart={cart} title="Cart">
+      {message ? <Modal message={message} /> : null}
       <main className={styles.cart}>
         {cartView === "resume"
           ? (
