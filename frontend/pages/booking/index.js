@@ -5,13 +5,13 @@ import compareDates from "../../utils/compareDates";
 import ActivityMiniature from "../../components/ActivityMiniature";
 import styles from "../../styles/activities.module.scss";
 
-export default function Booking({ activities, cart }) {
+export default function Booking({ activities }) {
   const [activitiesToDisplay, setActivitiesToDisplay] = useState([]);
   useEffect(() => {
     setActivitiesToDisplay(activities.filter(({ day }) => compareDates(day)));
   }, []);
   return (
-    <Layout cart={cart} title="Activitats">
+    <Layout title="Activitats">
       <main>
         <div className={styles.activities_list}>
           {activitiesToDisplay?.map(({

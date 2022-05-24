@@ -7,7 +7,7 @@ import en from "../languages/en";
 
 import styles from "../styles/index.module.scss";
 
-export default function Home({ cart }) {
+export default function Home() {
   const [language, setLanguage] = useState(en);
   const { locale } = useRouter();
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function Home({ cart }) {
     }
   }, [locale]);
   return (
-    <Layout cart={cart} title="Home">
+    <Layout title="Home">
       <div className={styles.image}>
         <p>{language.banner}</p>
       </div>
