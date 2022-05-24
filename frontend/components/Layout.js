@@ -3,7 +3,7 @@ import Footer from "./adminForms/Footer";
 
 import Header from "./Header";
 
-export default function Layout({ title, children, cart }) {
+export default function Layout({ title, children }) {
   return (
     <>
       <Head>
@@ -18,7 +18,7 @@ export default function Layout({ title, children, cart }) {
 
       </Head>
       <>
-        <Header cart={cart} />
+        <Header />
         {children}
         <Footer />
       </>

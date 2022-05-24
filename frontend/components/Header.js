@@ -8,7 +8,7 @@ import Cart from "./CartMiniature";
 
 import styles from "../styles/header.module.scss";
 
-export default function Header({ cart }) {
+export default function Header() {
   const { asPath, locale, locales } = useRouter();
 
   const [language, setLanguage] = useState(en);
@@ -89,7 +89,7 @@ export default function Header({ cart }) {
             {locales.map((loc) => <Link href={asPath} locale={loc} key={loc}>{lang(loc)}</Link>)}
           </div>
         </div>
-        <Cart cart={cart} />
+        <Cart />
       </nav>
 
     </header>
