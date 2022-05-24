@@ -6,6 +6,7 @@ import Modal from "../../components/Modal";
 import Map from "../../components/Map";
 import fetchFromApi from "../../utils/fetchFromApi";
 import formateDate from "../../utils/formateDate";
+import messageToCostumer from "../../utils/messageToCostumer";
 import styles from "../../styles/booking.module.scss";
 
 export default function BookingDetails({ activity, cart, setCart }) {
@@ -24,13 +25,6 @@ export default function BookingDetails({ activity, cart, setCart }) {
   }, [cart]);
   const { locale } = useRouter();
 
-  const messageToCostumer = (message) => {
-    setAddedToCart(message);
-    setTimeout(() => {
-      setAddedToCart("");
-    }, 750);
-  };
-
   const handleAmount = (action) => {
     let currentAmount = 0;
     const activityAlreadyInCart = cart.find((itemOnCart) => itemOnCart.id === id);
@@ -39,7 +33,7 @@ export default function BookingDetails({ activity, cart, setCart }) {
     if (action === "decrease" && amount > 1) setAmount(amount - 1);
   };
   const addToCart = () => {
-    if (amount === 0) return (messageToCostumer("No queden més places"));
+    if (amount === 0) return (messageToCostumer("No queden més places", setAddedToCart));
     const alreadyInCart = cart.find((itemOnCart) => Object.values(itemOnCart).includes(id));
     if (!alreadyInCart) {
       setCart([...cart, {
@@ -60,7 +54,7 @@ export default function BookingDetails({ activity, cart, setCart }) {
       setCart(updateItemOnCart);
     }
     setAmount(1);
-    return messageToCostumer("Afegit al carretó");
+    return messageToCostumer("Afegit al carretó", setAddedToCart);
   };
   return (
     <Layout cart={cart} title={title}>
