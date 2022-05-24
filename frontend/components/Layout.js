@@ -8,12 +8,12 @@ export default function Layout({ title, children, cart }) {
     <>
       <Head>
         <title>
-          Terraferma |
+          Fermaterra |
           {" "}
           {title}
         </title>
 
-        <meta name="description" content="Terraferma " />
+        <meta name="description" content="Fermaterra " />
         <meta name="keywords" content="Menorca, Yoga, Kundalini, Frigidarium, Pranayama, Chi kung, experience, relax, activity, activities, Balears" />
 
       </Head>
