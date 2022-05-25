@@ -4,11 +4,11 @@ import { getStorage } from "firebase/storage";
 const firebaseConfig = {
   apiKey: process.env.APIKEY,
   authDomain: process.env.AUTHDOMAIN,
-  projectId: "terraferma-665e5",
-  storageBucket: "terraferma-665e5.appspot.com",
-  messagingSenderId: "222349347436",
+  projectId: "fermaterra-1fd31",
+  storageBucket: "fermaterra-1fd31.appspot.com",
+  messagingSenderId: "462074134912",
   appId: process.env.APPID,
-  measurementId: "G-Q57HSFZVB8"
+  measurementId: "G-GBYJNH0Z0C"
 };
 
 const app = initializeApp(firebaseConfig);
