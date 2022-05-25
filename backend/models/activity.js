@@ -1,12 +1,38 @@
 const { model, Schema } = require("mongoose");
 
+const activityTextSchema = Schema({
+  title: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  shortDescription: {
+    type: String,
+    required: true
+  },
+});
+
+const locationSchema = Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  lat: {
+    type: Number,
+    required: true
+  },
+  lng: {
+    type: Number,
+    required: true
+  }
+});
 const activitySchema = Schema(
   {
-    title: {
-      type: String,
-      required: true,
-      trim: true
-    },
+
     day: {
       type: Date,
       required: true,
@@ -31,14 +57,7 @@ const activitySchema = Schema(
       type: Number,
       required: true
     },
-    description: {
-      type: String,
-      required: true
-    },
-    shortDescription: {
-      type: String,
-      required: true
-    },
+
     basePrice: {
       type: Number
     },
@@ -47,10 +66,7 @@ const activitySchema = Schema(
     },
 
     location: {
-
-      type: String,
-      required: true,
-      default: ""
+      type: locationSchema
     },
 
     contact: {
@@ -77,7 +93,10 @@ const activitySchema = Schema(
     status: {
       type: String,
       default: "available"
-    }
+    },
+    en: { type: activityTextSchema },
+    es: { type: activityTextSchema },
+    ca: { type: activityTextSchema },
 
   },
   { timestamps: true }

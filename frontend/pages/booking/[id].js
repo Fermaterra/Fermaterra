@@ -11,7 +11,7 @@ import styles from "../../styles/booking.module.scss";
 
 export default function BookingDetails({ activity, cart, setCart }) {
   const {
-    image, _id: id, title, day, hour, basePrice, description, stock
+    image, _id: id, title, day, hour, basePrice, description, stock, location
   } = activity;
   const [dataDisplayed, setDataDisplayed] = useState("includes");
   const [amount, setAmount] = useState(1);
@@ -84,7 +84,7 @@ export default function BookingDetails({ activity, cart, setCart }) {
                 onClick={() => setDataDisplayed("location")}
               />
             </div>
-            {dataDisplayed === "includes" ? <p>IActivitats incloses</p> : <Map />}
+            {dataDisplayed === "includes" ? <p>IActivitats incloses</p> : <Map location={location} />}
           </section>
           <section className={styles.add_to_cart}>
             <div>

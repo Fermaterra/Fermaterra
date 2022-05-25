@@ -13,7 +13,8 @@ export default function ActivityDetails({ activity }) {
   const [editionMode, setEditionMode] = useState(false);
   const {
     title, _id: id, day, hour, duration, image, stock, description, shortDescription,
-    basePrice, taxes, location, contact, instructor, notes, timesVisited, books, status
+    basePrice, taxes, location: { name: location },
+    contact, instructor, notes, timesVisited, books, status
   } = activity;
 
   const router = useRouter();

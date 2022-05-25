@@ -49,6 +49,9 @@ export default function Activities({ activities }) {
     {
       label: "Sitio",
       name: "location",
+      options: {
+        customBodyRender: (value) => value.name,
+      },
     },
     {
       label: "Titulo",
