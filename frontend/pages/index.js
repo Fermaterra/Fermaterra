@@ -44,7 +44,7 @@ export default function Home() {
         Planifica una experiència autèntica
         amb els nostres serveis
       </p>
-      <section>
+      <section className={styles.activities_list}>
         <PillarCard
           title={language.Frigidarium.title}
           text={[

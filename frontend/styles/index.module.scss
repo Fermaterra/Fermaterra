@@ -15,19 +15,18 @@
 
 .section{
     text-align: center;
-}
-
-.section h2{
-    font-size: 2rem;
-    font-weight: 700;
-    padding: 2rem;
-    margin-bottom: 2rem;
-}
-
-.section p{
-    font-size: 1.5rem;
-    width: 50%;
-    margin: 0 auto 3rem;
+   
+    h2{
+        font-size: 2rem;
+        font-weight: 700;
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+    p{
+        font-size: 1.5rem;
+        width: 50%;
+        margin: 0 auto 3rem;
+    }
 }
     
 .text{
@@ -41,9 +40,21 @@
 }
 
 .activities_list{
+    width: 90%;
     margin: 0 auto 5rem;
     display: grid;
-    grid-template-columns: repeat(4, 25%);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    h2{
+        text-align: center;
+    }
+    img{
+        margin: 0 auto;
+        width: 80%;
+    }
+    p{
+        text-align: justify;
+    }
 }
 
 .contact{
