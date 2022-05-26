@@ -11,21 +11,37 @@ export default function NewActivityForm({
   const [image, setImage] = useState(null);
   const [imageUploaded, setImageUploaded] = useState(false);
   const [activity, setActivity] = useState({
-    title: "",
+    en: {
+      title: "",
+      description: "",
+      shortDescription: ""
+    },
+    es: {
+      title: "",
+      description: "",
+      shortDescription: ""
+    },
+    ca: {
+      title: "",
+      description: "",
+      shortDescription: ""
+    },
     day: "",
     hour: "",
     duration: "",
     stock: "",
-    description: "",
-    shortDescription: "",
     basePrice: "",
     taxes: "",
-    location: "",
+    location: {
+      name: "",
+      lat: 0,
+      lng: 0
+    },
     contact: "",
     instructor: "",
     notes: "",
-    timesVisited: "",
-    books: "",
+    timesVisited: 0,
+    books: 0,
     status: ""
   });
   const [error, setError] = useState("");
@@ -82,12 +98,43 @@ export default function NewActivityForm({
       className={styles.form}
       onSubmit={(evt) => handleSubmit(evt)}
     >
-      <label htmlFor="title">
-        title
+      <label htmlFor="titleESP">
+        title spa
         <input
-          id="title"
-          value={activity.title}
-          onChange={(evt) => { setActivity({ ...activity, title: evt.target.value }); }}
+          type="text"
+          id="titleESP"
+          value={activity.es.title}
+          onChange={(evt) => {
+            setActivity(
+              { ...activity, es: { ...activity.es, title: evt.target.value } }
+            );
+          }}
+        />
+      </label>
+      <label htmlFor="titleCAT">
+        title cat
+        <input
+          type="text"
+          id="titleCAT"
+          value={activity.ca.title}
+          onChange={(evt) => {
+            setActivity(
+              { ...activity, ca: { ...activity.ca, title: evt.target.value } }
+            );
+          }}
+        />
+      </label>
+      <label htmlFor="titleENG">
+        title eng
+        <input
+          type="text"
+          id="titleENG"
+          value={activity.en.title}
+          onChange={(evt) => {
+            setActivity(
+              { ...activity, en: { ...activity.en, title: evt.target.value } }
+            );
+          }}
         />
       </label>
       <label htmlFor="day">
@@ -131,20 +178,80 @@ export default function NewActivityForm({
           onChange={(evt) => { setActivity({ ...activity, stock: evt.target.value }); }}
         />
       </label>
-      <label htmlFor="description">
-        description
+      <label htmlFor="descriptionESP">
+        description spa
         <input
-          id="description"
-          value={activity.description}
-          onChange={(evt) => { setActivity({ ...activity, description: evt.target.value }); }}
+          type="text"
+          id="descriptionESP"
+          value={activity.es.description}
+          onChange={(evt) => {
+            setActivity(
+              { ...activity, es: { ...activity.es, description: evt.target.value } }
+            );
+          }}
         />
       </label>
-      <label htmlFor="shortDescription">
-        shortDescription
+      <label htmlFor="descriptionCAT">
+        description cat
         <input
-          id="shortDescription"
-          value={activity.shortDescription}
-          onChange={(evt) => { setActivity({ ...activity, shortDescription: evt.target.value }); }}
+          type="text"
+          id="descriptionCAT"
+          value={activity.ca.description}
+          onChange={(evt) => {
+            setActivity(
+              { ...activity, ca: { ...activity.ca, description: evt.target.value } }
+            );
+          }}
+        />
+      </label>
+      <label htmlFor="descriptionENG">
+        description eng
+        <input
+          type="text"
+          id="descriptionENG"
+          value={activity.en.description}
+          onChange={(evt) => {
+            setActivity(
+              { ...activity, en: { ...activity.en, description: evt.target.value } }
+
+            );
+          }}
+        />
+      </label>
+      <label htmlFor="shortDescriptionESP">
+        shortDescription esp
+        <input
+          id="shortDescriptionESP"
+          value={activity.es.shortDescription}
+          onChange={(evt) => {
+            setActivity(
+              { ...activity, es: { ...activity.es, shortDescription: evt.target.value } }
+            );
+          }}
+        />
+      </label>
+      <label htmlFor="shortDescriptionCAT">
+        shortDescription cat
+        <input
+          id="shortDescriptionCAT"
+          value={activity.ca.shortDescription}
+          onChange={(evt) => {
+            setActivity(
+              { ...activity, ca: { ...activity.ca, shortDescription: evt.target.value } }
+            );
+          }}
+        />
+      </label>
+      <label htmlFor="shortDescriptionENG">
+        shortDescription eng
+        <input
+          id="shortDescriptionENG"
+          value={activity.en.shortDescription}
+          onChange={(evt) => {
+            setActivity(
+              { ...activity, en: { ...activity.en, shortDescription: evt.target.value } }
+            );
+          }}
         />
       </label>
       <label htmlFor="basePrice">
@@ -163,12 +270,41 @@ export default function NewActivityForm({
           onChange={(evt) => { setActivity({ ...activity, taxes: evt.target.value }); }}
         />
       </label>
-      <label htmlFor="location">
-        location
+      <label htmlFor="locationName">
+        location name
         <input
-          id="location"
-          value={activity.location}
-          onChange={(evt) => { setActivity({ ...activity, location: evt.target.value }); }}
+          id="locationName"
+          value={activity.location.name}
+          onChange={(evt) => {
+            setActivity(
+              { ...activity, location: { ...activity.location, name: evt.target.value } }
+            );
+          }}
+        />
+      </label>
+      <label htmlFor="locationLAT">
+        location lat
+        <input
+          id="locationLAT"
+          value={activity.location.lat}
+          onChange={(evt) => {
+            setActivity(
+              { ...activity, location: { ...activity.location, lat: evt.target.value } }
+            );
+          }}
+        />
+      </label>
+      <label htmlFor="locationLNG">
+        location long
+        <input
+          id="locationLNG"
+          value={activity.location.lng}
+          onChange={(evt) => {
+            setActivity(
+              { ...activity, location: { ...activity.location, lng: evt.target.value } }
+
+            );
+          }}
         />
       </label>
       <label htmlFor="contact">
