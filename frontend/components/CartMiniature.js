@@ -7,7 +7,7 @@ export default function Cart() {
     <div className={styles.cart_miniature}>
       <Link href="/cart">
         <span>
-          <Image src="/img/cart.svg" width={30} height={25} alt="cart" />
+          <Image src="/img/cart.svg" width={50} height={45} alt="cart" />
         </span>
       </Link>
     </div>

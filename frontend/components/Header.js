@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import es from "../languages/es/header";
 import cat from "../languages/cat/header";
@@ -64,21 +65,11 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-      <div>
-        <Link href="/">
-          <div className={styles.logo}>
-            <div className={styles.logo__container}>
-              <h1>
-                FERMATERRA
-                {" "}
-              </h1>
-              <span>Barcelona  -  Menorca</span>
-            </div>
-
-          </div>
-        </Link>
-
-      </div>
+      <Link href="/">
+        <div className={styles.logo}>
+          <Image src="/img/logo.svg" layout="fill" />
+        </div>
+      </Link>
       <nav className={styles.nav}>
         <Link href="/booking">{language.booking}</Link>
         <Link href="/blog">{language.blog}</Link>
