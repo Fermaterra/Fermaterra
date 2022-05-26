@@ -52,7 +52,7 @@ export default function Home() {
             language.Frigidarium.secondParagraph,
             language.Frigidarium.thirdParagraph
           ]}
-          image="https://firebasestorage.googleapis.com/v0/b/terraferma-665e5.appspot.com/o/images%2FSesi%C3%B3n%20de%20relajaci%C3%B3n-2022-05-20-13?alt=media&token=78bfe1bc-d063-47b5-89ca-658d5e49fc03"
+          image="https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Ffrigidfarium.webp?alt=media&token=b2e870d3-092a-4437-8b5d-82bb242a75f2"
         />
         <PillarCard
           title={language.Yoga.title}
@@ -61,7 +61,7 @@ export default function Home() {
             language.Yoga.secondParagraph,
             language.Yoga.thirdParagraph
           ]}
-          image="https://firebasestorage.googleapis.com/v0/b/terraferma-665e5.appspot.com/o/images%2FSesi%C3%B3n%20de%20relajaci%C3%B3n-2022-05-20-13?alt=media&token=78bfe1bc-d063-47b5-89ca-658d5e49fc03"
+          image="https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Fyoga.jpeg?alt=media&token=f8fc33c6-42d1-4f23-b6c9-0c774522f7c5"
         />
         <PillarCard
           title={language.Pranayama.title}
@@ -69,7 +69,7 @@ export default function Home() {
             language.Pranayama.firstParagraph,
             language.Pranayama.secondParagraph,
           ]}
-          image="https://firebasestorage.googleapis.com/v0/b/terraferma-665e5.appspot.com/o/images%2FSesi%C3%B3n%20de%20relajaci%C3%B3n-2022-05-20-13?alt=media&token=78bfe1bc-d063-47b5-89ca-658d5e49fc03"
+          image="https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Fpranayama.jpeg?alt=media&token=bc8827db-3a8a-4c75-9844-6e21e357b16f"
         />
       </section>
       <div className={styles.image} />

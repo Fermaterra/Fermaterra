@@ -1,5 +1,5 @@
 .header{
-    padding:2rem 5rem 1rem;
+    padding: 0 5rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     color: var(--white);
@@ -34,8 +34,8 @@
 
 .logo{
     position: relative;
-    height: 15vh;
-    width: 10rem;
+    height: 12vh;
+    width: 20rem;
     &:hover{
         cursor: pointer;
     }

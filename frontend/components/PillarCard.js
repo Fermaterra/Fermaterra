@@ -7,7 +7,7 @@ export default function PillarCard({ title, text, image }) {
       {image
         ? (
           <div className={styles.wrapper} width={450} height={550}>
-            <Image src={image} alt={title} layout="fill" />
+            <Image src={image} alt={title} layout="fill" objectFit="cover" />
           </div>
         ) : null}
       <h2>{title}</h2>
