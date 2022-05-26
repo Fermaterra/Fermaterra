@@ -14,17 +14,20 @@ export default function NewActivityForm({
     en: {
       title: "",
       description: "",
-      shortDescription: ""
+      shortDescription: "",
+      includes: []
     },
     es: {
       title: "",
       description: "",
-      shortDescription: ""
+      shortDescription: "",
+      includes: []
     },
     ca: {
       title: "",
       description: "",
-      shortDescription: ""
+      shortDescription: "",
+      includes: []
     },
     day: "",
     hour: "",
@@ -91,6 +94,27 @@ export default function NewActivityForm({
     evt.preventDefault();
     if (image) uploadImage();
     if (!image) sendDataToDDBB();
+  };
+  const splitIncludes = (includes, lang) => {
+    const includesArray = includes.split(",");
+    switch (lang) {
+      case "en":
+        setActivity(
+          { ...activity, en: { ...activity.en, includes: includesArray } }
+        );
+        break;
+      case "ca":
+        setActivity(
+          { ...activity, ca: { ...activity.ca, includes: includesArray } }
+        );
+        break; case "es":
+        setActivity(
+          { ...activity, es: { ...activity.es, includes: includesArray } }
+        );
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -219,7 +243,7 @@ export default function NewActivityForm({
         />
       </label>
       <label htmlFor="shortDescriptionESP">
-        shortDescription esp
+        shortDescription spa
         <input
           id="shortDescriptionESP"
           value={activity.es.shortDescription}
@@ -252,6 +276,34 @@ export default function NewActivityForm({
               { ...activity, en: { ...activity.en, shortDescription: evt.target.value } }
             );
           }}
+        />
+      </label>
+      <label htmlFor="includesESP">
+        includes spa
+        <input
+          type="text"
+          id="includesESP"
+          value={activity.es.includes.toString()}
+          onChange={(evt) => { splitIncludes(evt.target.value, "es"); }}
+        />
+      </label>
+      <label htmlFor="includesCAT">
+        includes cat
+        <input
+          type="text"
+          id="includesCAT"
+          value={activity.ca.includes.toString()}
+          onChange={(evt) => { splitIncludes(evt.target.value, "ca"); }}
+        />
+      </label>
+      <label htmlFor="includesENG">
+        includes eng
+        <input
+          type="text"
+          id="includesENG"
+          value={activity.en.includes.toString()}
+          onChange={(evt) => { splitIncludes(evt.target.value, "en"); }}
+
         />
       </label>
       <label htmlFor="basePrice">
@@ -329,22 +381,6 @@ export default function NewActivityForm({
           id="notes"
           value={activity.notes}
           onChange={(evt) => { setActivity({ ...activity, notes: evt.target.value }); }}
-        />
-      </label>
-      <label htmlFor="timesVisited">
-        timesVisited
-        <input
-          id="timesVisited"
-          value={activity.timesVisited}
-          onChange={(evt) => { setActivity({ ...activity, timesVisited: evt.target.value }); }}
-        />
-      </label>
-      <label htmlFor="books">
-        books
-        <input
-          id="books"
-          value={activity.books}
-          onChange={(evt) => { setActivity({ ...activity, books: evt.target.value }); }}
         />
       </label>
       <label htmlFor="status">
