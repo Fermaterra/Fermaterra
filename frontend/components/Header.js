@@ -10,8 +10,14 @@ import Cart from "./CartMiniature";
 import styles from "../styles/header.module.scss";
 
 export default function Header() {
-  const { asPath, locale, locales } = useRouter();
-
+  const {
+    asPath, locale, locales, pathname
+  } = useRouter();
+  const [headerClass, setHeaderClass] = useState(styles.home_header);
+  useEffect(() => {
+    if (pathname === "/")setHeaderClass(styles.home_header);
+    if (pathname !== "/")setHeaderClass(styles.views_header);
+  }, [pathname]);
   const [language, setLanguage] = useState(en);
   useEffect(() => {
     switch (locale) {
@@ -56,15 +62,15 @@ export default function Header() {
     const header = document.querySelector("header");
     window.onscroll = function scrolling() {
       if (window.scrollY >= scrollTrigger || window.pageYOffset >= scrollTrigger) {
-        header.classList.add(styles.header_scroll);
+        header.classList.add(styles.views_header);
       } else {
-        header.classList.remove(styles.header_scroll);
+        header.classList.remove(styles.views_header);
       }
     };
   }
 
   return (
-    <header className={styles.header}>
+    <header className={headerClass}>
       <Link href="/">
         <div className={styles.logo}>
           <Image src="/img/logo.svg" layout="fill" />
