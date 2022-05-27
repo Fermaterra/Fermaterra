@@ -1,8 +1,7 @@
 @mixin section_title {
     color: var(--black);
         letter-spacing: 0.5px;
-        font-weight: 700;
-        font-family: "Helvetica Neue Thin";
+        font-weight: 400;
 }
 @mixin form_input{ 
     border: none;
@@ -36,12 +35,15 @@
         font-family: "Helvetica Neue Thin";
         p{
             width: 100%;
+            font-size: 2vh;
             padding-bottom: 10px;
             border-bottom: 2px solid var(--black);
             margin-bottom: 5vh;
         }
         h3{
-            margin-bottom: 5vh;
+            margin-bottom: 3vh;
+            
+            font-size: 2vh
         }
 
         form{
@@ -87,7 +89,8 @@
     
     h2{
         @include section_title;
-        font-size: 1.8rem;
+        font-family: "Recife Display Italic";
+        font-size: 3vh;
     }
     .cart_table{
         width: 100%;
