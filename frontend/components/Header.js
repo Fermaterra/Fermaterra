@@ -33,14 +33,13 @@ export default function Header() {
 
   if (typeof window !== "undefined") {
     const scrollTrigger = window.screen.height / 3;
-    const header = document.querySelector("header");
     window.onscroll = function scrolling() {
       if (window.scrollY >= scrollTrigger || window.pageYOffset >= scrollTrigger) {
-        header.classList.add(styles.views_header);
+        setHeaderClass(styles.views_header);
         setcartLogo("black");
         setLogo(blackLogo);
       } else {
-        header.classList.remove(styles.views_header);
+        setHeaderClass(styles.home_header);
         setcartLogo("white");
         setLogo(whiteLogo);
       }
