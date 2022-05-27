@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
 import es from "../languages/es";
-import cat from "../languages/cat";
+import ca from "../languages/ca";
 import en from "../languages/en";
 
 import styles from "../styles/index.module.scss";
@@ -21,7 +21,7 @@ export default function Home() {
 
         break;
       case "ca":
-        setLanguage(cat);
+        setLanguage(ca);
 
         break;
 
@@ -35,7 +35,7 @@ export default function Home() {
         <p>{language.banner}</p>
       </div>
       <section className={styles.section}>
-        <h2>TERRAFERMA</h2>
+        <h2>FERMATERRA</h2>
         <p>{language.firstParagraph}</p>
       </section>
       <p className={styles.text}>{language.secondParagraph}</p>

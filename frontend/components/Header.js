@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import es from "../languages/es/header";
-import cat from "../languages/cat/header";
+import ca from "../languages/ca/header";
 import en from "../languages/en/header";
 import Cart from "./CartMiniature";
 
@@ -23,7 +23,7 @@ export default function Header() {
 
         break;
       case "ca":
-        setLanguage(cat);
+        setLanguage(ca);
 
         break;
 

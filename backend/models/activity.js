@@ -14,6 +14,10 @@ const activityTextSchema = Schema({
     type: String,
     required: true
   },
+  includes: {
+    type: Array,
+    required: true
+  }
 });
 
 const locationSchema = Schema({

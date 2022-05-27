@@ -11,9 +11,10 @@ import styles from "../../styles/booking.module.scss";
 
 export default function BookingDetails({ activity, cart, setCart }) {
   const {
-    image, _id: id, title, day, hour, basePrice, description, stock, location
+    image, _id: id, en, es, ca, day, hour, basePrice, stock, location
   } = activity;
   const [dataDisplayed, setDataDisplayed] = useState("includes");
+  const [language, setLanguage] = useState(en);
   const [amount, setAmount] = useState(1);
   const [addedToCart, setAddedToCart] = useState("");
   useEffect(() => { if (cart.length > 0) localStorage.setItem("cart", JSON.stringify(cart)); }, [cart]);
@@ -24,7 +25,24 @@ export default function BookingDetails({ activity, cart, setCart }) {
     }
   }, [cart]);
   const { locale } = useRouter();
+  useEffect(() => {
+    switch (locale) {
+      case "es":
+        setLanguage(es);
+        break;
+      case "en":
+        setLanguage(en);
 
+        break;
+      case "ca":
+        setLanguage(ca);
+
+        break;
+
+      default:
+        break;
+    }
+  }, [locale]);
   const handleAmount = (action) => {
     let currentAmount = 0;
     const activityAlreadyInCart = cart.find((itemOnCart) => itemOnCart.id === id);
@@ -37,7 +55,7 @@ export default function BookingDetails({ activity, cart, setCart }) {
     const alreadyInCart = cart.find((itemOnCart) => Object.values(itemOnCart).includes(id));
     if (!alreadyInCart) {
       setCart([...cart, {
-        activity: title, amount, price: basePrice, subTotal: basePrice * amount, image, id
+        activity: language.title, amount, price: basePrice, subTotal: basePrice * amount, image, id
       }]);
     }
     if (alreadyInCart) {
@@ -57,20 +75,20 @@ export default function BookingDetails({ activity, cart, setCart }) {
     return messageToCostumer("Afegit al carretó", setAddedToCart);
   };
   return (
-    <Layout cart={cart} title={title}>
+    <Layout cart={cart} title={language.title}>
       {addedToCart ? <Modal message={addedToCart} /> : null}
       <main className={styles.booking}>
 
-        <Image src={image} width={600} height={500} alt={title} />
+        <Image src={image} width={600} height={500} alt={language.title} />
         <div>
           <section className={styles.info}>
             <div>
-              <h3>{title}</h3>
+              <h3>{language.title}</h3>
               <p>{`${formateDate(day, locale)} - ${hour}h`}</p>
             </div>
             <p>{`${basePrice.toFixed(2)} €`}</p>
           </section>
-          <p className={styles.description}>{description}</p>
+          <p className={styles.description}>{language.description}</p>
           <section className={styles.specifications}>
             <div>
               <input
@@ -84,7 +102,9 @@ export default function BookingDetails({ activity, cart, setCart }) {
                 onClick={() => setDataDisplayed("location")}
               />
             </div>
-            {dataDisplayed === "includes" ? <p>IActivitats incloses</p> : <Map location={location} />}
+            {dataDisplayed === "includes"
+              ? <ul>{language.includes.map((included) => <li>{included}</li>)}</ul>
+              : <Map location={location} />}
           </section>
           <section className={styles.add_to_cart}>
             <div>
