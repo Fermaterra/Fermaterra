@@ -12,7 +12,7 @@ export default function Booking({ activities }) {
   }, []);
   return (
     <Layout title="Activitats">
-      <main>
+      <main className={styles.main}>
         <div className={styles.activities_list}>
           {activitiesToDisplay?.map(({
             _id: id, title, image, shortDescription, basePrice, day, hour
