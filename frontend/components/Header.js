@@ -14,9 +14,16 @@ export default function Header() {
     asPath, locale, locales, pathname
   } = useRouter();
   const [headerClass, setHeaderClass] = useState(styles.home_header);
+  const [cartLogo, setcartLogo] = useState("white");
   useEffect(() => {
-    if (pathname === "/")setHeaderClass(styles.home_header);
-    if (pathname !== "/")setHeaderClass(styles.views_header);
+    if (pathname === "/") {
+      setHeaderClass(styles.home_header);
+      setcartLogo("white");
+    }
+    if (pathname !== "/") {
+      setHeaderClass(styles.views_header);
+      setcartLogo("black");
+    }
   }, [pathname]);
   const [language, setLanguage] = useState(en);
   useEffect(() => {
@@ -63,8 +70,10 @@ export default function Header() {
     window.onscroll = function scrolling() {
       if (window.scrollY >= scrollTrigger || window.pageYOffset >= scrollTrigger) {
         header.classList.add(styles.views_header);
+        setcartLogo("black");
       } else {
         header.classList.remove(styles.views_header);
+        setcartLogo("white");
       }
     };
   }
@@ -86,7 +95,7 @@ export default function Header() {
             {locales.map((loc) => <Link href={asPath} locale={loc} key={loc}>{lang(loc)}</Link>)}
           </div>
         </div>
-        <Cart />
+        <Cart color={cartLogo} />
       </nav>
 
     </header>
