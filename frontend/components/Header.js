@@ -31,21 +31,22 @@ export default function Header() {
     }
   }, [pathname]);
 
-  if (typeof window !== "undefined") {
-    const scrollTrigger = window.screen.height / 3;
-    window.onscroll = function scrolling() {
-      if (window.scrollY >= scrollTrigger || window.pageYOffset >= scrollTrigger) {
-        setHeaderClass(styles.views_header);
-        setcartLogo("black");
-        setLogo(blackLogo);
-      } else {
-        setHeaderClass(styles.home_header);
-        setcartLogo("white");
-        setLogo(whiteLogo);
-      }
-    };
+  if (pathname === "/") {
+    if (typeof window !== "undefined") {
+      const scrollTrigger = window.screen.height / 3;
+      window.onscroll = function scrolling() {
+        if (window.scrollY >= scrollTrigger || window.pageYOffset >= scrollTrigger) {
+          setHeaderClass(styles.views_header);
+          setcartLogo("black");
+          setLogo(blackLogo);
+        } else {
+          setHeaderClass(styles.home_header);
+          setcartLogo("white");
+          setLogo(whiteLogo);
+        }
+      };
+    }
   }
-
   const [language, setLanguage] = useState(en);
   useEffect(() => {
     switch (locale) {
