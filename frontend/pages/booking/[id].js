@@ -78,8 +78,9 @@ export default function BookingDetails({ activity, cart, setCart }) {
     <Layout cart={cart} title={language.title}>
       {addedToCart ? <Modal message={addedToCart} /> : null}
       <main className={styles.booking}>
-
-        <Image src={image} width={600} height={500} alt={language.title} />
+        <div className={styles.wrapper}>
+          <Image src={image} layout="fill" priority objectFit="cover" alt={language.title} />
+        </div>
         <div>
           <section className={styles.info}>
             <div>
@@ -103,7 +104,7 @@ export default function BookingDetails({ activity, cart, setCart }) {
               />
             </div>
             {dataDisplayed === "includes"
-              ? <ul>{language.includes.map((included) => <li>{included}</li>)}</ul>
+              ? <ul>{language.includes.map((included) => <li key={included}>{included}</li>)}</ul>
               : <Map location={location} />}
           </section>
           <section className={styles.add_to_cart}>
