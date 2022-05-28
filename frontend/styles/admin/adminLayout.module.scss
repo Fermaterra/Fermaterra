@@ -1,0 +1,19 @@
+.main{
+    min-height: 85vh;
+    padding-top: 15rem;
+    align-items: center;
+    text-align: center;
+}
+
+.nav{
+    margin: 3rem auto;
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+}
+
+.link, .nav a{
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--black);
+}

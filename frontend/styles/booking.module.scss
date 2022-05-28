@@ -1,0 +1,83 @@
+.booking{
+   min-height: 85vh;
+   padding-top: 10vh;
+   padding-bottom: 5rem;
+   width: 70%;
+   margin: 0 auto;
+   display: grid;
+   grid-template-columns: 3fr 2fr;
+   gap: 0 12rem;
+
+   .wrapper{
+      margin: auto;
+      position: relative;
+      width: 25vw;
+      height: 30vw;
+   }
+   .info{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--gray);
+      font-size: 26px;
+      margin-bottom: 3vh;
+      div{
+         font-size: 18px;
+         h3{
+            font-family: "Helvetica Neue Thin";
+            font-weight: 700;
+            margin-bottom: 2vh;
+         }
+         display: flex;
+         flex-direction: column;
+         color: var(--black);
+      }
+   
+   }
+   .description{
+      margin-bottom: 3rem;
+      font-size: 20px;
+
+   }
+   .specifications{
+      display: flex;
+      height: 40vh;
+      input{
+         background-color: var(--white);
+         border: none;
+         text-transform: uppercase;
+         color: varvar(--black);
+         &:hover{cursor: pointer;}
+      }
+      div{
+         display: flex;
+         flex-direction: column;
+      }
+   }
+   .add_to_cart{
+      display: flex;
+      flex-direction: column;
+      div{
+         display: flex;
+         margin-bottom: 3vh;
+         input{
+            background-color: var(--white);
+            border: none;
+            &:hover{cursor: pointer;}
+         }
+      }
+      .add_button{
+         background-color: var(--black);
+         color: var(--white);
+         border: none;
+         padding:0.5rem;
+         text-transform: uppercase;
+         letter-spacing: 1px;
+         font-family: Helvetica Neue Thin;
+
+      &:hover{
+         cursor: pointer;
+      }
+      }
+   }
+}

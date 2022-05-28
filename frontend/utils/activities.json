@@ -1,0 +1,157 @@
+[{
+  "id": 
+    "627261da883ae35cd1a48d64"
+  ,
+  "title": "Prueba1",
+  "day": "04 de mayo de 2022",
+  "hour": "--h",
+  "duration": "45",
+  "picture": {
+    "url": "imagesrc",
+    "alt": "Prueba imagen"
+  },
+  "stock": 10,
+  "description": "...",
+  "shortDescription": "...",
+  "basePrice": 10,
+  "taxes": 21,
+  "location": {
+    "name": "Location",
+    "coordinates": "00.0000, 00.0000"
+  },
+  "contact": "-",
+  "instructor": "-",
+  "notes": "-",
+  "timesVisited": 0,
+  "initialStock": 0,
+  "books": 0,
+  "status": "available",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1651663322514"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1651663322514"
+    }
+  },
+  "__v": 0
+},{
+  "id": 
+     "627261f0883ae35cd1a48d66"
+  ,
+  "title": "Prueba2",
+  "day": "04 de mayo de 2022",
+  "hour": "--h",
+  "duration": "60",
+  "picture": {
+    "url": "imagesrc",
+    "alt": "Prueba imagen"
+  },
+  "stock": 10,
+  "description": "...",
+  "shortDescription": "...",
+  "basePrice": 50,
+  "taxes": 21,
+  "location": {
+    "name": "Location",
+    "coordinates": "00.0000, 00.0000"
+  },
+  "contact": "-",
+  "instructor": "-",
+  "notes": "-",
+  "timesVisited": 0,
+  "initialStock": 0,
+  "books": 0,
+  "status": "available",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1651663344646"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1651663344646"
+    }
+  },
+  "__v": 0
+},{
+  "id": 
+     "627261fa883ae35cd1a48d68"
+  ,
+  "title": "Prueba3",
+  "day": "04 de mayo de 2022",
+  "hour": "--h",
+  "duration": "60",
+  "picture": {
+    "url": "imagesrc",
+    "alt": "Prueba imagen"
+  },
+  "stock": 10,
+  "description": "...",
+  "shortDescription": "...",
+  "basePrice": 50,
+  "taxes": 21,
+  "location": {
+    "name": "Location",
+    "coordinates": "00.0000, 00.0000"
+  },
+  "contact": "-",
+  "instructor": "-",
+  "notes": "-",
+  "timesVisited": 0,
+  "initialStock": 0,
+  "books": 0,
+  "status": "available",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1651663354155"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1651663354155"
+    }
+  },
+  "__v": 0
+},{
+  "id": 
+     "62726211883ae35cd1a48d6a"
+  ,
+  "title": "Prueba4",
+  "day": "04 de mayo de 2022",
+  "hour": "--h",
+  "duration": "50",
+  "picture": {
+    "url": "imagesrc",
+    "alt": "Prueba imagen"
+  },
+  "stock": 15,
+  "description": "...",
+  "shortDescription": "...",
+  "basePrice": 40,
+  "taxes": 21,
+  "location": {
+    "name": "Location",
+    "coordinates": "00.0000, 00.0000"
+  },
+  "contact": "-",
+  "instructor": "-",
+  "notes": "-",
+  "timesVisited": 0,
+  "initialStock": 0,
+  "books": 0,
+  "status": "available",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1651663377278"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1651663377278"
+    }
+  },
+  "__v": 0
+}]

@@ -9,9 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.6.2",
+    "@mui/material": "^5.7.0",
+    "@nosferatu500/react-sortable-tree": "^4.1.0",
+    "@react-google-maps/api": "^2.10.2",
+    "axios": "^0.27.2",
+    "firebase": "^9.7.0",
+    "mui-datatables": "^4.2.2",
     "next": "12.1.5",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "sass": "^1.51.0"
   },
   "devDependencies": {
     "eslint": "^8.14.0",
@@ -22,5 +32,6 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0"
-  }
+  },
+  "proxy": "http://localhost:4001"
 }
