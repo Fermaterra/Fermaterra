@@ -17,7 +17,6 @@ function createLink(value) {
 }
 
 export default function Activities({ activities }) {
-  console.log(process.env.url)
   const { locale } = useRouter();
   const [addForm, setAddForm] = useState(false);
   const [activitiesList, setActivitiesList] = useState(activities);
