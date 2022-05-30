@@ -98,7 +98,9 @@ export default function Header() {
   return (
     <header className={headerClass}>
       <div className={`${styles.burger_menu}`}> 
-        <Image src={menuLogo} width={30} height={30}></Image>
+      <div className={styles.wrapper}>
+        <Image src={menuLogo} layout="fill"></Image>
+      </div>
         <div className={styles.dropdown_content}>
         <Link href="/booking">{language.booking}</Link>
         <Link href="/blog">{language.blog}</Link>

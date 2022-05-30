@@ -38,7 +38,7 @@
     }
     .burger_menu{
         a{
-            font-size: 2.5vh;
+            font-size: 25px;
         }
     }
     .dropdown{
@@ -101,13 +101,25 @@
 .logo{
     position: relative;
     height: 12vh;
-    width: 25rem;
+    width: 35vh;
     &:hover{
         cursor: pointer;
     }
-
+}
+@media (min-width:768px) {
+    .logo{
+        width: 25vhvw;
+    }
 }
 
+.wrapper{
+    position: relative;
+    height: 12vh;
+    width: 5vw;
+    &:hover{
+        cursor: pointer;
+    }
+}
 .nav{
     display: none;
     justify-content: space-around;
