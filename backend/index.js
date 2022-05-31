@@ -9,7 +9,17 @@ require("./config/mongooseConfig");
 const server = express();
 const port = process.env.PORT || 4001;
 
-server.use(cors());
+const whiteList = ["https://fermaterra.vercel.app"];
+const corsOptions = {
+  origin(origin, callback) {
+    if (whiteList.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  }
+};
+server.use(cors(corsOptions));
 
 server.use(morgan("dev"));
 server.use(express.json());
