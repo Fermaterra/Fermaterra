@@ -27,5 +27,6 @@
   "devDependencies": {
     "@next/eslint-plugin-next": "^12.1.6",
     "eslint": "^8.16.0"
-  }
+  },
+  "proxy": "https://fermaterra.herokuapp.com"
 }

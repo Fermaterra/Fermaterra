@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    URL: "http://localhost:4001",
+    URL: "https://fermaterra.herokuapp.com",
     MAP_API_KEY: "AIzaSyBmNi82O4o3ut9I5mICghJ__VoQB6EPP2s",
     APIKEY: "AIzaSyDMlt8Am9Pzi7bBxIMGdRQkfiTQhLQOago",
     AUTHDOMAIN: "fermaterra-1fd31.firebaseapp.com",
