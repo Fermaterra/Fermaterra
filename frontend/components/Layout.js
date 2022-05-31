@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Footer from "./adminForms/Footer";
+import Footer from "./Footer";
 
 import Header from "./Header";
 
