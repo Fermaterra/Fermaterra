@@ -10,20 +10,20 @@
 }
 .image p{
     font-family: "Recife Display Italic";
-    font-size: 2rem;
+    font-size: 3vh;
 }
 
 .section{
     text-align: center;
    
-    h2{
-        font-size: 2rem;
+    h1{
+        font-size: 3.5vh;
         font-weight: 700;
         padding: 2rem;
         margin-bottom: 2rem;
     }
     p{
-        font-size: 1.5rem;
+        font-size: 2.5vh;
         width: 50%;
         margin: 0 auto 3rem;
     }
@@ -31,7 +31,7 @@
     
 .text{
     font-family: "Recife Display Italic";
-    font-size: 1.75rem;
+    font-size:2.8vh;
     font-weight: 400;
     width: 60%;
     margin: 0 auto 3rem;
@@ -54,11 +54,14 @@
     h2{
         text-align: center;
         margin: 1rem auto;
+        font-size: 2.8vh;
     }
 
     p{
         text-align: justify;
-        font-size: 1.5rem;
+        font-size: 2.5vh;
+        width: 80%;
+        margin: 0 auto;
     }
 
 }
@@ -79,12 +82,12 @@
 .contact h4{
     color: var(--gray);
     font-family: "Recife Display Italic";
-    font-size: 1.8rem;
+    font-size: 2.8vh;
     margin-bottom: 2rem;
 }
 
 .contact p{
 
-    font-size: 1.5rem;
+    font-size: 2.5vh;
     margin-bottom: 1rem;
 }

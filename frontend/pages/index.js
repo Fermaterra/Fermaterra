@@ -35,7 +35,7 @@ export default function Home() {
         <p>{language.banner}</p>
       </div>
       <section className={styles.section}>
-        <h2>FERMATERRA</h2>
+        <h1>FERMATERRA</h1>
         <p>{language.firstParagraph}</p>
       </section>
       <p className={styles.text}>{language.secondParagraph}</p>
