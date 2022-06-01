@@ -1,22 +1,35 @@
 .image{
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 100vh;
     height: 90vh;
     background-color: var(--green);
     text-align: center;
     justify-content: center;
     margin-bottom: 5rem;
+
+    p{
+        font-family: "Recife Display Italic";
+        font-size: 4vh;
+        width: 40%;
+        margin: 0 auto;
+    }
 }
-.image p{
-    font-family: "Recife Display Italic";
-    font-size: 3vh;
+@media (min-width: 768px) {
+    .image{
+        width: 100%;
+        height: 90vh;
+
+    }
+    
 }
+
 
 .section{
     text-align: center;
    
     h1{
+        display: none;
         font-size: 3.5vh;
         font-weight: 700;
         padding: 2rem;
@@ -24,8 +37,15 @@
     }
     p{
         font-size: 2.5vh;
-        width: 50%;
-        margin: 0 auto 3rem;
+        width: 80%;
+        margin: auto;
+    }
+}
+@media (min-width: 768px) {
+    .section{
+        h1{
+            display: block;
+        }
     }
 }
     
@@ -45,25 +65,29 @@
     width: 80%;
     margin: 0 auto;
 }
-.activities_list{
-    width: 90%;
-    margin: 0 auto 5rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-    h2{
-        text-align: center;
-        margin: 1rem auto;
-        font-size: 2.8vh;
-    }
 
-    p{
-        text-align: justify;
-        font-size: 2.5vh;
-        width: 80%;
-        margin: 0 auto;
-    }
+@media (min-width:768px){
 
+    .activities_list{
+        width: 90%;
+        margin: 0 auto 5rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+        h2{
+            text-align: center;
+            margin: 1rem auto;
+            font-size: 2.8vh;
+        }
+        
+        p{
+            text-align: justify;
+            font-size: 2.5vh;
+            width: 80%;
+            margin: 0 auto;
+        }
+        
+    }
 }
 
 .contact{
