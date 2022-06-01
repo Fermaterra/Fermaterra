@@ -65,9 +65,13 @@
     width: 80%;
     margin: 0 auto;
 }
-
+.activities_list{
+    display: none;
+}
 @media (min-width:768px){
-
+    .activities_list_mobile{
+        display: none;
+    }
     .activities_list{
         width: 90%;
         margin: 0 auto 5rem;
