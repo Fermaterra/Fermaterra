@@ -1,42 +1,127 @@
-.image{
+@keyframes change-background{
+    
+    0%{
+
+        background-image: url("https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Fbanner.jpeg?alt=media&token=3d756f0c-f9b6-47be-8b47-4f6c264b2ed8");
+    }
+    33%{
+        background-image: url("https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Fbanner2.jpeg?alt=media&token=f87ae6c9-aa85-4106-a01a-2cd1427b6667");
+    }
+    66%{
+        background-image: url("https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Fbanner3.jpeg?alt=media&token=3b40b91e-fedb-4c41-8f4a-5a96d16935fb");
+    }
+    100%{       
+        background-image: url("https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Fbanner.jpeg?alt=media&token=3d756f0c-f9b6-47be-8b47-4f6c264b2ed8");
+
+    }
+}
+
+.banner{
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 100vh;
     height: 90vh;
-    background-color: var(--green);
     text-align: center;
     justify-content: center;
     margin-bottom: 5rem;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    animation: change-background 21s infinite cubic-bezier( 0.8, 0.1, 0.1, 0.8);
+
+    p{
+        font-family: "Recife Display Italic";
+        color: var(--white);
+        font-size: 30px;
+        width: 40%;
+        margin: 0 auto;
+    }
 }
-.image p{
-    font-family: "Recife Display Italic";
-    font-size: 3vh;
+@media (min-width: 768px) {
+    .banner{
+        width: 100%;
+        height: 70vh;
+        p{
+        font-size: 4vh;
+        }
+    }
+    
+}
+.image{
+    position: relative;
+    width: 100vh;
+    height: 90vh;
+    margin-bottom:10vh;
+}
+@media (min-width: 768px){
+   .image{
+    width: 100%;
+    height: 70vh;
+   }
+}
+
+.central_image{
+    display: none;
+}
+
+@media (min-width:768px){
+    .central_image{
+        display: block;
+    }
 }
 
 .section{
     text-align: center;
+    margin-bottom: 3vh;
    
     h1{
+        display: none;
         font-size: 3.5vh;
         font-weight: 700;
         padding: 2rem;
         margin-bottom: 2rem;
     }
     p{
-        font-size: 2.5vh;
-        width: 50%;
-        margin: 0 auto 3rem;
+        font-size: 20px;
+        width: 80%;
+        margin: auto;
+
+    }
+}
+@media (min-width: 768px) {
+    .section{
+        h1{
+            display: block;
+        }
+        p{
+            font-size: 2.8vh;
+        }
     }
 }
     
 .text{
     font-family: "Recife Display Italic";
-    font-size:2.8vh;
+    font-size:20px;
     font-weight: 400;
-    width: 60%;
+    width: 80%;
     margin: 0 auto 3rem;
     text-align: center;
+    padding-bottom: 5vh;
+    border-bottom: 1px solid #212121;
+    &:last-of-type{
+        padding-bottom: 0;
+        border: none;
+    }
+}
 
+@media (min-width:768px) {
+    .text{
+        width: 60%;
+        font-size:2.8vh;
+        border: none;
+        padding-bottom: 0;
+    }
+    
 }
 
 .wrapper{
@@ -46,38 +131,54 @@
     margin: 0 auto;
 }
 .activities_list{
-    width: 90%;
-    margin: 0 auto 5rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-    h2{
-        text-align: center;
-        margin: 1rem auto;
-        font-size: 2.8vh;
+    display: none;
+}
+@media (min-width:768px){
+    .activities_list_mobile{
+        display: none;
     }
-
-    p{
-        text-align: justify;
-        font-size: 2.5vh;
-        width: 80%;
-        margin: 0 auto;
+    .activities_list{
+        width: 90%;
+        margin: 0 auto 5rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+        h2{
+            text-align: center;
+            margin: 1rem auto;
+            font-size: 2.8vh;
+        }
+        
+        p{
+            text-align: justify;
+            font-size: 2.5vh;
+            width: 80%;
+            margin: 0 auto;
+        }
+        
     }
-
 }
 
 .contact{
     width: 75%;
     margin: 0 auto 5rem;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     align-items: center;
     text-align: center;
 }
 .contact__image{
-    background-color: var(--blue);
+    display: none;
+    position: relative;
     height: 70vh;
     width: 80%;
+}
+@media (min-width:768px) {
+    .contact{
+    grid-template-columns: repeat(2, 1fr);
+    }
+    .contact__image{
+        display: block;
+    }
 }
 .contact h4{
     color: var(--gray);

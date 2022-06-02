@@ -1,9 +1,9 @@
 import Image from "next/image";
-import styles from "../styles/index.module.scss";
+import styles from "../styles/pillarcard.module.scss";
 
 export default function PillarCard({ title, text, image }) {
   return (
-    <article>
+    <article className={styles.card}>
       {image
         ? (
           <div className={styles.wrapper} width={450} height={550}>
