@@ -11,7 +11,7 @@ export default function PillarCard({ title, text, image }) {
           </div>
         ) : null}
       <h2>{title}</h2>
-      {text?.map((paragraph) => <p  key={paragraph}>{paragraph}</p>)}
+      {text?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
     </article>
   );
 }
