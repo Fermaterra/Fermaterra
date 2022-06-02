@@ -113,17 +113,17 @@ export default function Header() {
         </div>
       </Link>
       <nav className={styles.nav}>
-        <Link href="/booking">{language.booking}</Link>
-        <Link href="/blog">{language.blog}</Link>
-        <Link href="/faq">{language.faqs}</Link>
+        <Link className={styles.nav_link} href="/booking">{language.booking}</Link>
+        <Link className={styles.nav_link} href="/blog">{language.blog}</Link>
+        <Link className={styles.nav_link} href="/faq">{language.faqs}</Link>
         <div className={styles.dropdown}>
           <input type="button" className={styles.dropdown_button} value={lang(locale)} />
           <div className={styles.dropdown_content}>
             {locales.map((loc) => <Link href={asPath} locale={loc} key={loc}>{lang(loc)}</Link>)}
           </div>
         </div>
-        <Cart color={cartLogo} />
       </nav>
+        <Cart color={cartLogo} />
 
     </header>
   );
