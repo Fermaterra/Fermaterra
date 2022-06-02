@@ -3,7 +3,7 @@ import styles from "../styles/index.module.scss";
 
 export default function PillarCard({ title, text, image }) {
   return (
-    <article >
+    <article>
       {image
         ? (
           <div className={styles.wrapper} width={450} height={550}>
@@ -11,7 +11,7 @@ export default function PillarCard({ title, text, image }) {
           </div>
         ) : null}
       <h2>{title}</h2>
-      {text?.map((paragraph) => <p  key={paragraph}>{paragraph}</p>)}
+      {text?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
     </article>
   );
 }
