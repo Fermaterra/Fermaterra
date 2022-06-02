@@ -28,6 +28,8 @@
    ========================================================================== */
 
 body{
+  min-width: 100vh;
+  min-height: 100vh;
   background-color: var(--white);
   &::-webkit-scrollbar{
     width: 8px;
@@ -36,6 +38,11 @@ body{
   &::-webkit-scrollbar-thumb{
     background-color: var(--blue);
     border-radius: 0.5rem;
+  }
+}
+@media (min-width:768px) {
+  body{
+    width: 100%;
   }
 }
 /**
@@ -70,6 +77,7 @@ h1, h2, h3, h4 ,h5, h6{
 }
 p, a{
   font-family: "Helvetica Neue Thin";
+  font-size: 1.8vh;
 }
 /**
  * Render the `main` element consistently in IE.
@@ -86,7 +94,7 @@ main {
  */
 
 h1 {
-  font-size: 1.2em;
+  font-size: 1.2vh;
 }
 
 /* Grouping content

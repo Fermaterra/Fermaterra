@@ -1,11 +1,15 @@
 .home_header, .views_header{
-    padding: 0 3rem;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:3fr 5fr 1fr;
+
+    padding: 0 2.5vw;
     position: fixed;
     width: 100%;
     height: 10vh;
-    z-index: 1;
+    z-index: 9999;
+    font-size: 1.2vh;
+    align-items: center;
+    
     a {
         text-decoration: none;
         letter-spacing: 2px;
@@ -13,24 +17,16 @@
             cursor: pointer;
         }
     }
-    .dropdown{
-        display: inline-block;
+   
+    .dropdown, .burger_menu{
         position: relative;
-        font-family: "Helvetica Neue Thin";
-    
+        
         &:hover{
             .dropdown_content{
                 display: flex;
                 flex-direction: column;
             }
         }
-    
-        .dropdown_button{
-            padding: 0;
-            border: none;
-            text-transform: uppercase;
-        }
-        
         .dropdown_content{
             display: none;
             position: absolute;
@@ -40,8 +36,38 @@
                 text-transform: uppercase;
             }
         }
+
     }
-    
+    .burger_menu{
+        margin-left: 5vw;
+        a{
+            font-size: 25px;
+        }
+    }
+    .dropdown{
+        font-family: "Helvetica Neue Thin";
+        .dropdown_button{
+            padding: 0;
+            border: none;
+            text-transform: uppercase;
+        }
+        
+      
+    }
+}
+@media (min-width: 768px) {
+    .home_header, .views_header{
+    grid-template-columns:5fr 3fr 1fr;
+
+        font-size: 1.8vh;
+    }
+    .burger_menu{
+        display: none;
+    }
+    .dropdown{
+        display: inline-block;
+
+    }
 }
 
 .home_header{
@@ -80,16 +106,33 @@
 .logo{
     position: relative;
     height: 12vh;
-    width: 25rem;
+    width: 35vh;
     &:hover{
         cursor: pointer;
     }
-
+}
+@media (min-width:768px) {
+    .logo{
+        width: 25vhvw;
+    }
 }
 
+.wrapper{
+    position: relative;
+    height: 8vh;
+    width: 10vw;
+    &:hover{
+        cursor: pointer;
+    }
+}
 .nav{
-    display: flex;
+    display: none;
     justify-content: space-around;
     align-items: center;
 }
 
+@media (min-width:768px) {
+    .nav{
+        display: flex;
+    }
+}

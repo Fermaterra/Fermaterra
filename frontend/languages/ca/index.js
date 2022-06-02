@@ -17,7 +17,7 @@ const home = {
   Pranayama: {
     title: "PRANAYAMA",
     firstParagraph: "És tan senzill que molts cops no ens adonem de com és d’important. Ensenyar-nos a respirar ens descobrirà el que el nostre cos és capaç d’arribar a fer.",
-    secondParagraph: "Es coneix com Prânâyâma un mètode d’exercicis respiratoris del ioga. Una práctica que condueix a la concentración, regulació o tonificació del Prâna o Ki."
+    secondParagraph: "Es coneix com Prânâyâma un mètode d’exercicis respiratoris del ioga. Una pràctica que condueix a la concentració, regulació o tonificació del Prâna o Ki."
   }
 };
 
