@@ -10,7 +10,7 @@
 
     p{
         font-family: "Recife Display Italic";
-        font-size: 4vh;
+        font-size: 20px;
         width: 40%;
         margin: 0 auto;
     }
@@ -19,11 +19,21 @@
     .image{
         width: 100%;
         height: 90vh;
-
+        p{
+        font-size: 4vh;
+        }
     }
     
 }
+.central_image{
+    display: none;
+}
 
+@media (min-width:768px){
+    .central_image{
+        display: block;
+    }
+}
 
 .section{
     text-align: center;
@@ -37,9 +47,10 @@
         margin-bottom: 2rem;
     }
     p{
-        font-size: 2.5vh;
+        font-size: 20px;
         width: 80%;
         margin: auto;
+
     }
 }
 @media (min-width: 768px) {
@@ -47,17 +58,35 @@
         h1{
             display: block;
         }
+        p{
+            font-size: 2.8vh;
+        }
     }
 }
     
 .text{
     font-family: "Recife Display Italic";
-    font-size:2.8vh;
+    font-size:20px;
     font-weight: 400;
-    width: 60%;
+    width: 80%;
     margin: 0 auto 3rem;
     text-align: center;
+    padding-bottom: 5vh;
+    border-bottom: 1px solid #212121;
+    &:last-of-type{
+        padding-bottom: 0;
+        border: none;
+    }
+}
 
+@media (min-width:768px) {
+    .text{
+        width: 60%;
+        font-size:2.8vh;
+        border: none;
+        padding-bottom: 0;
+    }
+    
 }
 
 .wrapper{
@@ -99,14 +128,22 @@
     width: 75%;
     margin: 0 auto 5rem;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     align-items: center;
     text-align: center;
 }
 .contact__image{
+    display: none;
     background-color: var(--blue);
     height: 70vh;
     width: 80%;
+}
+@media (min-width:768px) {
+    .contact{
+    grid-template-columns: repeat(2, 1fr);
+    }
+    .contact__image{
+        display: block;
+    }
 }
 .contact h4{
     color: var(--gray);

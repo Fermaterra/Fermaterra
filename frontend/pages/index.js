@@ -41,7 +41,7 @@ export default function Home() {
         <p>{language.firstParagraph}</p>
       </section>
       <p className={styles.text}>{language.secondParagraph}</p>
-      <div className={styles.image} />
+      <div className={`${styles.image} ${styles.central_image}`} />
       <p className={styles.text}>
         Planifica una experiència autèntica
         amb els nostres serveis
@@ -114,10 +114,9 @@ export default function Home() {
       <section className={styles.contact}>
         <div className={styles.contact__image} />
         <div>
-
           <h4>Contacte</h4>
           <p>Instagram | Facebook</p>
-          <p>hola@terraferma.com</p>
+          <p>info@terraferma.com</p>
           <p>+34 000 000 000</p>
         </div>
       </section>
