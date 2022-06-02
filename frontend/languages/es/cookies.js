@@ -1,0 +1,30 @@
+const cookies = {
+  firstParraf: "Usamos cookies para poder ofrecer el mejor servicio posibles. Puedes leer más aquí.",
+  secondParraf: "Política de cookies:",
+  thirdParraf: "De conformidad con lo establecido en la Ley 34/2002 de Servicios de la Sociedad de la Información, se pone en conocimiento del Usuario que el sitio web www.fermaterra.com, propiedad de FERMATERRA utiliza cookies. Las cookies son pequeños archivos de texto que el sitio web que el usuario visita almacena en su ordenador o dispositivo.",
+  forthParraf: "(i) Cookies propias: son aquéllas que se envían al equipo terminal del usuario desde un equipo o dominio gestionado por el propio editor y desde el que se presta el servicio solicitado por el usuario.",
+  fifthParraf: "Cookies de sesión: Necesarias para el correcto uso de la página web, la navegación de forma ininterrumpida recordando opciones de idioma o país. Se utilizan para identificar la misma sesión temporal de un usuario o sesión de navegación.",
+  sixthParraf: "Cookies Técnicas: Almacenan información genérica y anónima que no incluye datos de carácter personal cuyo objetivo es garantizar el funcionamiento de la web. De registro: Se crean con el registro de un usuario (log-in). Se utilizan para identificar al usuario una vez se ha autenticado dentro de los Sitios Web.",
+  seventhParraf: "Cookies de terceros: el sitio web puede contener cookies de terceros orientadas a ofrecer un mejor servicio que estos terceros ofrecen. Un ejemplo de este uso son los enlaces a las redes sociales que permiten compartir el contenido del sitio web.",
+  eigthParraf: "Cookies analíticas: son aquellas que, tratadas por FERMATERRA o por terceros, permiten cuantificar el número de visitantes y analizar estadísticamente la utilización que hacen los usuarios del portal web. La información recogida mediante este tipo de cookies se utiliza en la medición de la actividad del Sitio Web y para la elaboración de perfiles de navegación anonimizados de los usuarios, con el fin de introducir mejoras en función del análisis de los datos de uso que hacen los usuarios del servicio: Google Analitycs:",
+  googleAnalitycsLink: "https://www.google.com/policies/privacy/",
+  ninthParraf: "Cookies de redes sociales: Gravatar: El Gravatar es una imagen del usuario que le sigue de sitio web a sitio web, apareciendo junto a su nombre cuando realiza acciones como comentar en un blog o cuando el usuario inicia sesión como usuario registrado (log in) en el Sitio Web. Se almacenan cookies para gestionar los iconos relacionados con los perfiles y usuarios de ese servicio:",
+  gravatarLink: ":https://automattic.com/privacy/",
+  tenthParraf: "Cookies de redes sociales externas: se utilizan para que los visitantes puedan interactuar con el contenido de diferentes plataformas sociales (Facebook, YouTube, Twitter, LinkedIn, Instagram, etc.) y que se generan únicamente para los usuarios de dichas redes sociales. Las condiciones de utilización de estas cookies y la información recopilada se regulan por la política de privacidad de la plataforma social correspondiente",
+  googleSocialLink: "https://www.google.com/intl/es_es/policies/technologies/types/",
+  instagramLink: "https://www.instagram.com/legal/cookies/",
+  eleventhParraf: "En el caso que el Usuario quiera modificar la configuración de cookies de su navegador, puede hacerlo mediante la configuración de las opciones del mismo.",
+  twelfthParraf: "El Usuario podrá encontrar información sobre cómo modificar las políticas de cookies de los distintos navegadores en los siguientes espacios:",
+  thirteenthParraf: "Si utiliza Microsoft Internet Explorer:",
+  explorerLink: "https://support.microsoft.com/eses/help/17442/windows-internet-explorer-delete-manage-cookies",
+  fourtennthParraf: "Si utiliza Firefox: ",
+  firefoxLink: "http://support.mozilla.org/ca/kb/habilitar-y-deshabilitar-cookiesque-los-sitios-we",
+  fifteenthParraf: "Si utiliza Safari: ",
+  safariLink: "https://support.apple.com/kb/PH19214?viewlocale=ca_ES&locale=ca_CA",
+  sixteenthParraf: "Si utiliza Google Chrome: ",
+  chromeLink: "http://support.google.com/chrome/bin/answer.py?hl=es&answer=95647",
+  seventeenthParraf: "Existen herramientas de terceros, disponibles online, que permiten a los usuarios detectar las cookies en cada sitio web que visita y gestionar su desactivación. Los navegadores web son las herramientas encargadas de almacenar las cookies y desde este lugar el usuario puede ejercitar su derecho a eliminación o desactivación de las mismas. Ni esta web ni sus representantes legales pueden garantizar la correcta o incorrecta manipulación de las cookies por parte de los mencionados navegadores. Se informa al usuario que si no desea que los sitios web pongan ninguna cookie en su equipo, puede adaptar la configuración del navegador de modo que se le notifique antes de que se coloque ninguna cookie. De igual modo, puede adaptar la configuración de forma que el navegador rechace todas las cookies, o únicamente las cookies de terceros. En caso de que se encuentre con este tipo de cookies en este sitio web y no estén enumeradas en la lista anterior, le rogamos que nos lo comunique. La aceptación de la presente política de cookies implica que el usuario ha sido informado de una forma clara y completa sobre el uso de dispositivos de almacenamiento y recuperación de datos (cookies) así como que FERMATERRA dispone del consentimiento del usuario para el uso de las mismas tal y como establece la normativa. En el caso de que tenga alguna duda sobre la política de cookies del sitio web, el Usuario puede dirigirse a: info@fermaterra.com. En el supuesto de querer conocer con más detalles en qué consisten las cookies, en este link se puede acceder a la guía de cookies editada por la Agencia Española de Protección de Datos.:  ",
+  agpdLink: "http://www.agpd.es/portalwebAGPD/canaldocumentacion/publicacions/common/Guias/Guia_Cookies.pdf"
+};
+
+module.exports = cookies;
