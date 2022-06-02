@@ -8,8 +8,8 @@ import en from "../languages/en/header";
 import whiteLogo from "../public/img/logo.svg";
 import blackLogo from "../public/img/logo_black.svg";
 import Cart from "./CartMiniature";
-import whiteMenuLogo from "../public/img/menu-icon.svg"
-import blackMenuLogo from "../public/img/menu-icon-black.svg"
+import whiteMenuLogo from "../public/img/menu-icon.svg";
+import blackMenuLogo from "../public/img/menu-icon-black.svg";
 
 import styles from "../styles/header.module.scss";
 
@@ -26,14 +26,13 @@ export default function Header() {
       setHeaderClass(styles.home_header);
       setcartLogo("white");
       setLogo(whiteLogo);
-      setMenuLogo(whiteMenuLogo)
+      setMenuLogo(whiteMenuLogo);
     }
     if (pathname !== "/") {
       setHeaderClass(styles.views_header);
       setcartLogo("black");
       setLogo(blackLogo);
-      setMenuLogo(blackMenuLogo)
-
+      setMenuLogo(blackMenuLogo);
     }
   }, [pathname]);
 
@@ -51,7 +50,6 @@ export default function Header() {
           setcartLogo("white");
           setLogo(whiteLogo);
           setMenuLogo(whiteMenuLogo);
-
         }
       };
     }
@@ -97,14 +95,14 @@ export default function Header() {
 
   return (
     <header className={headerClass}>
-      <div className={`${styles.burger_menu}`}> 
-      <div className={styles.wrapper}>
-        <Image src={menuLogo} layout="fill"></Image>
-      </div>
+      <div className={`${styles.burger_menu}`}>
+        <div className={styles.wrapper}>
+          <Image src={menuLogo} layout="fill" />
+        </div>
         <div className={styles.dropdown_content}>
-        <Link href="/booking">{language.booking}</Link>
-        <Link href="/blog">{language.blog}</Link>
-        <Link href="/faq">{language.faqs}</Link>
+          <Link href="/booking">{language.booking}</Link>
+          <Link href="/blog">{language.blog}</Link>
+          <Link href="/faq">{language.faqs}</Link>
         </div>
       </div>
       <Link href="/">
@@ -123,7 +121,7 @@ export default function Header() {
           </div>
         </div>
       </nav>
-        <Cart color={cartLogo} />
+      <Cart color={cartLogo} />
 
     </header>
   );
