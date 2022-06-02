@@ -3,8 +3,11 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ["plugin:@next/next/recommended",
-],
+  extends: [
+    "plugin:@next/next/recommended",
+    "plugin:react/recommended",
+    "airbnb",
+  ],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -12,7 +15,9 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["react"],
+  plugins: [
+    "react",
+  ],
   rules: {
     "comma-dangle": "off",
     "linebreak-style": 0,
@@ -23,5 +28,6 @@ module.exports = {
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
+
   },
 };
