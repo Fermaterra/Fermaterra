@@ -33,7 +33,7 @@ export default function Home() {
   }, [locale]);
   return (
     <Layout title="Home">
-      <div className={styles.image}>
+      <div className={styles.banner}>
         <p>{language.banner}</p>
       </div>
       <section className={styles.section}>
@@ -41,7 +41,14 @@ export default function Home() {
         <p>{language.firstParagraph}</p>
       </section>
       <p className={styles.text}>{language.secondParagraph}</p>
-      <div className={`${styles.image} ${styles.central_image}`} />
+      <div className={`${styles.image} ${styles.central_image}`}>
+        <Image 
+        src="https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Fempuries.webp?alt=media&token=0681133b-bc15-48e8-b55a-4a52a0ae5c96"
+        layout="fill"
+        alt="Fieldview"
+        objectFit="cover"
+        ></Image>
+      </div>
       <p className={styles.text}>
         Planifica una experiència autèntica
         amb els nostres serveis
@@ -61,7 +68,7 @@ export default function Home() {
             language.Frigidarium.secondParagraph,
             language.Frigidarium.thirdParagraph
           ]}
-          image="https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Ffrigidfarium.webp?alt=media&token=b2e870d3-092a-4437-8b5d-82bb242a75f2"
+          image="https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Ffrigidarium.jpeg?alt=media&token=ea0dc4d8-d38a-48b5-bbd8-30e155287bb6"
         />
         <PillarCard
           title={language.Yoga.title}
@@ -110,9 +117,23 @@ export default function Home() {
           image="https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Fpranayama.jpeg?alt=media&token=bc8827db-3a8a-4c75-9844-6e21e357b16f"
         />
       </section>
-      <div className={styles.image} />
+      <div className={styles.image}>
+        <Image 
+        src="https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Fmasia.jpeg?alt=media&token=fe011d06-c870-471d-b941-400af01a3b30"
+        layout="fill"
+        objectFit="cover"
+        alt="fieldhouse"
+        />
+      </div>
       <section className={styles.contact}>
-        <div className={styles.contact__image} />
+        <div className={styles.contact__image}  width={450} height={550}>
+          <Image 
+          src="https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2FContacte.png?alt=media&token=bc6f1607-3e01-4edb-8245-0105516e897f"
+          layout="fill"
+          objectFit="cover"
+          alt="Contact"
+          />
+        </div>
         <div>
           <h4>Contacte</h4>
           <p>Instagram | Facebook</p>
