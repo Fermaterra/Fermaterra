@@ -70,6 +70,7 @@ export default function CartView({ cart, setCart }) {
     if (!discountToApply[0] || discountToApply[0].expiresOn < Date.now()) return messageToCostumer("Codi no vàlid", setMessage);
     setTotal(total - (total * (discountToApply[0].percentage / 100)));
     setAppliedDiscount(discountToApply[0]);
+    setDiscount("");
     return messageToCostumer("Descompte aplicat", setMessage);
   };
   return (
@@ -181,7 +182,7 @@ export default function CartView({ cart, setCart }) {
           <p>{`Subtotal: ${total} €`}</p>
           <h3>CODI DESCOMPTE</h3>
           <form onSubmit={applyDiscount}>
-            <input type="text" placeholder="Escriure el teu codi" onChange={(evt) => setDiscount(evt.target.value)} />
+            <input type="text" value={discount} placeholder="Escriure el teu codi" onChange={(evt) => setDiscount(evt.target.value)} />
             <input type="submit" value="APLICAR" />
           </form>
           <input type="button" value="pagament" className={styles.payment_button} onClick={handleView} />
