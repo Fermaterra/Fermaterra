@@ -9,7 +9,7 @@ const activityNotFound = (res) => {
 
 const getAllActivities = async ({ query }, res) => {
   try {
-    const activities = await Activity.find({ query });
+    const activities = await Activity.find(query);
     res.status(200).json(activities);
   } catch (error) {
     serverError(res);

@@ -3,7 +3,7 @@ const serverError = require("../utils/serverError");
 
 const getAllDiscounts = async ({ query }, res) => {
   try {
-    const discounts = await Discount.find({ query });
+    const discounts = await Discount.find(query);
     res.status(200).json(discounts);
   } catch (error) {
     serverError(res);

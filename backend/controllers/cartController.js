@@ -3,7 +3,7 @@ const serverError = require("../utils/serverError");
 
 const getAllCarts = async ({ query }, res) => {
   try {
-    const carts = await Cart.find({ query })
+    const carts = await Cart.find(query)
       .populate({
         path: "client",
         select: "name"

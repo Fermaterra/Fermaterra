@@ -5,7 +5,7 @@ const purchaseNotFound = (res) => res.status(404).json({ message: "Purchase not 
 
 const getPurchases = async ({ query }, res) => {
   try {
-    const purchases = await Purchase.find({ query })
+    const purchases = await Purchase.find(query)
       .populate({
         path: "client",
         select: "name"
