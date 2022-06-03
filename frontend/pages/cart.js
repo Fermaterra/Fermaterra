@@ -12,6 +12,7 @@ export default function CartView({ cart, setCart }) {
   const [total, setTotal] = useState(0);
   const [cartView, setCartView] = useState("resume");
   const [discount, setDiscount] = useState("");
+  const [appliediscount, setAppliedDiscount] = useState("");
   const [client, setClient] = useState({});
   const [confirmAge, setConfirmAge] = useState(false);
   const [confirmPoliticies, setConfirmPoliticies] = useState(false);
@@ -64,11 +65,11 @@ export default function CartView({ cart, setCart }) {
   };
   const applyDiscount = async (evt) => {
     evt.preventDefault();
-    if (cart.discount) return messageToCostumer("Ja sh'ha aplicat un descompte per aquesta compra", setMessage);
-    const discountToApply = await fetchFromApi(`${process.env.url}/discounts?name=${discount}`);
-    if (!discountToApply || discountToApply.expiresOn < Date.now()) return messageToCostumer("Codi no vàlid", setMessage);
-    setCart({ ...cart, discount });
-    setTotal(total - (total * discountToApply.percentage));
+    if (appliediscount) return messageToCostumer("Ja sh'ha aplicat un descompte per aquesta compra", setMessage);
+    const discountToApply = await fetchFromApi(`${process.env.URL}/discounts?name=${discount}`);
+    if (!discountToApply[0] || discountToApply[0].expiresOn < Date.now()) return messageToCostumer("Codi no vàlid", setMessage);
+    setTotal(total - (total * (discountToApply[0].percentage / 100)));
+    setAppliedDiscount(discountToApply[0]);
     return messageToCostumer("Descompte aplicat", setMessage);
   };
   return (
