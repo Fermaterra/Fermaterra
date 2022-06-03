@@ -24,16 +24,19 @@ export default function CartView({ cart, setCart }) {
     ) => previousTotal + nextItem.subTotal, 0).toFixed(2));
   }, [cart]);
 
-  const increaseItem = (id) => {
+  const increaseItem = async (id) => {
     const itemToUpdate = cart.find((item) => item.id === id);
-    itemToUpdate.amount += 1;
-    itemToUpdate.subTotal += itemToUpdate.price;
-    setCart(cart.map((item) => {
-      if (item.id === id) return itemToUpdate;
-      return item;
-    }));
+    const { stock } = await fetchFromApi(`${process.env.URL}/activities/${id}`);
+    if (itemToUpdate.amount < stock) {
+      itemToUpdate.amount += 1;
+      itemToUpdate.subTotal += itemToUpdate.price;
+      setCart(cart.map((item) => {
+        if (item.id === id) return itemToUpdate;
+        return item;
+      }));
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
   };
 
   const decreaseItem = (id) => {
@@ -53,11 +56,27 @@ export default function CartView({ cart, setCart }) {
     }
   };
 
+  const validateActivitiesBeforePayment = () => {
+    function checkActivity(date, amount, stock) {
+      const checkDate = date < Date.now();
+      const checkAmount = amount <= stock;
+      if (checkDate && checkAmount) return true;
+      return false;
+    }
+    const validActivities = cart.every(async (activity) => {
+      const { id, amount } = activity;
+      const activityOnDDBB = await fetchFromApi(`${process.env.URL}/activities/${id}`);
+      checkActivity(activityOnDDBB.date, amount, activityOnDDBB.stock);
+    });
+    if (validActivities) return messageToCostumer("Passant a pagament", setMessage);
+    return messageToCostumer("No és possible realitzar aquesta comanda", setMessage);
+  };
+
   const handlePayment = () => {
     if (Object.keys(client).length < 6) return messageToCostumer("Tots els camps són obligatoris", setMessage);
     if (client.mail !== client.confirmedMail) return messageToCostumer("Els correus no coincideixen", setMessage);
-    if (confirmAge && confirmPoliticies) return messageToCostumer("Passant a pagament", setMessage);
-    return messageToCostumer("S'han de confirmar les condicions i polítiques", setMessage);
+    if (!confirmAge || !confirmPoliticies) return messageToCostumer("S'han de confirmar les condicions i polítiques", setMessage);
+    return validateActivitiesBeforePayment();
   };
   const handleView = () => {
     if (cartView === "resume") setCartView("client");
