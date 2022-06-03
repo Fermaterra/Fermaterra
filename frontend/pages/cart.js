@@ -5,17 +5,19 @@ import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import Modal from "../components/Modal";
 import messageToCostumer from "../utils/messageToCostumer";
+import fetchFromApi from "../utils/fetchFromApi";
 import styles from "../styles/cart.module.scss";
 
 export default function CartView({ cart, setCart }) {
-  const [total, setTtotal] = useState(0);
+  const [total, setTotal] = useState(0);
   const [cartView, setCartView] = useState("resume");
+  const [discount, setDiscount] = useState("");
   const [client, setClient] = useState({});
   const [confirmAge, setConfirmAge] = useState(false);
   const [confirmPoliticies, setConfirmPoliticies] = useState(false);
   const [message, setMessage] = useState("");
   useEffect(() => {
-    setTtotal(cart?.reduce((
+    setTotal(cart?.reduce((
       previousTotal,
       nextItem
     ) => previousTotal + nextItem.subTotal, 0).toFixed(2));
@@ -59,6 +61,15 @@ export default function CartView({ cart, setCart }) {
   const handleView = () => {
     if (cartView === "resume") setCartView("client");
     if (cartView === "client") handlePayment();
+  };
+  const applyDiscount = async (evt) => {
+    evt.preventDefault();
+    if (cart.discount) return messageToCostumer("Ja sh'ha aplicat un descompte per aquesta compra", setMessage);
+    const discountToApply = await fetchFromApi(`${process.env.url}/discounts?name=${discount}`);
+    if (!discountToApply || discountToApply.expiresOn < Date.now()) return messageToCostumer("Codi no vàlid", setMessage);
+    setCart({ ...cart, discount });
+    setTotal(total - (total * discountToApply.percentage));
+    return messageToCostumer("Descompte aplicat", setMessage);
   };
   return (
     <Layout cart={cart} title="Cart">
@@ -168,8 +179,8 @@ export default function CartView({ cart, setCart }) {
         <section className={styles.cart_payment}>
           <p>{`Subtotal: ${total} €`}</p>
           <h3>CODI DESCOMPTE</h3>
-          <form>
-            <input type="text" placeholder="Escriure el teu codi" />
+          <form onSubmit={applyDiscount}>
+            <input type="text" placeholder="Escriure el teu codi" onChange={(evt) => setDiscount(evt.target.value)} />
             <input type="submit" value="APLICAR" />
           </form>
           <input type="button" value="pagament" className={styles.payment_button} onClick={handleView} />
