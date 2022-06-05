@@ -1,17 +1,13 @@
-import { useState, useEffect } from "react";
+import Provider from "../app/Provider";
 import "../styles/globals.scss";
 
 function MyApp({ Component, pageProps }) {
-  const [cart, setCart] = useState([]);
-  useEffect(() => {
-    if (Object.keys(localStorage).includes("cart")) { setCart(JSON.parse(localStorage.getItem("cart"))); }
-  }, []);
   return (
-    <Component
-      {...pageProps}
-      cart={cart}
-      setCart={setCart}
-    />
+    <Provider>
+      <Component
+        {...pageProps}
+      />
+    </Provider>
   );
 }
 
