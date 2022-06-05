@@ -504,8 +504,10 @@ export default function NewActivityForm({
             }}
           />
         </label>
-        <input type="submit" value={id ? "Edit activity" : "Add activity"} />
-        <input type="button" value="Exit" onClick={() => handleAddForm()} />
+        <div className={styles.buttons}>
+          <input type="submit" value={id ? "Edit activity" : "Add activity"} />
+          <input type="button" value="Exit" onClick={() => handleAddForm()} />
+        </div>
         {error ? <p>{error}</p> : null}
       </form>
     </div>

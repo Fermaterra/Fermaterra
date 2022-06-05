@@ -43,6 +43,7 @@ export default function BookForm({ books, setBooks, handleAddForm }) {
         {error ? <p>{error}</p> : null}
         <label htmlFor="client">
           Cliente
+          <br />
           <input
             id="client"
             required
@@ -54,6 +55,7 @@ export default function BookForm({ books, setBooks, handleAddForm }) {
         </label>
         <label htmlFor="activities">
           Actividades
+          <br />
           <input
             id="activities"
             type="text"
@@ -65,6 +67,7 @@ export default function BookForm({ books, setBooks, handleAddForm }) {
         </label>
         <label htmlFor="basePrice">
           Precio base
+          <br />
           <input
             type="number"
             id="basePrice"
@@ -75,6 +78,7 @@ export default function BookForm({ books, setBooks, handleAddForm }) {
         </label>
         <label htmlFor="taxes">
           Impuestos
+          <br />
           <input
             type="number"
             id="taxes"
@@ -85,6 +89,7 @@ export default function BookForm({ books, setBooks, handleAddForm }) {
         </label>
         <label htmlFor="discountAppliedName">
           Descuento aplicado (nombre)
+          <br />
           <input
             id="discountAppliedName"
             type="text"
@@ -95,6 +100,7 @@ export default function BookForm({ books, setBooks, handleAddForm }) {
         </label>
         <label htmlFor="discountAppliedPercentage">
           Descuento aplicado (%)
+          <br />
           <input
             type="number"
             id="discountAppliedPercentage"
@@ -105,6 +111,7 @@ export default function BookForm({ books, setBooks, handleAddForm }) {
         </label>
         <label htmlFor="finalPrice">
           Precio final
+          <br />
           <input
             type="number"
             id="finalPrice"
@@ -116,6 +123,7 @@ export default function BookForm({ books, setBooks, handleAddForm }) {
         </label>
         <label htmlFor="status">
           Estado
+          <br />
           <input
             id="status"
             required
@@ -126,6 +134,7 @@ export default function BookForm({ books, setBooks, handleAddForm }) {
         </label>
         <label htmlFor="paymentMethod">
           Método de pago
+          <br />
           <input
             id="paymentMethod"
             input="text"
@@ -136,6 +145,7 @@ export default function BookForm({ books, setBooks, handleAddForm }) {
         </label>
         <label htmlFor="notes">
           Notas
+          <br />
           <input
             id="notes"
             type="text"
@@ -144,9 +154,10 @@ export default function BookForm({ books, setBooks, handleAddForm }) {
             }}
           />
         </label>
-
-        <input type="submit" value="Add booking" />
-        <input type="button" value="Exit" onClick={() => handleAddForm()} />
+        <div className={styles.buttons}>
+          <input type="submit" value="Add booking" />
+          <input type="button" value="Exit" onClick={() => handleAddForm()} />
+        </div>
       </form>
     </div>
   );
