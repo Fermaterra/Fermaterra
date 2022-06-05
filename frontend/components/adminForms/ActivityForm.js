@@ -349,6 +349,7 @@ export default function NewActivityForm({
           <br />
           <input
             type="text"
+            required
             id="includesESP"
             value={activity.es.includes.toString()}
             onChange={(evt) => {
