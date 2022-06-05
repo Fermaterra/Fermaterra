@@ -387,6 +387,7 @@ export default function NewActivityForm({
           <br />
           <input
             id="basePrice"
+            required
             type="number"
             value={activity.basePrice}
             onChange={(evt) => {
