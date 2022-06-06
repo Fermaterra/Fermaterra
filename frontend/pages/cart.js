@@ -5,32 +5,38 @@ import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import Modal from "../components/Modal";
 import messageToCostumer from "../utils/messageToCostumer";
+import fetchFromApi from "../utils/fetchFromApi";
 import styles from "../styles/cart.module.scss";
 
 export default function CartView({ cart, setCart }) {
-  const [total, setTtotal] = useState(0);
+  const [total, setTotal] = useState(0);
   const [cartView, setCartView] = useState("resume");
+  const [discount, setDiscount] = useState("");
+  const [appliediscount, setAppliedDiscount] = useState("");
   const [client, setClient] = useState({});
   const [confirmAge, setConfirmAge] = useState(false);
   const [confirmPoliticies, setConfirmPoliticies] = useState(false);
   const [message, setMessage] = useState("");
   useEffect(() => {
-    setTtotal(cart?.reduce((
+    setTotal(cart?.reduce((
       previousTotal,
       nextItem
     ) => previousTotal + nextItem.subTotal, 0).toFixed(2));
   }, [cart]);
 
-  const increaseItem = (id) => {
+  const increaseItem = async (id) => {
     const itemToUpdate = cart.find((item) => item.id === id);
-    itemToUpdate.amount += 1;
-    itemToUpdate.subTotal += itemToUpdate.price;
-    setCart(cart.map((item) => {
-      if (item.id === id) return itemToUpdate;
-      return item;
-    }));
+    const { stock } = await fetchFromApi(`${process.env.URL}/activities/${id}`);
+    if (itemToUpdate.amount < stock) {
+      itemToUpdate.amount += 1;
+      itemToUpdate.subTotal += itemToUpdate.price;
+      setCart(cart.map((item) => {
+        if (item.id === id) return itemToUpdate;
+        return item;
+      }));
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
   };
 
   const decreaseItem = (id) => {
@@ -50,15 +56,41 @@ export default function CartView({ cart, setCart }) {
     }
   };
 
+  const validateActivitiesBeforePayment = () => {
+    function checkActivity(date, amount, stock) {
+      const checkDate = date < Date.now();
+      const checkAmount = amount <= stock;
+      if (checkDate && checkAmount) return true;
+      return false;
+    }
+    const validActivities = cart.every(async (activity) => {
+      const { id, amount } = activity;
+      const activityOnDDBB = await fetchFromApi(`${process.env.URL}/activities/${id}`);
+      checkActivity(activityOnDDBB.date, amount, activityOnDDBB.stock);
+    });
+    if (validActivities) return messageToCostumer("Passant a pagament", setMessage);
+    return messageToCostumer("No és possible realitzar aquesta comanda", setMessage);
+  };
+
   const handlePayment = () => {
     if (Object.keys(client).length < 6) return messageToCostumer("Tots els camps són obligatoris", setMessage);
     if (client.mail !== client.confirmedMail) return messageToCostumer("Els correus no coincideixen", setMessage);
-    if (confirmAge && confirmPoliticies) return messageToCostumer("Passant a pagament", setMessage);
-    return messageToCostumer("S'han de confirmar les condicions i polítiques", setMessage);
+    if (!confirmAge || !confirmPoliticies) return messageToCostumer("S'han de confirmar les condicions i polítiques", setMessage);
+    return validateActivitiesBeforePayment();
   };
   const handleView = () => {
     if (cartView === "resume") setCartView("client");
     if (cartView === "client") handlePayment();
+  };
+  const applyDiscount = async (evt) => {
+    evt.preventDefault();
+    if (appliediscount) return messageToCostumer("Ja sh'ha aplicat un descompte per aquesta compra", setMessage);
+    const discountToApply = await fetchFromApi(`${process.env.URL}/discounts?name=${discount}`);
+    if (!discountToApply[0] || discountToApply[0].expiresOn < Date.now()) return messageToCostumer("Codi no vàlid", setMessage);
+    setTotal(total - (total * (discountToApply[0].percentage / 100)));
+    setAppliedDiscount(discountToApply[0]);
+    setDiscount("");
+    return messageToCostumer("Descompte aplicat", setMessage);
   };
   return (
     <Layout cart={cart} title="Cart">
@@ -168,8 +200,8 @@ export default function CartView({ cart, setCart }) {
         <section className={styles.cart_payment}>
           <p>{`Subtotal: ${total} €`}</p>
           <h3>CODI DESCOMPTE</h3>
-          <form>
-            <input type="text" placeholder="Escriure el teu codi" />
+          <form onSubmit={applyDiscount}>
+            <input type="text" value={discount} placeholder="Escriure el teu codi" onChange={(evt) => setDiscount(evt.target.value)} />
             <input type="submit" value="APLICAR" />
           </form>
           <input type="button" value="pagament" className={styles.payment_button} onClick={handleView} />

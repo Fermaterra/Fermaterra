@@ -6,7 +6,7 @@ const discountSchema = Schema(
       type: String,
       required: true
     },
-    percetage: {
+    percentage: {
       type: Number,
       required: true
     },
