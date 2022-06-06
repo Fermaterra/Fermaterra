@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { AppContext } from "../../app/Provider";
 import Layout from "../../components/Layout";
 import Modal from "../../components/Modal";
 import Map from "../../components/Map";
@@ -9,7 +10,8 @@ import formateDate from "../../utils/formateDate";
 import messageToCostumer from "../../utils/messageToCostumer";
 import styles from "../../styles/booking.module.scss";
 
-export default function BookingDetails({ activity, cart, setCart }) {
+export default function BookingDetails({ activity }) {
+  const [cart, setCart] = useContext(AppContext);
   const {
     image, _id: id, en, es, ca, day, hour, basePrice, stock, location
   } = activity;

@@ -1,6 +1,7 @@
+import { useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { AppContext } from "../app/Provider";
 
 import Layout from "../components/Layout";
 import Modal from "../components/Modal";
@@ -8,7 +9,8 @@ import messageToCostumer from "../utils/messageToCostumer";
 import fetchFromApi from "../utils/fetchFromApi";
 import styles from "../styles/cart.module.scss";
 
-export default function CartView({ cart, setCart }) {
+export default function CartView() {
+  const [cart, setCart] = useContext(AppContext);
   const [total, setTotal] = useState(0);
   const [cartView, setCartView] = useState("resume");
   const [discount, setDiscount] = useState("");
