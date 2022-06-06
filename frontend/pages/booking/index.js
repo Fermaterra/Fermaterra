@@ -13,9 +13,7 @@ export default function Booking({ activities }) {
   const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
-    const activitiesFiltered = activities.filter(({ day }) =>
-      compareDates(day)
-    );
+    const activitiesFiltered = activities.filter(({ day }) => compareDates(day));
     const activitesDivided = [];
     for (let i = 0; i < activitiesFiltered.length; i += 6) {
       const slice = activitiesFiltered.slice(i, i + 6);
