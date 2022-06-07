@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import axios from "axios";
 import { AppContext } from "../app/Provider";
 
 import Layout from "../components/Layout";
@@ -58,6 +59,16 @@ export default function CartView() {
     }
   };
 
+  const sendConfirmationEmail = async () => {
+    try {
+      const emailData = { email: client.mail, payload: "<h1>Message sent from FE</h1>" };
+      const { status } = await axios.post(`${process.env.URL}/email`, emailData);
+      if (status === 200) messageToCostumer("S'he enviat un mail de confirmació", setMessage);
+    } catch (error) {
+      messageToCostumer("No s'ha pogut enviar confirmació", setMessage);
+    }
+  };
+
   const validateActivitiesBeforePayment = () => {
     function checkActivity(date, amount, stock) {
       const checkDate = date < Date.now();
@@ -70,7 +81,7 @@ export default function CartView() {
       const activityOnDDBB = await fetchFromApi(`${process.env.URL}/activities/${id}`);
       checkActivity(activityOnDDBB.date, amount, activityOnDDBB.stock);
     });
-    if (validActivities) return messageToCostumer("Passant a pagament", setMessage);
+    if (validActivities) return sendConfirmationEmail();
     return messageToCostumer("No és possible realitzar aquesta comanda", setMessage);
   };
 
