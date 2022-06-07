@@ -34,4 +34,8 @@ const cartRouter = require("./routes/cartRouter");
 
 server.use("/carts", cartRouter);
 
+const emailRouter = require("./routes/emailRouter");
+
+server.use("/email", emailRouter);
+
 server.listen(port, () => { debug(`Server is running on port ${port}`); });
