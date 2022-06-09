@@ -7,7 +7,10 @@ exports.sendEmail = async ({ body }, res) => {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
       to: email,
-      from: process.env.SENDGRID_USER,
+      from: {
+        email: process.env.SENDGRID_USER,
+        name: "Fermaterra"
+      },
       subject: "Email",
       html: payload,
     };

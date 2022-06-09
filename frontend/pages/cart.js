@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import axios from "axios";
 import { AppContext } from "../app/Provider";
 
@@ -20,13 +21,13 @@ export default function CartView() {
   const [confirmAge, setConfirmAge] = useState(false);
   const [confirmPoliticies, setConfirmPoliticies] = useState(false);
   const [message, setMessage] = useState("");
+  const { locale } = useRouter();
   useEffect(() => {
     setTotal(cart?.reduce((
       previousTotal,
       nextItem
     ) => previousTotal + nextItem.subTotal, 0).toFixed(2));
   }, [cart]);
-
   const increaseItem = async (id) => {
     const itemToUpdate = cart.find((item) => item.id === id);
     const { stock } = await fetchFromApi(`${process.env.URL}/activities/${id}`);
@@ -61,12 +62,53 @@ export default function CartView() {
 
   const sendConfirmationEmail = async () => {
     try {
-      const emailData = { email: client.mail, payload: "<h1>Message sent from FE</h1>" };
+      const emailData = { email: client.mail, payload: "<h1>Confirmation email from Fermaterra</h1>" };
       const { status } = await axios.post(`${process.env.URL}/email`, emailData);
       if (status === 200) messageToCostumer("S'he enviat un mail de confirmació", setMessage);
     } catch (error) {
       messageToCostumer("No s'ha pogut enviar confirmació", setMessage);
     }
+  };
+
+  const createBooking = async (clientToBill) => {
+    const purchaseData = {
+      date: Date.now(),
+      client: clientToBill,
+      activities: cart.map(({ id }) => id),
+      basePrice: parseFloat(total),
+      finalPrice: parseFloat(total),
+    };
+    const { data, status } = await axios.post(`${process.env.URL}/purchases`, purchaseData);
+    if (status !== 201) return messageToCostumer("No s'ha pogut completar el pagament", setMessage);
+    return sendConfirmationEmail(data);
+  };
+
+  const validateClient = async () => {
+    let currentClient;
+
+    currentClient = await axios.get(`${process.env.URL}/clients?email=${client.mail}`);
+    if (currentClient.data.clients.length === 0) {
+      currentClient = await axios.post(`${process.env.URL}/clients`, {
+        name: `${client.name} ${client.surname}`,
+        email: client.mail,
+        phone: client.phone,
+        country: client.country,
+        purchases: [],
+        lannguage: locale
+      });
+    }
+    const { status, data } = currentClient;
+    let clientId;
+    if (status === 200) {
+      const { _id: id } = data.clients[0];
+      clientId = id;
+    }
+    if (status === 201) {
+      const { _id: id } = data;
+      clientId = id;
+    }
+    if (status !== 200 && status !== 201) return messageToCostumer("Alguna cosa no ha anat bé", setMessage);
+    return createBooking(clientId);
   };
 
   const validateActivitiesBeforePayment = () => {
@@ -81,7 +123,7 @@ export default function CartView() {
       const activityOnDDBB = await fetchFromApi(`${process.env.URL}/activities/${id}`);
       checkActivity(activityOnDDBB.date, amount, activityOnDDBB.stock);
     });
-    if (validActivities) return sendConfirmationEmail();
+    if (validActivities) return validateClient();
     return messageToCostumer("No és possible realitzar aquesta comanda", setMessage);
   };
 
