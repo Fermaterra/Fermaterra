@@ -12,12 +12,13 @@ import fetchFromApi from "../utils/fetchFromApi";
 import styles from "../styles/cart.module.scss";
 
 export default function CartView() {
-  const [cart, setCart] = useContext(AppContext);
+  const { cartContext, clientContext } = useContext(AppContext);
+  const [cart, setCart] = cartContext;
+  const [client] = clientContext;
   const [total, setTotal] = useState(0);
   const [cartView, setCartView] = useState("resume");
   const [discount, setDiscount] = useState("");
   const [appliediscount, setAppliedDiscount] = useState("");
-  const [client, setClient] = useState({});
   const [confirmAge, setConfirmAge] = useState(false);
   const [confirmPoliticies, setConfirmPoliticies] = useState(false);
   const [message, setMessage] = useState("");
@@ -62,6 +63,7 @@ export default function CartView() {
   const [renderedData, setRenderedData] = useState(
     <CartResume cart={cart} increaseItem={increaseItem} decreaseItem={decreaseItem} />
   );
+
   useEffect(() => {
     switch (cartView) {
       case "resume":
@@ -74,13 +76,10 @@ export default function CartView() {
 
       case "client":
         setRenderedData(<ClientInfo
-          client={client}
-          setClient={setClient}
           setConfirmAge={setConfirmAge}
           confirmAge={confirmAge}
           setConfirmPoliticies={setConfirmPoliticies}
           confirmPoliticies={confirmPoliticies}
-
         />);
         break;
       case "cardData":
@@ -113,7 +112,7 @@ export default function CartView() {
       const activityOnDDBB = await fetchFromApi(`${process.env.URL}/activities/${id}`);
       checkActivity(activityOnDDBB.date, amount, activityOnDDBB.stock);
     });
-    if (validActivities) return sendConfirmationEmail();
+    if (validActivities) return setRenderedData("cardData");
     return messageToCostumer("No és possible realitzar aquesta comanda", setMessage);
   };
 

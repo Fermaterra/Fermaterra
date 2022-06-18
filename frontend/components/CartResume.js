@@ -6,7 +6,8 @@ import { AppContext } from "../app/Provider";
 import styles from "../styles/cart.module.scss";
 
 export default function Cart({ increaseItem, decreaseItem }) {
-  const [cart, setCart] = useContext(AppContext);
+  const { cartContext } = useContext(AppContext);
+  const [cart] = cartContext;
 
   return (
     <section className={styles.cart_content}>

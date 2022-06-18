@@ -11,7 +11,8 @@ import messageToCostumer from "../../utils/messageToCostumer";
 import styles from "../../styles/booking.module.scss";
 
 export default function BookingDetails({ activity }) {
-  const [cart, setCart] = useContext(AppContext);
+  const { cartContext } = useContext(AppContext);
+  const [cart, setCart] = cartContext;
   const {
     image, _id: id, en, es, ca, day, hour, basePrice, stock, location
   } = activity;

@@ -1,8 +1,12 @@
+import { useContext } from "react";
+import { AppContext } from "../app/Provider";
 import styles from "../styles/cart.module.scss";
 
 export default function ClientInfo({
-  client, setClient, setConfirmAge, setConfirmPoliticies, confirmAge, confirmPoliticies
+  setConfirmAge, setConfirmPoliticies, confirmAge, confirmPoliticies
 }) {
+  const { clientContext } = useContext(AppContext);
+  const [client, setClient] = clientContext;
   return (
     <section className={styles.client}>
       <h2>Dades de contacte</h2>
