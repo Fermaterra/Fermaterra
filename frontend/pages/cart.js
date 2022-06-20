@@ -1,12 +1,12 @@
 import { useContext, useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { AppContext } from "../app/Provider";
 
 import Layout from "../components/Layout";
 import Modal from "../components/Modal";
 import CartResume from "../components/CartResume";
 import ClientInfo from "../components/ClientInfo";
-import RedsysForm from "../components/RedsysForm";
+import StripeCheckout from "../components/StripeCheckout";
 import messageToCostumer from "../utils/messageToCostumer";
 import fetchFromApi from "../utils/fetchFromApi";
 import styles from "../styles/cart.module.scss";
@@ -16,6 +16,9 @@ export default function CartView() {
   const [cart, setCart] = cartContext;
   const [client] = clientContext;
   const [total, setTotal] = useState(0);
+  const [lineItems, setLineItems] = useState(
+    cart.map((item) => ({ price: item.priceId, quantity: item.amount }))
+  );
   const [cartView, setCartView] = useState("resume");
   const [discount, setDiscount] = useState("");
   const [appliediscount, setAppliedDiscount] = useState("");
@@ -27,6 +30,7 @@ export default function CartView() {
       previousTotal,
       nextItem
     ) => previousTotal + nextItem.subTotal, 0).toFixed(2));
+    setLineItems(cart.map((item) => ({ price: item.priceId, quantity: item.amount })));
   }, [cart]);
 
   const increaseItem = async (id) => {
@@ -83,13 +87,13 @@ export default function CartView() {
         />);
         break;
       case "cardData":
-        setRenderedData(<RedsysForm />);
+        setRenderedData(<StripeCheckout lineItems={lineItems} />);
         break;
       default:
         break;
     }
   }, [cartView]);
-
+  /*
   const sendConfirmationEmail = async () => {
     try {
       const emailData = { email: client.mail, payload: "<h1>Message sent from FE</h1>" };
@@ -99,7 +103,7 @@ export default function CartView() {
       messageToCostumer("No s'ha pogut enviar confirmació", setMessage);
     }
   };
-
+*/
   const validateActivitiesBeforePayment = () => {
     function checkActivity(date, amount, stock) {
       const checkDate = date < Date.now();
@@ -112,7 +116,7 @@ export default function CartView() {
       const activityOnDDBB = await fetchFromApi(`${process.env.URL}/activities/${id}`);
       checkActivity(activityOnDDBB.date, amount, activityOnDDBB.stock);
     });
-    if (validActivities) return setRenderedData("cardData");
+    if (validActivities) return setCartView("cardData");
     return messageToCostumer("No és possible realitzar aquesta comanda", setMessage);
   };
 
@@ -140,7 +144,7 @@ export default function CartView() {
     <Layout cart={cart} title="Cart">
       {message ? <Modal message={message} /> : null}
       <main className={styles.cart}>
-        {renderedData}
+        {renderedData.props ? renderedData : null}
         <section className={styles.cart_payment}>
           <p>{`Subtotal: ${total} €`}</p>
           <h3>CODI DESCOMPTE</h3>
