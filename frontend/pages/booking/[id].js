@@ -11,9 +11,10 @@ import messageToCostumer from "../../utils/messageToCostumer";
 import styles from "../../styles/booking.module.scss";
 
 export default function BookingDetails({ activity }) {
-  const [cart, setCart] = useContext(AppContext);
+  const { cartContext } = useContext(AppContext);
+  const [cart, setCart] = cartContext;
   const {
-    image, _id: id, en, es, ca, day, hour, basePrice, stock, location
+    image, _id: id, en, es, ca, day, hour, basePrice, stock, location, priceId, duration
   } = activity;
   const [dataDisplayed, setDataDisplayed] = useState("includes");
   const [language, setLanguage] = useState(en);
@@ -57,7 +58,16 @@ export default function BookingDetails({ activity }) {
     const alreadyInCart = cart.find((itemOnCart) => Object.values(itemOnCart).includes(id));
     if (!alreadyInCart) {
       setCart([...cart, {
-        activity: language.title, amount, price: basePrice, subTotal: basePrice * amount, image, id
+        activity: language.title,
+        amount,
+        day,
+        hour,
+        price: basePrice,
+        subTotal: basePrice * amount,
+        image,
+        id,
+        priceId,
+        duration
       }]);
     }
     if (alreadyInCart) {

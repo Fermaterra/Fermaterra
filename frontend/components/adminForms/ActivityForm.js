@@ -37,6 +37,7 @@ export default function NewActivityForm({
     duration: "",
     stock: "",
     basePrice: "",
+    priceId: "",
     taxes: "",
     location: {
       name: "",
@@ -393,6 +394,19 @@ export default function NewActivityForm({
             value={activity.basePrice}
             onChange={(evt) => {
               setActivity({ ...activity, basePrice: evt.target.value });
+            }}
+          />
+        </label>
+        <label htmlFor="priceId">
+          price Id
+          <br />
+          <input
+            id="priceId"
+            required
+            type="text"
+            value={activity.priceId}
+            onChange={(evt) => {
+              setActivity({ ...activity, priceId: evt.target.value });
             }}
           />
         </label>

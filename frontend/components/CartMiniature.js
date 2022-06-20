@@ -7,7 +7,8 @@ import whiteLogo from "../public/img/cart.svg";
 import blackLogo from "../public/img/cart_black.svg";
 
 export default function Cart({ color }) {
-  const [cart] = useContext(AppContext);
+  const { cartContext } = useContext(AppContext);
+  const [cart] = cartContext;
   const [logo, setLogo] = useState(whiteLogo);
   useEffect(() => {
     if (color === "white")setLogo(whiteLogo);
