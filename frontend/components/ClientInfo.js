@@ -7,6 +7,11 @@ export default function ClientInfo({
 }) {
   const { clientContext } = useContext(AppContext);
   const [client, setClient] = clientContext;
+
+  const saveEmail = (mail) => {
+    setClient({ ...client, mail });
+    localStorage.setItem("email", mail);
+  };
   return (
     <section className={styles.client}>
       <h2>Dades de contacte</h2>
@@ -21,7 +26,7 @@ export default function ClientInfo({
         </label>
         <label htmlFor="email">
           MAIL
-          <input id="email" type="email" onChange={(evt) => setClient({ ...client, mail: evt.target.value })} />
+          <input id="email" type="email" onChange={(evt) => saveEmail(evt.target.value)} />
         </label>
         <label htmlFor="confirm_email">
           CONFIR. MAIL

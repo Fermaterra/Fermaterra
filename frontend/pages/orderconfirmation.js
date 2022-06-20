@@ -1,16 +1,41 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
 import { AppContext } from "../app/Provider";
+import messageToCostumer from "../utils/messageToCostumer";
 import Layout from "../components/Layout";
 import formateDate from "../utils/formateDate";
 import styles from "../styles/orderconfirmation.module.scss";
 
 export default function orderConfirmation() {
+  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState("");
   const { cartContext } = useContext(AppContext);
   const [cart] = cartContext;
+
+  const sendConfirmationEmail = async () => {
+    try {
+      const emailData = {
+        email,
+        payload: "<h1>Confirmation email from Fermaterra</h1>"
+      };
+      const { status } = await axios.post(`${process.env.URL}/email`, emailData);
+      if (status === 200) messageToCostumer("S'he enviat un mail de confirmació", setMessage);
+    } catch (error) {
+      messageToCostumer("No s'ha pogut enviar confirmació", setMessage);
+    }
+  };
+
+  useEffect(() => {
+    setEmail(localStorage.getItem("email"));
+    if (email) {
+      sendConfirmationEmail();
+    }
+  }, [email]);
+
   return (
     <Layout title="Confirm">
       <main className={styles.main}>
-
+        {message || null}
         <h2>Muy bien. ¡Tienes una reserva!</h2>
         <p>Un mail de confirmación está en camino.</p>
         <div>

@@ -1,6 +1,6 @@
 import { loadStripe } from "@stripe/stripe-js";
 
-export default async function stripeUtils({ lineItems }) {
+export default async function StripeCheckout(lineItems) {
   let stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY);
 
   const getStripe = () => {

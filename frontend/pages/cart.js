@@ -13,10 +13,10 @@ import fetchFromApi from "../utils/fetchFromApi";
 import styles from "../styles/cart.module.scss";
 
 export default function CartView() {
-  const { cartContext, clientContext, bookContext } = useContext(AppContext);
+  const { cartContext, bookContext, clientContext } = useContext(AppContext);
   const [cart, setCart] = cartContext;
-  const [client] = clientContext;
   const [, setBook] = bookContext;
+  const [client] = clientContext;
   const [total, setTotal] = useState(0);
   const [lineItems, setLineItems] = useState(
     cart.map((item) => ({ price: item.priceId, quantity: item.amount }))
@@ -28,6 +28,7 @@ export default function CartView() {
   const [confirmPoliticies, setConfirmPoliticies] = useState(false);
   const [message, setMessage] = useState("");
   const { locale } = useRouter();
+
   useEffect(() => {
     setTotal(cart?.reduce((
       previousTotal,
@@ -89,7 +90,7 @@ export default function CartView() {
         />);
         break;
       case "cardData":
-        setRenderedData(<StripeCheckout lineItems={lineItems} />);
+        StripeCheckout(lineItems);
         break;
       default:
         break;
@@ -106,7 +107,8 @@ export default function CartView() {
     };
     const { data, status } = await axios.post(`${process.env.URL}/purchases`, purchaseData);
     if (status !== 201) return messageToCostumer("No s'ha pogut completar el pagament", setMessage);
-    return setBook(data);
+    setBook(data);
+    return setCartView("cardData");
   };
 
   const validateClient = async () => {
@@ -150,7 +152,6 @@ export default function CartView() {
       checkActivity(activityOnDDBB.date, amount, activityOnDDBB.stock);
     });
     if (validActivities) {
-      setCartView("cardData");
       return validateClient();
     }
     return messageToCostumer("No és possible realitzar aquesta comanda", setMessage);
