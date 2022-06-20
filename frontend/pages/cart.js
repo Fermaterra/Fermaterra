@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from "react";
-// import axios from "axios";
+import axios from "axios";
+import { useRouter } from "next/router";
 import { AppContext } from "../app/Provider";
 
 import Layout from "../components/Layout";
@@ -12,9 +13,10 @@ import fetchFromApi from "../utils/fetchFromApi";
 import styles from "../styles/cart.module.scss";
 
 export default function CartView() {
-  const { cartContext, clientContext } = useContext(AppContext);
+  const { cartContext, clientContext, bookContext } = useContext(AppContext);
   const [cart, setCart] = cartContext;
   const [client] = clientContext;
+  const [, setBook] = bookContext;
   const [total, setTotal] = useState(0);
   const [lineItems, setLineItems] = useState(
     cart.map((item) => ({ price: item.priceId, quantity: item.amount }))
@@ -25,6 +27,7 @@ export default function CartView() {
   const [confirmAge, setConfirmAge] = useState(false);
   const [confirmPoliticies, setConfirmPoliticies] = useState(false);
   const [message, setMessage] = useState("");
+  const { locale } = useRouter();
   useEffect(() => {
     setTotal(cart?.reduce((
       previousTotal,
@@ -32,7 +35,6 @@ export default function CartView() {
     ) => previousTotal + nextItem.subTotal, 0).toFixed(2));
     setLineItems(cart.map((item) => ({ price: item.priceId, quantity: item.amount })));
   }, [cart]);
-
   const increaseItem = async (id) => {
     const itemToUpdate = cart.find((item) => item.id === id);
     const { stock } = await fetchFromApi(`${process.env.URL}/activities/${id}`);
@@ -93,17 +95,48 @@ export default function CartView() {
         break;
     }
   }, [cartView]);
-  /*
-  const sendConfirmationEmail = async () => {
-    try {
-      const emailData = { email: client.mail, payload: "<h1>Message sent from FE</h1>" };
-      const { status } = await axios.post(`${process.env.URL}/email`, emailData);
-      if (status === 200) messageToCostumer("S'he enviat un mail de confirmació", setMessage);
-    } catch (error) {
-      messageToCostumer("No s'ha pogut enviar confirmació", setMessage);
-    }
+
+  const createBooking = async (clientToBill) => {
+    const purchaseData = {
+      date: Date.now(),
+      client: clientToBill,
+      activities: cart.map(({ id }) => id),
+      basePrice: parseFloat(total),
+      finalPrice: parseFloat(total),
+    };
+    const { data, status } = await axios.post(`${process.env.URL}/purchases`, purchaseData);
+    if (status !== 201) return messageToCostumer("No s'ha pogut completar el pagament", setMessage);
+    return setBook(data);
   };
-*/
+
+  const validateClient = async () => {
+    let currentClient;
+
+    currentClient = await axios.get(`${process.env.URL}/clients?email=${client.mail}`);
+    if (currentClient.data.clients.length === 0) {
+      currentClient = await axios.post(`${process.env.URL}/clients`, {
+        name: `${client.name} ${client.surname}`,
+        email: client.mail,
+        phone: client.phone,
+        country: client.country,
+        purchases: [],
+        lannguage: locale
+      });
+    }
+    const { status, data } = currentClient;
+    let clientId;
+    if (status === 200) {
+      const { _id: id } = data.clients[0];
+      clientId = id;
+    }
+    if (status === 201) {
+      const { _id: id } = data;
+      clientId = id;
+    }
+    if (status !== 200 && status !== 201) return messageToCostumer("Alguna cosa no ha anat bé", setMessage);
+    return createBooking(clientId);
+  };
+
   const validateActivitiesBeforePayment = () => {
     function checkActivity(date, amount, stock) {
       const checkDate = date < Date.now();
@@ -116,7 +149,10 @@ export default function CartView() {
       const activityOnDDBB = await fetchFromApi(`${process.env.URL}/activities/${id}`);
       checkActivity(activityOnDDBB.date, amount, activityOnDDBB.stock);
     });
-    if (validActivities) return setCartView("cardData");
+    if (validActivities) {
+      setCartView("cardData");
+      return validateClient();
+    }
     return messageToCostumer("No és possible realitzar aquesta comanda", setMessage);
   };
 
