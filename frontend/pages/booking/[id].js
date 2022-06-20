@@ -14,7 +14,7 @@ export default function BookingDetails({ activity }) {
   const { cartContext } = useContext(AppContext);
   const [cart, setCart] = cartContext;
   const {
-    image, _id: id, en, es, ca, day, hour, basePrice, stock, location, priceId
+    image, _id: id, en, es, ca, day, hour, basePrice, stock, location, priceId, duration
   } = activity;
   const [dataDisplayed, setDataDisplayed] = useState("includes");
   const [language, setLanguage] = useState(en);
@@ -60,11 +60,14 @@ export default function BookingDetails({ activity }) {
       setCart([...cart, {
         activity: language.title,
         amount,
+        day,
+        hour,
         price: basePrice,
         subTotal: basePrice * amount,
         image,
         id,
-        priceId
+        priceId,
+        duration
       }]);
     }
     if (alreadyInCart) {
