@@ -94,6 +94,10 @@ const activitySchema = Schema(
       type: Number,
       default: 0
     },
+    priceId: {
+      type: String,
+      required: true
+    },
     status: {
       type: String,
       default: "available"

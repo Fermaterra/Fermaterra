@@ -5,7 +5,7 @@ const clientNotFound = (res) => res.status(404).json({ message: "Client not foun
 
 const getClients = async ({ query }, res) => {
   try {
-    const clients = await Client.find({ query });
+    const clients = await Client.find(query);
     res.status(200).json({ clients });
   } catch (error) {
     serverError(res);
