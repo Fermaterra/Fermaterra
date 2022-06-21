@@ -12,7 +12,7 @@ export default async function StripeCheckout(lineItems) {
   await stripe.redirectToCheckout({
     mode: "payment",
     lineItems,
-    successUrl: "http://localhost:3000/orderconfirmation",
+    successUrl: "http://fermaterra.com/orderconfirmation",
     cancelUrl: window.location.origin
   });
 }
