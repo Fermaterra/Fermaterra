@@ -17,10 +17,10 @@ export default function Cart({ color }) {
   return (
     <div className={styles.cart_miniature}>
       <Link href="/cart">
-        <span className={styles.wrapper}>
-          <Image src={logo} width={50} height={45} alt="cart" />
+        <div className={styles.minitaure_wrapper}>
+          <Image src={logo} fit="layout" alt="cart" />
           {cart.length > 0 ? <p className={styles.wrapped}>{cart.length}</p> : null}
-        </span>
+        </div>
 
       </Link>
     </div>
