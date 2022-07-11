@@ -1,17 +1,26 @@
 .main {
-  min-height: 85vh;
+   min-height: 200vh;
+}
+
+@media (min-width:768px) {
+  .main{
+    min-height: 85vh;
+  }
 }
 
 .miniature {
   display: flex;
   flex-direction: column;
+  width: 60%;
+  margin: 0 auto;
   align-items: center;
-  margin-bottom: 3rem;
+  font-size: 2.5vh;
   div {
-    width: 80%;
+    height: fit-content;
+    width: 40%;
     display: flex;
     justify-content: space-between;
-    margin: 1rem auto;
+    margin: 2vh auto;
     h3 {
       font-family: "Helvetica Neue Thin";
       font-weight: 400;
@@ -20,28 +29,74 @@
   }
   p,
   a {
-    font-size: 2vh;
+    font-size: 2.5vh;
     color: var(--gray);
   }
   a {
     text-decoration: none;
+    margin-bottom: 2vh;
   }
+
   .activity_description {
     color: var(--black);
-    margin-bottom: 3rem;
+    margin-bottom: 2vh;
+    font-size: 2.5vh;
+  }
+  .wrapper{
+    width: 2vh;
+    height: 2vh;
+  }
+}
+@media (min-width: 1080px) {
+.miniature{
+
+  div{
+    width: 80%;
+    h3{
+      font-size: 1.8vh;
+    }
+  }
+
+  p,
+  a {
+    font-size: 1.8vh;
+  }
+  .activity_description {
+    font-size: 1.8vh;
+  }
+}
+.wrapper{
+  position: relative;
+  height: 50px;
+  width: 50%;
+}
+@media (min-width:1080px) {
+  .wrapper{
+    height: 40vh;
+    width:20vh;
   }
 }
 
+}
 .activities_list {
-  padding-top: 10rem;
+  padding-top: 10vh;
   width: 90%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 5rem;
+  grid-template-columns: 1fr;
+  gap: 3vh;
+  justify-content: center;
 }
 
+@media (min-width:1080px) {
+  .activities_list {
+    width: 90%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5rem;
+  }
+}
 .paginationButtons {
-  margin: 50px auto;
-  margin-left: 50%;
+  margin: 2vh auto;
+  display: flex;
+  justify-content: center;
 }

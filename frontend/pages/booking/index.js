@@ -33,18 +33,18 @@ export default function Booking({ activities }) {
           {activitiesToDisplay[currentPage - 1]?.map(
             ({
               _id: id,
-              title,
               image,
-              shortDescription,
+              en,
+              es,
+              ca,
               basePrice,
               day,
               hour,
             }) => (
               <ActivityMiniature
                 id={id}
-                title={title}
+                languageModules={[en, es, ca]}
                 image={image}
-                shortDescription={shortDescription}
                 basePrice={basePrice}
                 day={day}
                 hour={hour}
