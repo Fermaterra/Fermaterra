@@ -7,7 +7,7 @@ import Layout from "../components/Layout";
 import Modal from "../components/Modal";
 import CartResume from "../components/CartResume";
 import ClientInfo from "../components/ClientInfo";
-import StripeCheckout from "../components/StripeCheckout";
+import Paypal from "../components/Paypal";
 import messageToCostumer from "../utils/messageToCostumer";
 import fetchFromApi from "../utils/fetchFromApi";
 import styles from "../styles/cart.module.scss";
@@ -18,9 +18,6 @@ export default function CartView() {
   const [, setBook] = bookContext;
   const [client] = clientContext;
   const [total, setTotal] = useState(0);
-  const [lineItems, setLineItems] = useState(
-    cart.map((item) => ({ price: item.priceId, quantity: item.amount }))
-  );
   const [cartView, setCartView] = useState("resume");
   const [discount, setDiscount] = useState("");
   const [appliediscount, setAppliedDiscount] = useState("");
@@ -34,7 +31,6 @@ export default function CartView() {
       previousTotal,
       nextItem
     ) => previousTotal + nextItem.subTotal, 0).toFixed(2));
-    setLineItems(cart.map((item) => ({ price: item.priceId, quantity: item.amount })));
   }, [cart]);
   const increaseItem = async (id) => {
     const itemToUpdate = cart.find((item) => item.id === id);
@@ -90,7 +86,9 @@ export default function CartView() {
         />);
         break;
       case "cardData":
-        StripeCheckout(lineItems);
+        setRenderedData(
+          <Paypal value={total} />
+        );
         break;
       default:
         break;
