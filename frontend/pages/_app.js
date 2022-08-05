@@ -5,10 +5,8 @@ import "../styles/globals.scss";
 function MyApp({ Component, pageProps }) {
   return (
     <Provider>
-      <PayPalScriptProvider options={{ "client-id": "test" }}>
-        <Component
-          {...pageProps}
-        />
+      <PayPalScriptProvider>
+        <Component {...pageProps} />
       </PayPalScriptProvider>
     </Provider>
   );
