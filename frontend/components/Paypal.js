@@ -7,7 +7,6 @@ export default function Paypal({ value }) {
   const router = useRouter();
   const { locale } = router;
 
-  const [currency, setCurrency] = useState("USD");
   const [success, setSuccess] = useState(false);
 
   function navigateToConfirmation() {
@@ -18,20 +17,10 @@ export default function Paypal({ value }) {
     if (success) navigateToConfirmation();
   }, [success]);
 
-  useEffect(() => {
-    switch (locale) {
-      case "en":
-        setCurrency("USD");
-        break;
-      default:
-        setCurrency("EUR");
-        break;
-    }
-  }, [locale]);
-  const initialOptions = {
+const initialOptions = {
     "client-id":
       "AZxOV6ImEr-joOmOwtAL6WKOinRCTogO8GBg-2_Z4M88rdWBb_1cXuDpMqpejGiXKgefPQoo0Q6qgN3i",
-    currency,
+    currency:"EUR",
     intent: "capture",
     "data-client-token": "abc123xyz==",
   };
@@ -50,7 +39,7 @@ export default function Paypal({ value }) {
               {
                 amount: {
                   value,
-                  currency_code: currency,
+                  currency_code: "EUR",
                 },
               },
             ],
