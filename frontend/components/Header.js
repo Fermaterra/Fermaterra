@@ -100,7 +100,7 @@ export default function Header() {
           <Image src={menuLogo} layout="fill" />
         </div>
         <div className={styles.dropdown_content}>
-          <Link href="/booking">{language.booking}</Link>
+          <Link href="/booking" replace>{language.booking}</Link>
           <Link href="/blog">{language.blog}</Link>
           <Link href="/faq">{language.faqs}</Link>
         </div>
