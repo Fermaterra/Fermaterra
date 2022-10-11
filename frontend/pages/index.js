@@ -68,7 +68,7 @@ export default function Home() {
               language.Frigidarium.secondParagraph,
               language.Frigidarium.thirdParagraph
             ]}
-            image="https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Ffrigidarium.jpeg?alt=media&token=ea0dc4d8-d38a-48b5-bbd8-30e155287bb6"
+            image="https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Ffrigidarium.jpeg?alt=media&token=0ebb34dd-395f-4efc-900f-0a3ce30ecb32"
           />
           <PillarCard
             title={language.Yoga.title}
@@ -138,7 +138,7 @@ export default function Home() {
           <h4>Contacte</h4>
           <p>Instagram | Facebook</p>
           <p>info@terraferma.com</p>
-          <p>+34 000 000 000</p>
+          <p>+34 613 035 123</p>
         </div>
       </section>
     </Layout>
