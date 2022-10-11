@@ -10,6 +10,9 @@ import ClientInfo from "../components/ClientInfo";
 import Paypal from "../components/Paypal";
 import messageToCostumer from "../utils/messageToCostumer";
 import fetchFromApi from "../utils/fetchFromApi";
+import en from "../languages/en/cart";
+import es from "../languages/es/cart";
+import ca from "../languages/ca/cart";
 import styles from "../styles/cart.module.scss";
 
 export default function CartView() {
@@ -24,6 +27,7 @@ export default function CartView() {
   const [confirmAge, setConfirmAge] = useState(false);
   const [confirmPoliticies, setConfirmPoliticies] = useState(false);
   const [message, setMessage] = useState("");
+  const [language, setLanguage] = useState("");
   const { locale } = useRouter();
 
   useEffect(() => {
@@ -36,6 +40,21 @@ export default function CartView() {
         .toFixed(2)
     );
   }, [cart]);
+  useEffect(() => {
+    switch (locale) {
+      case "en":
+        setLanguage(en);
+        break;
+      case "es":
+        setLanguage(es);
+        break;
+      case "ca":
+        setLanguage(ca);
+        break;
+      default:
+        break;
+    }
+  }, [locale]);
   const increaseItem = async (id) => {
     const itemToUpdate = cart.find((item) => item.id === id);
     const { stock } = await fetchFromApi(`${process.env.URL}/activities/${id}`);
@@ -123,7 +142,7 @@ export default function CartView() {
     );
     if (status !== 201) {
       return messageToCostumer(
-        "No s'ha pogut completar el pagament",
+        language.message.uncompletedPayment,
         setMessage
       );
     }
@@ -158,7 +177,7 @@ export default function CartView() {
       clientId = id;
     }
     if (status !== 200 && status !== 201) {
-      return messageToCostumer("Alguna cosa no ha anat bé", setMessage);
+      return messageToCostumer(language.message.error, setMessage);
     }
     return createBooking(clientId);
   };
@@ -181,21 +200,21 @@ export default function CartView() {
       return validateClient();
     }
     return messageToCostumer(
-      "No és possible realitzar aquesta comanda",
+      language.message.expiredItems,
       setMessage
     );
   };
 
   const handlePayment = () => {
     if (Object.keys(client).length < 6) {
-      return messageToCostumer("Tots els camps són obligatoris", setMessage);
+      return messageToCostumer(language.message.fields, setMessage);
     }
     if (client.mail !== client.confirmedMail) {
-      return messageToCostumer("Els correus no coincideixen", setMessage);
+      return messageToCostumer(language.message.mail, setMessage);
     }
     if (!confirmAge || !confirmPoliticies) {
       return messageToCostumer(
-        "S'han de confirmar les condicions i polítiques",
+        language.message.policies,
         setMessage
       );
     }
@@ -209,7 +228,7 @@ export default function CartView() {
     evt.preventDefault();
     if (appliediscount) {
       return messageToCostumer(
-        "Ja sh'ha aplicat un descompte per aquesta compra",
+        language.message.alreadyDiscounted,
         setMessage
       );
     }
@@ -217,12 +236,12 @@ export default function CartView() {
       `${process.env.URL}/discounts?name=${discount}`
     );
     if (!discountToApply[0] || discountToApply[0].expiresOn < Date.now()) {
-      return messageToCostumer("Codi no vàlid", setMessage);
+      return messageToCostumer(language.message.unvalidCode, setMessage);
     }
     setTotal(total - total * (discountToApply[0].percentage / 100));
     setAppliedDiscount(discountToApply[0]);
     setDiscount("");
-    return messageToCostumer("Descompte aplicat", setMessage);
+    return messageToCostumer(language.message.discountApplied, setMessage);
   };
   return (
     <Layout cart={cart} title="Cart">
