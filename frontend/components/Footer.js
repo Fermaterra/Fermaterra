@@ -7,8 +7,8 @@ export default function Footer() {
       <p>Tots els drets reservats</p>
       <nav>
         <Link href="/cookies">Política de cookies</Link>
-        <Link href="/">Política de privacitat</Link>
-        <Link href="/">Protecció de dades</Link>
+        <Link href="/terms">Política de privacitat</Link>
+        <Link href="/terms">Protecció de dades</Link>
         <Link href="/cookies">Ús de galetes</Link>
       </nav>
     </footer>
