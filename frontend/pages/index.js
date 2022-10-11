@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Link from "next/link";
 import Carousel from "react-material-ui-carousel";
 import Layout from "../components/Layout";
 import es from "../languages/es";
@@ -68,7 +69,7 @@ export default function Home() {
               language.Frigidarium.secondParagraph,
               language.Frigidarium.thirdParagraph
             ]}
-            image="https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Ffrigidarium.jpeg?alt=media&token=ea0dc4d8-d38a-48b5-bbd8-30e155287bb6"
+            image="https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Ffrigidarium.jpeg?alt=media&token=0ebb34dd-395f-4efc-900f-0a3ce30ecb32"
           />
           <PillarCard
             title={language.Yoga.title}
@@ -136,9 +137,9 @@ export default function Home() {
         </div>
         <div>
           <h4>Contacte</h4>
-          <p>Instagram | Facebook</p>
-          <p>info@terraferma.com</p>
-          <p>+34 000 000 000</p>
+          <Link href="https://www.instagram.com/fermaterra_/?igshid=YmMyMTA2M2Y%3D">Instagram | Facebook</Link>
+          <Link href="mailto:info@terraferma.com">info@terraferma.com</Link>
+          <Link href="tel:+34613035123">+34 613 035 123</Link>
         </div>
       </section>
     </Layout>
