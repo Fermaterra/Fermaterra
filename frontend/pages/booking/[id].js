@@ -20,6 +20,8 @@ export default function BookingDetails({ activity }) {
   const [language, setLanguage] = useState(en);
   const [amount, setAmount] = useState(1);
   const [addedToCart, setAddedToCart] = useState("");
+  const [noPlacesMsg, setNoPlacesMsg] = useState("There are no places available");
+  const [addedMsg, setAddedMsg] = useState("Added to cart");
   useEffect(() => { if (cart.length > 0) localStorage.setItem("cart", JSON.stringify(cart)); }, [cart]);
   useEffect(() => {
     const amountChecker = cart.find((itemOnCart) => itemOnCart.id === id);
@@ -32,14 +34,18 @@ export default function BookingDetails({ activity }) {
     switch (locale) {
       case "es":
         setLanguage(es);
+        setNoPlacesMsg("No quedan plazas disponibles");
+        setAddedMsg("Añadido al carrito");
         break;
       case "en":
         setLanguage(en);
-
+        setNoPlacesMsg("There are no places available");
+        setAddedMsg("Added to cart");
         break;
       case "ca":
         setLanguage(ca);
-
+        setNoPlacesMsg("No queden places disponibles");
+        setAddedMsg("Afegit al carretó");
         break;
 
       default:
@@ -54,7 +60,7 @@ export default function BookingDetails({ activity }) {
     if (action === "decrease" && amount > 1) setAmount(amount - 1);
   };
   const addToCart = () => {
-    if (amount === 0) return (messageToCostumer("No queden més places", setAddedToCart));
+    if (amount === 0) return (messageToCostumer(noPlacesMsg, setAddedToCart));
     const alreadyInCart = cart.find((itemOnCart) => Object.values(itemOnCart).includes(id));
     if (!alreadyInCart) {
       setCart([...cart, {
@@ -84,7 +90,7 @@ export default function BookingDetails({ activity }) {
       setCart(updateItemOnCart);
     }
     setAmount(1);
-    return messageToCostumer("Afegit al carretó", setAddedToCart);
+    return messageToCostumer(addedMsg, setAddedToCart);
   };
   return (
     <Layout cart={cart} title={language.title}>
