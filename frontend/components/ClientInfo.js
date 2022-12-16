@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import { useContext } from "react";
 import { AppContext } from "../app/Provider";
 import styles from "../styles/cart.module.scss";
@@ -59,11 +60,11 @@ export default function ClientInfo({
           />
           Confirmo que he llegit i accepto les
           {" "}
-          <a href="/" target="blank">condicions de participació a l&apos;activitat</a>
+          <a href="/cookies" target="blank">condicions de participació a l&apos;activitat</a>
           {" "}
           i la
           {" "}
-          <a href="/booking" target="blank">política de protecció de dades</a>
+          <a href="/terms" target="blank">política de protecció de dades</a>
           .
         </label>
       </div>
