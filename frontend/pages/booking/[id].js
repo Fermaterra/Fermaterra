@@ -22,6 +22,8 @@ export default function BookingDetails({ activity }) {
   const [addedToCart, setAddedToCart] = useState("");
   const [noPlacesMsg, setNoPlacesMsg] = useState("There are no places available");
   const [addedMsg, setAddedMsg] = useState("Added to cart");
+  const [inclou, setInclou] = useState("Includes");
+  const [ubicacio, setUbicacio] = useState("Location");
   useEffect(() => { if (cart.length > 0) localStorage.setItem("cart", JSON.stringify(cart)); }, [cart]);
   useEffect(() => {
     const amountChecker = cart.find((itemOnCart) => itemOnCart.id === id);
@@ -36,16 +38,22 @@ export default function BookingDetails({ activity }) {
         setLanguage(es);
         setNoPlacesMsg("No quedan plazas disponibles");
         setAddedMsg("Añadido al carrito");
+        setInclou("Incluye");
+        setUbicacio("Ubicación");
         break;
       case "en":
         setLanguage(en);
         setNoPlacesMsg("There are no places available");
         setAddedMsg("Added to cart");
+        setInclou("Includes");
+        setUbicacio("Location");
         break;
       case "ca":
         setLanguage(ca);
         setNoPlacesMsg("No queden places disponibles");
         setAddedMsg("Afegit al carretó");
+        setInclou("Ubicació");
+
         break;
 
       default:
@@ -112,12 +120,12 @@ export default function BookingDetails({ activity }) {
             <div>
               <input
                 type="button"
-                value="inclou"
+                value={inclou}
                 onClick={() => setDataDisplayed("includes")}
               />
               <input
                 type="button"
-                value="ubicació"
+                value={ubicacio}
                 onClick={() => setDataDisplayed("location")}
               />
             </div>
