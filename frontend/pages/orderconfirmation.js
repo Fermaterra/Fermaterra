@@ -14,12 +14,12 @@ export default function orderConfirmation() {
   const [cart] = cartContext;
   const activities = cart.map((item) => `<p>{${item.activity}: ${item.price}€ (x${item.amount})}</p>`);
   const activitiesToString = activities.toString();
-
+  const orderId = localStorage.getItem("book");
   const sendConfirmationEmail = async () => {
     try {
       const emailData = {
         email,
-        payload: mailbody(activitiesToString)
+        payload: mailbody(activitiesToString, orderId)
       };
       const { status } = await axios.post(`${process.env.URL}/email`, emailData);
       if (status === 200) messageToCostumer("S'he enviat un mail de confirmació", setMessage);
