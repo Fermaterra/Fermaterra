@@ -3,6 +3,7 @@ import axios from "axios";
 import { AppContext } from "../app/Provider";
 import messageToCostumer from "../utils/messageToCostumer";
 import Layout from "../components/Layout";
+// import Mail from "../components/Mail";
 import formateDate from "../utils/formateDate";
 import styles from "../styles/orderconfirmation.module.scss";
 
@@ -11,12 +12,13 @@ export default function orderConfirmation() {
   const [email, setEmail] = useState("");
   const { cartContext } = useContext(AppContext);
   const [cart] = cartContext;
-
+  const activities = cart.map((item) => <div>{item.activity}</div>);
+  const html = activities;
   const sendConfirmationEmail = async () => {
     try {
       const emailData = {
         email,
-        payload: "<h1>Confirmation email from Fermaterra</h1>"
+        payload: html
       };
       const { status } = await axios.post(`${process.env.URL}/email`, emailData);
       if (status === 200) messageToCostumer("S'he enviat un mail de confirmació", setMessage);
