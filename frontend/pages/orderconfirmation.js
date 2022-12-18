@@ -15,9 +15,6 @@ export default function orderConfirmation() {
   const activities = cart.map((item) => `<p>{${item.activity}: ${item.price}€ (x${item.amount})}</p>`);
   const activitiesToString = activities.toString();
 
-  console.log("mailbody:", mailbody(activitiesToString));
-  console.log("cart:", cart);
-  console.log("activities:", activitiesToString);
   const sendConfirmationEmail = async () => {
     try {
       const emailData = {
