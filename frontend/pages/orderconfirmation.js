@@ -25,6 +25,7 @@ export default function orderConfirmation() {
       if (status === 200) messageToCostumer("S'he enviat un mail de confirmació", setMessage);
       await (localStorage.removeItem("email"));
       await (localStorage.removeItem("cart"));
+      await (localStorage.removeItem("book"));
     } catch (error) {
       messageToCostumer("No s'ha pogut enviar confirmació", setMessage);
     }
