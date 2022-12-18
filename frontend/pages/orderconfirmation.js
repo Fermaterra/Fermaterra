@@ -3,7 +3,7 @@ import axios from "axios";
 import { AppContext } from "../app/Provider";
 import messageToCostumer from "../utils/messageToCostumer";
 import Layout from "../components/Layout";
-// import Mail from "../components/Mail";
+import mailbody from "../utils/mailbody";
 import formateDate from "../utils/formateDate";
 import styles from "../styles/orderconfirmation.module.scss";
 
@@ -12,16 +12,22 @@ export default function orderConfirmation() {
   const [email, setEmail] = useState("");
   const { cartContext } = useContext(AppContext);
   const [cart] = cartContext;
-  const activities = cart.map((item) => <div>{item.activity}</div>);
-  const html = activities;
+  const activities = cart.map((item) => `<p>{${item.activity}: ${item.price}€ (x${item.amount})}</p>`);
+  const activitiesToString = activities.toString();
+
+  console.log("mailbody:", mailbody(activitiesToString));
+  console.log("cart:", cart);
+  console.log("activities:", activitiesToString);
   const sendConfirmationEmail = async () => {
     try {
       const emailData = {
         email,
-        payload: html
+        payload: mailbody(activitiesToString)
       };
       const { status } = await axios.post(`${process.env.URL}/email`, emailData);
       if (status === 200) messageToCostumer("S'he enviat un mail de confirmació", setMessage);
+      await (localStorage.removeItem("email"));
+      await (localStorage.removeItem("cart"));
     } catch (error) {
       messageToCostumer("No s'ha pogut enviar confirmació", setMessage);
     }
@@ -52,7 +58,7 @@ export default function orderConfirmation() {
               </div>
               <div className={styles.column}>
                 <p>{ item.activity}</p>
-                <p>{`${item.duration} min. | ${item.price} €`}</p>
+                <p>{`${item.duration} min. | ${item.price} € (x${item.amount})`}</p>
               </div>
             </div>
           ))}
