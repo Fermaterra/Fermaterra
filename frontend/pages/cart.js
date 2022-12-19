@@ -146,6 +146,8 @@ export default function CartView() {
         setMessage
       );
     }
+    const { _id: id } = data;
+    localStorage.setItem("book", id);
     setBook(data);
     return setCartView("cardData");
   };
