@@ -10,11 +10,11 @@ import styles from "../styles/orderconfirmation.module.scss";
 export default function orderConfirmation() {
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
+  const [orderId, setOrderId] = useState("");
   const { cartContext } = useContext(AppContext);
   const [cart] = cartContext;
   const activities = cart.map((item) => `<p>{${item.activity}: ${item.price}€ (x${item.amount})}</p>`);
   const activitiesToString = activities.toString();
-  const orderId = localStorage.getItem("book");
   const sendConfirmationEmail = async () => {
     try {
       const emailData = {
@@ -30,7 +30,9 @@ export default function orderConfirmation() {
       messageToCostumer("No s'ha pogut enviar confirmació", setMessage);
     }
   };
-
+  useEffect(() => {
+    setOrderId(localStorage.getItem("book"));
+  }, []);
   useEffect(() => {
     setEmail(localStorage.getItem("email"));
     if (email) {

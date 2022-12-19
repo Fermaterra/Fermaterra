@@ -1,6 +1,7 @@
 const mailbody = (activities, bookId) => (
 
   ` <div>
+    <p style="text-align:center;"><img src="shorturl.at/pt357" alt="Fermaterra"></p>
     <h1>Muchas gracias por confiar en Fermaterra</h1>
     <div>
       <p>Aquí tiene un resumen de su compra:</p>
