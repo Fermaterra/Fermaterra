@@ -67,15 +67,16 @@ export default function bookDetails({ book }) {
                   </li>
                 )
                 : <li>Sin cliente</li>}
-
-              {activities.length > 0
-                ? (
-                  <ul>
-                    {`Actividades: `}
-                    {activities.map(({ _id: activityId, title: activityTitle }) => <li key={activityId}><Link href={`/admin/activities/${activityId}`}>{activityTitle}</Link></li>)}
-                  </ul>
-                )
-                : <li>Sin actividades</li>}
+              {
+             activities.length > 0
+               ? (
+                 <ul>
+                   {`Actividades: `}
+                   {activities.map(({ _id: activityId, es }) => <li key={activityId}><Link href={`/admin/activities/${activityId}`}>{es.title}</Link></li>)}
+                 </ul>
+               )
+               : <li>Sin actividades</li>
+}
 
               <li>
                 {`Precio base: `}
