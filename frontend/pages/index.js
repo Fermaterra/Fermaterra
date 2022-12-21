@@ -69,7 +69,7 @@ export default function Home() {
               language.Frigidarium.secondParagraph,
               language.Frigidarium.thirdParagraph
             ]}
-            image="https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Ffrigidarium.jpeg?alt=media&token=0ebb34dd-395f-4efc-900f-0a3ce30ecb32"
+            image="https://firebasestorage.googleapis.com/v0/b/fermaterra-1fd31.appspot.com/o/web%2Ffrigidarium.webp?alt=media&token=cad271a2-f700-4749-b834-cafe06a4aec9"
           />
           <PillarCard
             title={language.Yoga.title}
