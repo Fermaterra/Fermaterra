@@ -23,8 +23,7 @@ export default function Paypal({ value }) {
   return (
     <div className={styles.payPalButtons}>
 
-      <PayPalScriptProvider options={{ "client-id": process.env.PAYPAL, currency: "EUR" }}>
-
+      <PayPalScriptProvider options={{ "client-id": `${process.env.PAYPAL}`, currency: "EUR" }}>
         <PayPalButtons
           createOrder={(data, actions) => actions.order
             .create({
