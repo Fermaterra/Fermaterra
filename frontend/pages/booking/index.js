@@ -1,45 +1,41 @@
-import { useState, useEffect } from "react";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
+import { useState, useMemo } from "react";
+import dynamic from "next/dynamic";
 import Layout from "../../components/Layout";
 import fetchFromApi from "../../utils/fetchFromApi";
 import compareDates from "../../utils/compareDates";
-import ActivityMiniature from "../../components/ActivityMiniature";
 import styles from "../../styles/activities.module.scss";
 
-export default function Booking({ activities }) {
-  const [activitiesToDisplay, setActivitiesToDisplay] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalCount, setTotalCount] = useState(0);
+const Pagination = dynamic(() => import("@mui/material/Pagination"));
+const Stack = dynamic(() => import("@mui/material/Stack"));
+const ActivityMiniature = dynamic(() => import("../../components/ActivityMiniature"));
 
-  useEffect(() => {
-    const activitiesFiltered = activities.filter(({ day }) => compareDates(day));
-    const activitesDivided = [];
-    for (let i = 0; i < activitiesFiltered.length; i += 6) {
-      const slice = activitiesFiltered.slice(i, i + 6);
-      activitesDivided.push(slice);
-    }
-    setTotalCount(activitesDivided.length);
-    setActivitiesToDisplay(activitesDivided);
-  }, []);
+export default function Booking({ activities }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
+  const filteredActivities = useMemo(() => activities
+    .filter(({ day }) => compareDates(day)), [activities]);
+
+  const totalItems = useMemo(() => Math
+    .ceil(filteredActivities.length / itemsPerPage), [filteredActivities]);
+
+  const activitiesToDisplay = useMemo(() => {
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    return filteredActivities.slice(start, end);
+  }, [filteredActivities, currentPage]);
 
   function handlePaginationChange(event, value) {
     setCurrentPage(value);
   }
+
   return (
     <Layout title="Activitats">
       <main className={styles.main}>
         <div className={styles.activities_list}>
-          {activitiesToDisplay[currentPage - 1]?.map(
+          {activitiesToDisplay.map(
             ({
-              _id: id,
-              image,
-              en,
-              es,
-              ca,
-              basePrice,
-              day,
-              hour,
+              _id: id, image, en, es, ca, basePrice, day, hour
             }) => (
               <ActivityMiniature
                 id={id}
@@ -56,8 +52,9 @@ export default function Booking({ activities }) {
         <div className={styles.paginationButtons}>
           <Stack spacing={2}>
             <Pagination
-              count={totalCount}
-              onChange={(event, value) => handlePaginationChange(event, value)}
+              count={totalItems}
+              // eslint-disable-next-line react/jsx-no-bind
+              onChange={handlePaginationChange}
               page={currentPage}
               size="large"
             />
