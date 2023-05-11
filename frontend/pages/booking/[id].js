@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -7,7 +8,8 @@ import Modal from "../../components/Modal";
 import Map from "../../components/Map";
 import fetchFromApi from "../../utils/fetchFromApi";
 import formateDate from "../../utils/formateDate";
-import messageToCostumer from "../../utils/messageToCostumer";
+import handleAmount from "../../utils/handleAmounts";
+import addToCart from "../../utils/addToCart";
 import styles from "../../styles/booking.module.scss";
 
 export default function BookingDetails({ activity }) {
@@ -60,46 +62,7 @@ export default function BookingDetails({ activity }) {
         break;
     }
   }, [locale]);
-  const handleAmount = (action) => {
-    let currentAmount = 0;
-    const activityAlreadyInCart = cart.find((itemOnCart) => itemOnCart.id === id);
-    if (activityAlreadyInCart) currentAmount = activityAlreadyInCart.amount;
-    if (action === "increase" && (amount + currentAmount) < stock) setAmount(amount + 1);
-    if (action === "decrease" && amount > 1) setAmount(amount - 1);
-  };
-  const addToCart = () => {
-    if (amount === 0) return (messageToCostumer(noPlacesMsg, setAddedToCart));
-    const alreadyInCart = cart.find((itemOnCart) => Object.values(itemOnCart).includes(id));
-    if (!alreadyInCart) {
-      setCart([...cart, {
-        activity: language.title,
-        amount,
-        day,
-        hour,
-        price: basePrice,
-        subTotal: basePrice * amount,
-        image,
-        id,
-        priceId,
-        duration
-      }]);
-    }
-    if (alreadyInCart) {
-      const updateItemOnCart = cart.map((itemOnCart) => {
-        if (Object.values(itemOnCart).includes(id)) {
-          return ({
-            ...itemOnCart,
-            amount: itemOnCart.amount + amount,
-            subTotal: itemOnCart.subTotal + (basePrice * amount)
-          });
-        }
-        return itemOnCart;
-      });
-      setCart(updateItemOnCart);
-    }
-    setAmount(1);
-    return messageToCostumer(addedMsg, setAddedToCart);
-  };
+
   return (
     <Layout cart={cart} title={language.title}>
       {addedToCart ? <Modal message={addedToCart} /> : null}
@@ -139,20 +102,36 @@ export default function BookingDetails({ activity }) {
               <input
                 type="button"
                 value="-"
-                onClick={() => handleAmount("decrease")}
+                onClick={() => handleAmount("decrease", cart, amount, stock, setAmount, id)}
               />
               <p>{amount}</p>
               <input
                 type="button"
                 value="+"
-                onClick={() => handleAmount("increase")}
+                onClick={() => handleAmount("increase", cart, amount, stock, setAmount, id)}
               />
             </div>
             <input
               className={styles.add_button}
               type="button"
               value="Reservar"
-              onClick={() => addToCart()}
+              onClick={() => addToCart(
+                amount,
+                noPlacesMsg,
+                setAddedToCart,
+                language,
+                day,
+                hour,
+                basePrice,
+                image,
+                id,
+                priceId,
+                duration,
+                setAmount,
+                addedMsg,
+                setCart,
+                cart
+              )}
             />
 
           </section>
