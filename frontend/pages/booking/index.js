@@ -1,75 +1,77 @@
-import { useState, useMemo } from "react";
-import dynamic from "next/dynamic";
+import { useMemo } from "react";
+import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import fetchFromApi from "../../utils/fetchFromApi";
-import compareDates from "../../utils/compareDates";
+import ActivityMiniature from "../../components/ActivityMiniature";
+import En from "../../languages/en/booking";
+import Es from "../../languages/es/booking";
+import Ca from "../../languages/ca/booking";
 import styles from "../../styles/activities.module.scss";
 
-const Pagination = dynamic(() => import("@mui/material/Pagination"));
-const Stack = dynamic(() => import("@mui/material/Stack"));
-const ActivityMiniature = dynamic(() => import("../../components/ActivityMiniature"));
-
 export default function Booking({ activities }) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const { locale } = useRouter();
+  const language = useMemo(() => {
+    switch (locale) {
+      case "es":
+        return Es;
 
-  const filteredActivities = useMemo(() => activities
-    .filter(({ day }) => compareDates(day)), [activities]);
+      case "en":
+        return En;
 
-  const totalItems = useMemo(() => Math
-    .ceil(filteredActivities.length / itemsPerPage), [filteredActivities]);
+      case "ca":
+        return Ca;
 
-  const activitiesToDisplay = useMemo(() => {
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    return filteredActivities.slice(start, end);
-  }, [filteredActivities, currentPage]);
-
-  function handlePaginationChange(event, value) {
-    setCurrentPage(value);
-  }
-
+      default:
+        return En;
+    }
+  }, [locale]);
   return (
     <Layout title="Activitats">
       <main className={styles.main}>
         <div className={styles.activities_list}>
-          {activitiesToDisplay.map(
-            ({
-              _id: id, image, en, es, ca, basePrice, day, hour
-            }) => (
-              <ActivityMiniature
-                id={id}
-                languageModules={[en, es, ca]}
-                image={image}
-                basePrice={basePrice}
-                day={day}
-                hour={hour}
-                key={id}
-              />
+
+          {activities.length
+            ? activities.map(
+              ({
+                _id: id,
+                image,
+                en,
+                es,
+                ca,
+                basePrice,
+                day,
+                hour,
+              }) => (
+                <ActivityMiniature
+                  id={id}
+                  languageModules={[en, es, ca]}
+                  image={image}
+                  basePrice={basePrice}
+                  day={day}
+                  hour={hour}
+                  key={id}
+                />
+              )
             )
-          )}
+            : <span>{language.noResults}</span>}
         </div>
-        <div className={styles.paginationButtons}>
-          <Stack spacing={2}>
-            <Pagination
-              count={totalItems}
-              // eslint-disable-next-line react/jsx-no-bind
-              onChange={handlePaginationChange}
-              page={currentPage}
-              size="large"
-            />
-          </Stack>
-        </div>
+        <div className={styles.paginationButtons} />
       </main>
     </Layout>
   );
 }
 
+function compareDates(day) {
+  const now = new Date();
+  const activityDate = new Date(day);
+  return activityDate > now;
+}
 export async function getServerSideProps() {
   const activities = await fetchFromApi(`${process.env.URL}/activities`);
+  const filteredActivities = activities.filter((activity) => compareDates(activity.day));
   return {
     props: {
-      activities,
+      activities: filteredActivities,
     },
   };
 }
