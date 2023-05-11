@@ -1,12 +1,17 @@
 import { useMemo } from "react";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic"; // 1. use dynamic imports
 import Layout from "../../components/Layout";
 import fetchFromApi from "../../utils/fetchFromApi";
-import ActivityMiniature from "../../components/ActivityMiniature";
 import En from "../../constants/locales/en/booking";
 import Es from "../../constants/locales/es/booking";
 import Ca from "../../constants/locales/ca/booking";
 import styles from "../../styles/activities.module.scss";
+
+const ActivityMiniature = dynamic( // 1. use dynamic imports
+  () => import("../../components/ActivityMiniature"),
+  { ssr: false }
+);
 
 export default function Booking({ activities }) {
   const { locale } = useRouter();
@@ -15,9 +20,6 @@ export default function Booking({ activities }) {
       case "es":
         return Es;
 
-      case "en":
-        return En;
-
       case "ca":
         return Ca;
 
@@ -25,35 +27,38 @@ export default function Booking({ activities }) {
         return En;
     }
   }, [locale]);
+
+  if (!activities.length) { // 4. handle empty activities
+    return (
+      <Layout title="Activitats">
+        <main className={styles.main}>
+          <div className={styles.activities_list}>
+            <span>{language.noResults}</span>
+          </div>
+        </main>
+      </Layout>
+    );
+  }
+
   return (
     <Layout title="Activitats">
       <main className={styles.main}>
         <div className={styles.activities_list}>
-
-          {activities.length
-            ? activities.map(
-              ({
-                _id: id,
-                image,
-                en,
-                es,
-                ca,
-                basePrice,
-                day,
-                hour,
-              }) => (
-                <ActivityMiniature
-                  id={id}
-                  languageModules={[en, es, ca]}
-                  image={image}
-                  basePrice={basePrice}
-                  day={day}
-                  hour={hour}
-                  key={id}
-                />
-              )
+          {activities.map(
+            ({
+              _id: id, image, en, es, ca, basePrice, day, hour
+            }) => (
+              <ActivityMiniature
+                key={id}
+                id={id}
+                languageModules={[en, es, ca]}
+                image={image}
+                basePrice={basePrice}
+                day={day}
+                hour={hour}
+              />
             )
-            : <span>{language.noResults}</span>}
+          )}
         </div>
         <div className={styles.paginationButtons} />
       </main>
@@ -66,9 +71,10 @@ function compareDates(day) {
   const activityDate = new Date(day);
   return activityDate > now;
 }
+
 export async function getServerSideProps() {
   const activities = await fetchFromApi(`${process.env.URL}/activities`);
-  const filteredActivities = activities.filter((activity) => compareDates(activity.day));
+  const filteredActivities = activities.filter(compareDates);
   return {
     props: {
       activities: filteredActivities,
