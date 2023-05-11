@@ -1,0 +1,23 @@
+.main {
+  padding-top: 15vh;
+  padding-bottom: 5vh;
+  width: 90%;
+  margin: 0 auto;
+  text-align: justify;
+  font-family: "Helvetica Neue Thin";
+  h2 {
+    font-size: 12px;
+  }
+  p {
+    margin: 1vh 0;
+    &:first-of-type,
+    &:nth-of-type(2) {
+      font-weight: 700;
+    }
+  }
+  a {
+    padding-bottom: 2vh;
+    text-decoration: none;
+    color: var(--black);
+  }
+}
