@@ -10,7 +10,6 @@ import blackLogo from "../public/img/logo_black.svg";
 import Cart from "./CartMiniature";
 import whiteMenuLogo from "../public/img/menu-icon.svg";
 import blackMenuLogo from "../public/img/menu-icon-black.svg";
-
 import styles from "../styles/header.module.scss";
 
 export default function Header() {
@@ -36,10 +35,11 @@ export default function Header() {
     }
   }, [pathname]);
 
-  if (pathname === "/") {
-    if (typeof window !== "undefined") {
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    if (pathname === "/") {
       const scrollTrigger = window.screen.height / 3;
-      window.onscroll = function scrolling() {
+      const handleScroll = () => {
         if (window.scrollY >= scrollTrigger || window.pageYOffset >= scrollTrigger) {
           setHeaderClass(styles.views_header);
           setcartLogo("black");
@@ -52,8 +52,13 @@ export default function Header() {
           setMenuLogo(whiteMenuLogo);
         }
       };
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
     }
-  }
+  }, [pathname]);
+
   const language = useMemo(() => {
     switch (locale) {
       case "es":
@@ -69,6 +74,7 @@ export default function Header() {
         return en;
     }
   }, [locale]);
+
   const lang = (loc) => {
     let languageName;
     switch (loc) {
@@ -87,6 +93,9 @@ export default function Header() {
     }
     return languageName;
   };
+  const languageOptions = useMemo(() => locales.map((loc) => (
+    { localeOption: loc, name: lang(loc) }
+  )), [locales]);
 
   return (
     <header className={headerClass}>
@@ -106,13 +115,17 @@ export default function Header() {
         </div>
       </Link>
       <nav className={styles.nav}>
-        <Link className={styles.nav_link} href="/booking">{language.booking}</Link>
+        <Link className={styles.nav_link} href="/booking" prefetch>{language.booking}</Link>
         <Link className={styles.nav_link} href="/blog">{language.blog}</Link>
         <Link className={styles.nav_link} href="/faq">{language.faqs}</Link>
         <div className={styles.dropdown}>
           <input type="button" className={styles.dropdown_button} value={lang(locale)} />
           <div className={styles.dropdown_content}>
-            {locales.map((loc) => <Link href={asPath} locale={loc} key={loc}>{lang(loc)}</Link>)}
+            {languageOptions.map(({ localeOption, name }) => (
+              <Link key={localeOption} href={asPath} locale={locale}>
+                {name}
+              </Link>
+            ))}
           </div>
         </div>
       </nav>
