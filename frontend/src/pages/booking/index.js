@@ -66,18 +66,11 @@ export default function Booking({ activities }) {
   );
 }
 
-function compareDates(day) {
-  const now = new Date();
-  const activityDate = new Date(day);
-  return activityDate > now;
-}
-
 export async function getServerSideProps() {
   const activities = await fetchFromApi(`${process.env.URL}/activities`);
-  const filteredActivities = activities.filter(compareDates);
   return {
     props: {
-      activities: filteredActivities,
+      activities,
     },
   };
 }
