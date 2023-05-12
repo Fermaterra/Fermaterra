@@ -32,7 +32,15 @@ export default function ActivityMiniature({
   }, [locale]);
   return (
     <article className={styles.miniature}>
-      <Image src={image} height={450} width={400} alt={language.title} objectFit="cover" />
+      <Image
+        src={image}
+        height={450}
+        width={400}
+        alt={language.title}
+        objectFit="cover"
+        priority
+        loading="lazy"
+      />
       <div>
         <h3>{language.title}</h3>
         <p>{`${basePrice?.toFixed(2)}€`}</p>
