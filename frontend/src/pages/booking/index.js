@@ -28,7 +28,7 @@ export default function Booking({ activities }) {
     }
   }, [locale]);
 
-  if (!activities.length) { // 4. handle empty activities
+  if (!activities?.length) { // 4. handle empty activities
     return (
       <Layout title="Activitats">
         <main className={styles.main}>
