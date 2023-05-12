@@ -10,7 +10,18 @@ const activityNotFound = (res) => {
 const getAllActivities = async ({ query }, res) => {
   try {
     const activities = await Activity.find(query);
-    res.status(200).json(activities);
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const filteredByDateActivities = activities.filter((activity) => {
+      const activityDate = new Date(
+        activity.day.getFullYear(),
+        activity.day.getMonth(),
+
+        activity.day.getDate()
+      );
+      return activityDate >= today;
+    });
+    res.status(200).json(filteredByDateActivities);
   } catch (error) {
     serverError(res);
   }
